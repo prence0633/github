@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERDucate Web Based Module — Quiz</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="quiz1.css">
+</head>
+<body>
+<header>
+  <div class="title">ERDucate Web Based Module</div>
+  <div class="btn-group">
+    <a href="Lesson1.html">📚 Back to Lesson</a>
+    <a href="index.html">🏠 Home</a>
+  </div>
+</header>
+
+<main class="container">
+  <h1 class="test">Quiz 1 — Introduction to the database and structured</h1>
+  <div class="timer">Time left: <span id="time">90</span>s</div>
+
+  <form id="quizForm" class="form-area" autocomplete="off">
+    <!-- PART 1: Multiple Choice (5) -->
+    <h2 class="section-title">PART 1: Multiple Choice — Define Database</h2>
+<p class="instructions" style="color:var(--muted); font-style:italic; margin-bottom:15px;">
+  <strong>Directions:</strong> Read each question carefully and choose the letter of the correct answer.
+  This section will test your understanding of what a database is, its purpose, and how it is used in real-life situations.
+  Select the best answer by clicking the correct option.
+</p>
+
+    <div class="question">
+      <h3>1. Which best describes a database?</h3>
+      <label><input type="radio" name="q1" value="a"> A pile of loose papers with information</label>
+      <label><input type="radio" name="q1" value="b"> A structured collection of related data stored for easy access and management</label>
+      <label><input type="radio" name="q1" value="c"> A printed book of notes</label>
+    </div>
+
+    <div class="question">
+      <h3>2. What is the main purpose of a database?</h3>
+      <label><input type="radio" name="q2" value="a"> To make data harder to find</label>
+      <label><input type="radio" name="q2" value="b"> To store, organize, and retrieve data efficiently</label>
+      <label><input type="radio" name="q2" value="c"> To avoid using computers</label>
+    </div>
+
+    <div class="question">
+      <h3>3. Which of these is an example of a database?</h3>
+      <label><input type="radio" name="q3" value="a"> A school's student information system (SIS)</label>
+      <label><input type="radio" name="q3" value="b"> A teacher's random sticky notes</label>
+      <label><input type="radio" name="q3" value="c"> A crumpled receipt</label>
+    </div>
+
+    <div class="question">
+      <h3>4. Which feature is commonly provided by databases?</h3>
+      <label><input type="radio" name="q4" value="a"> Automatic data organization and queries</label>
+      <label><input type="radio" name="q4" value="b"> Only handwritten backups</label>
+      <label><input type="radio" name="q4" value="c"> Erasing records every week</label>
+    </div>
+
+    <div class="question">
+      <h3>5. Why do schools use databases?</h3>
+      <label><input type="radio" name="q5" value="a"> To waste time</label>
+      <label><input type="radio" name="q5" value="b"> To securely store student records and allow quick retrieval</label>
+      <label><input type="radio" name="q5" value="c"> To make grades secret</label>
+    </div>
+
+   <!-- PART 2: Identification (5) -->
+<h2 class="section-title">PART 2: Identification — Structured Data</h2>
+<p>Directions: Identify whether each situation or description refers to <strong>Structured Data</strong> or <strong>Unstructured Data</strong>. Write your answer in the space provided.</p>
+
+<div class="question">
+  <h3>6. Information arranged in rows and columns, easy to sort and search.</h3>
+  <label>Your Answer: <input type="text" name="q6" placeholder="Structured / Unstructured"></label>
+</div>
+
+<div class="question">
+  <h3>7. A handwritten list of random notes without format.</h3>
+  <label>Your Answer: <input type="text" name="q7" placeholder="Structured / Unstructured"></label>
+</div>
+
+<div class="question">
+  <h3>8. Spreadsheet containing student name, ID, and grade columns.</h3>
+  <label>Your Answer: <input type="text" name="q8" placeholder="Structured / Unstructured"></label>
+</div>
+
+<div class="question">
+  <h3>9. Photos of students without any labels or captions.</h3>
+  <label>Your Answer: <input type="text" name="q9" placeholder="Structured / Unstructured"></label>
+</div>
+
+<div class="question">
+  <h3>10. Organized student records that can be quickly compared and filtered.</h3>
+  <label>Your Answer: <input type="text" name="q10" placeholder="Structured / Unstructured"></label>
+</div>
+
+    <!-- PART 3: Matching (5) -->
+    <h2 class="section-title">PART 3: Matching — Importance in Schools</h2>
+ <strong>Directions:</strong> Read each scenario carefully and match it with the correct benefit of using databases in schools.
+  You may choose your preferred mode — <strong>Dropdown, Letter Matching,</strong> or <strong>Drag & Drop</strong> — by selecting an option above.
+  Each scenario on the left describes a problem, and each benefit on the right shows how a database helps solve it.
+  Match all pairs correctly to complete this activity.
+</p>
+    <div class="question">
+      <h3>Mode for Matching (choose one) — you can switch to try the three styles</h3>
+      <div class="mode-switch">
+        <label><input type="radio" name="matchMode" value="dropdown" checked> A — Dropdown</label>
+        <label><input type="radio" name="matchMode" value="letter"> B — Letter Matching</label>
+        <label><input type="radio" name="matchMode" value="drag"> C — Drag & Drop</label>
+      </div>
+      <p style="font-size:0.95rem; margin-top:6px;">Scenarios (left) — Benefits (right). Match each scenario to its best benefit.</p>
+    </div>
+
+    <!-- Shared data for matching (rendered by JS into the chosen mode) -->
+    <div id="matchingArea" class="question">
+      <!-- JS will render one of: #dropdownArea, #letterArea, #dragArea -->
+      <div id="dropdownArea" style="display:block;">
+        <div class="match-grid">
+          <div class="match-left">
+            <div class="match-item"><div>11. Report cards often have calculation errors.</div><div><select name="q11"><option value="">-- choose --</option></select></div></div>
+            <div class="match-item"><div>12. Teacher cannot find a student's historical grades.</div><div><select name="q12"><option value="">-- choose --</option></select></div></div>
+            <div class="match-item"><div>13. Physical records were destroyed after a flood.</div><div><select name="q13"><option value="">-- choose --</option></select></div></div>
+            <div class="match-item"><div>14. Multiple teachers have conflicting attendance lists.</div><div><select name="q14"><option value="">-- choose --</option></select></div></div>
+            <div class="match-item"><div>15. Manual records take too long to prepare for parent meetings.</div><div><select name="q15"><option value="">-- choose --</option></select></div></div>
+          </div>
+          <div class="match-right" id="dropdownOptions">
+            <strong>Benefits — choose the best match:</strong>
+            <div style="margin-top:8px;">
+              <div class="draggable" data-id="A">A. Automatic calculations & reduced errors</div>
+              <div class="draggable" data-id="B">B. Fast retrieval of historical records</div>
+              <div class="draggable" data-id="C">C. Secure backups & disaster recovery</div>
+              <div class="draggable" data-id="D">D. Standardized shared records for consistency</div>
+              <div class="draggable" data-id="E">E. Faster report generation for meetings</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="letterArea" style="display:none;">
+        <div style="margin-bottom:8px;">Write the letter (A–E) that matches each scenario in the box on the right. Example answer format: 11 - A</div>
+        <div class="match-grid">
+          <div class="match-left">
+            <div class="match-item"><div>11. Report cards often have calculation errors.</div><div class="dropzone">Answer: <input type="text" pattern="[A-Ea-e]" maxlength="1" name="q11_letter" style="width:34px; text-transform:uppercase;"></div></div>
+            <div class="match-item"><div>12. Teacher cannot find a student's historical grades.</div><div class="dropzone">Answer: <input type="text" pattern="[A-Ea-e]" maxlength="1" name="q12_letter" style="width:34px; text-transform:uppercase;"></div></div>
+            <div class="match-item"><div>13. Physical records were destroyed after a flood.</div><div class="dropzone">Answer: <input type="text" pattern="[A-Ea-e]" maxlength="1" name="q13_letter" style="width:34px; text-transform:uppercase;"></div></div>
+            <div class="match-item"><div>14. Multiple teachers have conflicting attendance lists.</div><div class="dropzone">Answer: <input type="text" pattern="[A-Ea-e]" maxlength="1" name="q14_letter" style="width:34px; text-transform:uppercase;"></div></div>
+            <div class="match-item"><div>15. Manual records take too long to prepare for parent meetings.</div><div class="dropzone">Answer: <input type="text" pattern="[A-Ea-e]" maxlength="1" name="q15_letter" style="width:34px; text-transform:uppercase;"></div></div>
+          </div>
+
+          <div class="match-right">
+            <strong>Benefits — letter code:</strong>
+            <div style="margin-top:8px;">
+              <div class="draggable">A. Automatic calculations & reduced errors</div>
+              <div class="draggable">B. Fast retrieval of historical records</div>
+              <div class="draggable">C. Secure backups & disaster recovery</div>
+              <div class="draggable">D. Standardized shared records for consistency</div>
+              <div class="draggable">E. Faster report generation for meetings</div>
+            </div>
+            <div style="margin-top:10px; font-size:0.95rem;">(Enter the letter beside each scenario.)</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="dragArea" style="display:none;">
+        <div style="margin-bottom:8px;">Drag the benefit from the right column into the matching box for each scenario on the left.</div>
+        <div class="match-grid">
+          <div class="match-left">
+            <div class="match-item"><div>11. Report cards often have calculation errors.</div><div class="dropzone" data-q="q11" data-accept=""></div></div>
+            <div class="match-item"><div>12. Teacher cannot find a student's historical grades.</div><div class="dropzone" data-q="q12" data-accept=""></div></div>
+            <div class="match-item"><div>13. Physical records were destroyed after a flood.</div><div class="dropzone" data-q="q13" data-accept=""></div></div>
+            <div class="match-item"><div>14. Multiple teachers have conflicting attendance lists.</div><div class="dropzone" data-q="q14" data-accept=""></div></div>
+            <div class="match-item"><div>15. Manual records take too long to prepare for parent meetings.</div><div class="dropzone" data-q="q15" data-accept=""></div></div>
+          </div>
+
+          <div class="match-right" id="dragOptions">
+            <strong>Benefits — drag these:</strong>
+            <div style="margin-top:8px;">
+              <div class="draggable" draggable="true" data-id="A">A. Automatic calculations & reduced errors</div>
+              <div class="draggable" draggable="true" data-id="B">B. Fast retrieval of historical records</div>
+              <div class="draggable" draggable="true" data-id="C">C. Secure backups & disaster recovery</div>
+              <div class="draggable" draggable="true" data-id="D">D. Standardized shared records for consistency</div>
+              <div class="draggable" draggable="true" data-id="E">E. Faster report generation for meetings</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;">
+      <button type="submit" class="submit-btn">Submit</button>
+    </div>
+  </form>
+</main>
+
+<!-- Result Modal -->
+<div id="resultModal">
+  <div class="modal-content">
+    <button class="close-btn" title="Close">&times;</button>
+    <h2>Quiz Results & Rationalization</h2>
+    <p id="scoreText" style="font-weight:700"></p>
+    <ul id="rationalizationList"></ul>
+    <button id="proceedBtn">🎮 Proceed to Game</button>
+  </div>
+</div>
+
+<footer>
+  ERDucate Developer © 2025 | Technological University of the Philippines
+</footer>
+<script src="quiz1.js"></script>
+</body>
+</html>

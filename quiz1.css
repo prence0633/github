@@ -1,0 +1,131 @@
+/* ================= GLOBAL (based on your original styles) ================= */
+:root {
+  --maroon: #800000;
+  --maroon-dark: #a00000;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: 'Poppins', sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  background: url("Quiz-background-Lesson1.png") no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: 10px;
+}
+header {
+  background-color: var(--maroon);
+  color: #fff;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+header .title { font-size: 20px; font-weight: 600; }
+header .btn-group a {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+header .btn-group a:hover { background: #fff; color: var(--maroon); }
+h1 { color: var(--maroon); text-align: center; margin-top: 10px; }
+.container { padding: 10px 0 40px 0; }
+.section-title { color: var(--maroon); margin: 18px 0 8px 0; font-size: 1.05rem; }
+.form-area { margin-top: 6px; }
+.question {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.question h3 { margin: 0 0 10px; color: var(--maroon); font-size: 1rem; }
+.question label { display: block; margin: 6px 0; cursor: pointer; }
+input[type="radio"], input[type="checkbox"] { margin-right: 8px; }
+button.submit-btn {
+  padding: 12px 20px;
+  background: var(--maroon);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+button.submit-btn:hover { background: var(--maroon-dark); }
+footer { margin-top: auto; text-align: center; background: var(--maroon); color: #fff; padding: 12px; font-size: 13px; border-radius: 6px; }
+.timer { font-weight: bold; font-size: 16px; text-align: center; margin-top: 6px; }
+
+/* Modal Styles */
+#resultModal {
+  position: fixed;
+  top:0; left:0;
+  width:100vw; height:100vh;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+}
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 720px;
+  width: 100%;
+  padding: 20px 25px;
+  text-align: left;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.modal-content h2 { color: var(--maroon); margin-top:0; }
+.modal-content ul { padding-left:20px; margin:15px 0; max-height: 300px; overflow:auto; }
+.modal-content button {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border:none;
+  border-radius:8px;
+  font-weight:600;
+  background:var(--maroon);
+  color:#fff;
+  cursor:pointer;
+}
+.modal-content button:hover { background:var(--maroon-dark); }
+.close-btn {
+  position: absolute;
+  top:10px; right:15px;
+  background:transparent;
+  border:none;
+  font-size:22px;
+  cursor:pointer;
+  color:#666;
+}
+.close-btn:hover { color:#000; }
+#proceedBtn { opacity:0.5; pointer-events:none; }
+#proceedBtn.enabled { opacity:1; pointer-events:auto; }
+
+/* Matching area styles */
+.match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.match-left, .match-right { background: #fff; padding: 12px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.06); }
+.match-item { padding: 8px 10px; margin-bottom: 8px; border-radius: 8px; background: #fafafa; display:flex; align-items:center; justify-content:space-between; border: 1px dashed #eee; }
+.match-item .dropzone { min-height: 32px; display:inline-block; padding: 4px 8px; border-radius: 6px; background: #fff; border: 1px solid #eee; min-width: 180px; text-align:center; }
+.draggable { padding:8px 10px; margin:6px 0; background:#fff; border-radius:8px; cursor:grab; border:1px solid #ddd; }
+.mode-switch { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .match-grid { grid-template-columns: 1fr; }
+  header { flex-direction: column; align-items: flex-start; gap:8px; }
+  .modal-content { max-width: 95%; }
+}

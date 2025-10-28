@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERDucate ERD Builder</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="practiceERD.css"> 
+</head>
+<body>
+
+<header>
+  <div class="title">ERDucate ERD Builder</div>
+  <div class="nav-buttons">
+    <button onclick="goHome()">🏠 Home</button>
+    <button onclick="saveDraftQuick()">💾 Save Draft</button>
+    <button onclick="loadDraftQuick()">📂 Load Draft</button>
+    <button onclick="clearCanvasConfirm()" title="Clear entire canvas (entities & relationships)">🧹 Clear</button>
+    <button onclick="logout()">🚪 Logout</button>
+  </div>
+</header>
+
+<div class="toolbar" role="toolbar" aria-label="ERD tools">
+  <div class="group">
+    <button onclick="addEntity()" title="Add a new entity">➕ Add Entity</button>
+    <button onclick="addRelationship()" title="Create relationship between entities">🔗 Add Relationship</button>
+    <button onclick="addAttribute()" title="Add attribute to selected entity">✚ Add Attribute</button>
+  </div>
+
+  <div class="group">
+    <button onclick="addPK()" title="Mark selected attribute as Primary Key">🔑 Add PK</button>
+    <button onclick="addFK()" title="Mark selected attribute as Foreign Key">🔗 Add FK</button>
+    <button onclick="deleteSelected()" title="Delete selected entity/attribute/relationship" class="danger">🗑 Delete</button>
+  </div>
+
+  <div class="group">
+    <button onclick="validateERD()" title="Validate ERD before submission">✅ Validate ERD</button>
+    <button onclick="exportERDPNG()" title="Export ERD as PNG">🖼 Export PNG</button>
+    <button onclick="openPreview()" title="Preview exported image (from last export)">🔍 Preview</button>
+  </div>
+
+  <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
+    <div class="muted">Shortcuts:</div>
+    <div class="btn-inline" title="Undo (Ctrl/Cmd+Z)">↶ Undo</div>
+    <div class="btn-inline" title="Redo (Ctrl/Cmd+Y)">↷ Redo</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <!-- STAGE -->
+  <div class="stage" id="stage" aria-label="ERD stage area">
+    <div id="canvas" aria-hidden="false"></div>
+    <!-- SVG overlay for relationships -->
+    <svg id="svgLayer" viewBox="0 0 2000 2000" preserveAspectRatio="xMinYMin meet"></svg>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-label="Inspector panel">
+    <h3>Inspector</h3>
+    <div class="panel">
+      <div class="muted">Selected Entity / Attribute</div>
+      <div id="inspectorName" style="font-weight:700; margin-top:6px;">None</div>
+      <div id="inspectorAttrs" class="muted" style="margin-top:8px;">Select an entity or attribute to edit here.</div>
+      <div class="space"></div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button onclick="renameSelected()" class="small ghost">✏️ Rename</button>
+        <button onclick="focusSelected()" class="small">🔎 Focus</button>
+        <button onclick="duplicateEntity()" class="small">⟲ Duplicate</button>
+      </div>
+    </div>
+
+    <h3>Help & Tips</h3>
+    <div class="panel hint">
+      • Double-click entity title to rename.<br>
+      • Double-click attribute to edit.<br>
+      • Double-click cardinality label on relationship to edit it.<br>
+      • Drag entities to reposition; lines update automatically.<br>
+      • Use Save Draft to persist to localStorage.
+    </div>
+
+    <h3>Submission</h3>
+    <div class="panel" style="display:flex;flex-direction:column;gap:8px;">
+      <div class="muted">After validation, you will be redirected to the submission form.</div>
+      <div style="display:flex; gap:8px;">
+        <button onclick="validateERD()">Validate & Submit</button>
+        <button onclick="exportAndOpenForm()" class="ghost">Export + Open Form</button>
+      </div>
+      <div class="muted" style="font-size:0.9rem; margin-top:6px;">Tip: Export PNG then attach it to Google Form upload question (if provided).</div>
+    </div>
+
+    <div style="flex:1"></div>
+
+    <div style="text-align:center; font-size:0.9rem;" class="muted">ERDucate • v1.0 • Local-only by default</div>
+  </aside>
+</div>
+
+<!-- PREVIEW / MODAL for exported image -->
+<div id="previewModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="content" role="document">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h2 style="color:var(--maroon);">Export Preview</h2>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button onclick="downloadLastExport()">💾 Download</button>
+        <button onclick="closePreview()" style="background:transparent;border:1px solid rgba(0,0,0,0.06);">Close</button>
+      </div>
+    </div>
+    <div style="height:12px;"></div>
+    <div id="previewContainer" style="text-align:center;">
+      <!-- Image will be injected here -->
+    </div>
+  </div>
+</div>
+
+<!-- INTRO MODAL -->
+<div id="introModal" class="modal" style="display:flex;">
+  <div class="content" role="dialog" aria-modal="true">
+    <span class="close" onclick="closeIntro()">&times;</span>
+    <h2 style="color:var(--maroon);">Welcome to ERDucate ERD Builder 🎓</h2>
+    <p style="margin-top:8px;">
+      This tool allows you to create, edit, and validate Entity-Relationship Diagrams (ERDs) easily.
+      <br><br>
+      ✅ Add entities, attributes, and relationships <br>
+      ✅ Drag and drop entities on the grid <br>
+      ✅ Edit names, attributes, and cardinalities <br>
+      ✅ Validate your ERD before submission
+    </p>
+    <div style="height:12px;"></div>
+    <div style="display:flex; gap:10px; justify-content:center;">
+      <button onclick="closeIntro()" style="padding:8px 16px; background:var(--maroon); color:#fff; border:none; border-radius:6px; cursor:pointer;">Get Started</button>
+      <button onclick="demoPopulate()" style="padding:8px 16px; background:#fff; color:var(--maroon); border:1px solid rgba(0,0,0,0.06); border-radius:6px; cursor:pointer;">Load Demo ERD</button>
+    </div>
+  </div>
+</div>
+<script src="practiceERD.js"></script> 
+</body>
+</html>

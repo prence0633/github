@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ERDucate Web Based Module — Lesson 7 (Integrated)</title>
+  <link rel="icon" href="ERDucate.ico">
+  <link rel="stylesheet" href="lesson7.css"> 
+</head>
+<body>
+  <div class="page" role="main">
+    <h1>Lesson 7 — Normalization & Database Design</h1>
+
+    <!-- Objectives card -->
+    <div class="modal-card" style="margin-bottom:18px;">
+  <h2>Lesson 7 Objectives</h2>
+  <p>At the end of the lesson, the student should be able to:</p>
+  <ul>
+    <li>Explain the purpose of Normalization and its role in database design</li>
+    <li>Differentiate between 1st, 2nd, and 3rd Normal Forms and apply them to create well-structured tables</li>
+    <li>Use Normalization concepts to improve ERD design and minimize data redundancy</li>
+  </ul>
+</div>
+
+
+    <!-- Scene -->
+    <div class="lesson-container" aria-label="Lesson scene" id="lessonScene">
+      <div class="scene-bg" role="img" aria-label="Cafeteria background"></div>
+      <div class="characters" aria-hidden="true">
+        <img src="studentfrankie.png" alt="Frankie" class="student student1" id="student1Img">
+        <img src="john.png" alt="John" class="student student2" id="student2Img">
+        <img src="Student-Mia.png" alt="Mia" class="student student3" id="student3Img">
+      </div>
+
+      <!-- Bubbles -->
+      <div class="speech student1-bubble" id="student1Bubble" role="status" aria-live="polite"></div>
+      <div class="speech student2-bubble" id="student2Bubble" role="status" aria-live="polite"></div>
+      <div class="speech student3-bubble" id="student3Bubble" role="status" aria-live="polite"></div>
+    </div>
+
+    <!-- Pause & reflect -->
+    <div id="pauseReflect" class="pause-reflect" aria-hidden="true">
+      <h3>Pause & Reflect</h3>
+      <p id="reflectQuestion" style="color:var(--muted)">Which normal form removes repeating groups and ensures atomic values? Write it down (e.g., 1NF, 2NF, 3NF).</p>
+      <div style="margin-top:10px; display:flex; justify-content:center; gap:10px;">
+        <button class="btn" id="continueBtn">➡️Continue</button>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls" role="navigation" aria-label="Lesson Controls">
+      <button class="btn" id="startBtn" aria-controls="lessonScene">▶️Start Lesson</button>
+      <button id="backBtn" class="btn">⬅️Back</button>
+      <button class="btn" id="nextBtn" disabled>➡️Next</button>
+      <button class="btn" id="skipBtn">⏩Skip to Quiz</button>
+
+      <button class="btn small" id="showDbBtn" title="Show database summary">📊 Show Summary</button>
+      <button class="btn small" id="openGuidedBtn" title="Guided practice">🧭 Guided Practice</button>
+      <button class="btn small" id="openGlossaryBtn" title="Glossary">📚 Glossary</button>
+    </div>
+  </div>
+
+  <!-- Intro Modal -->
+  <div class="modal show" id="introModal" aria-hidden="false" role="dialog" aria-label="Intro — Lesson Overview">
+    <div class="modal-card" role="document">
+      <h2>Introduction — Normalization & Database Design</h2>
+     <p>
+  In the cafeteria, John frowns at his cluttered table filled with repeated notes and duplicate lists. 
+  <strong>“Frankie! My table is messy again… I keep writing the same info over and over!”</strong> he sighs.  
+  Frankie smiles and introduces the concept of <strong>Normalization</strong> — a process that helps 
+  organize messy data into smaller, well-structured tables. Mia joins them, comparing their work to a 
+  detective investigation where each clue (or data piece) must be placed in its correct folder.  
+  Together, they explore how <strong>1st Normal Form (1NF)</strong> removes repeating groups, 
+  <strong>2nd Normal Form (2NF)</strong> eliminates partial dependencies, and 
+  <strong>3rd Normal Form (3NF)</strong> removes transitive dependencies.  
+  Through these steps, they learn how Normalization improves ERD design, minimizes redundancy, 
+  and keeps database relationships clean and efficient — just like solving a well-organized mystery.
+</p>
+
+      <div class="modal-actions" style="margin-top:14px;">
+        <button class="btn" id="closeModalBtn">🔎 Read Later</button>
+        <button class="btn" id="beginBtn">🚀Start Lesson</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DB Info -->
+  <div id="dbInfo" role="dialog" aria-hidden="true" aria-label="Summary — Normalization & Database Design">
+    <button class="btn small" style="float:right; background:var(--maroon); color:#fff; border:none;" aria-label="Close summary" id="closeDbX">❌</button>
+    <h3>Summary — Normalization & Database Design</h3>
+    <p><strong>1NF:</strong> Remove repeating groups and ensure each column holds atomic values.</p>
+    <p><strong>2NF:</strong> Remove partial dependencies; all non-key attributes depend on the full primary key.</p>
+    <p><strong>3NF:</strong> Remove transitive dependencies; non-key attributes depend only on primary keys.</p>
+    <table aria-label="Normalization example table">
+      <thead>
+        <tr><th>StudentID</th><th>Name</th><th>Course</th><th>ProjectTitle</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>101</td><td>John</td><td>IT</td><td>Lost & Found ERD</td></tr>
+        <tr><td>102</td><td>Frankie</td><td>CS</td><td>Library System</td></tr>
+        <tr><td>103</td><td>Mia</td><td>IS</td><td>Inventory ERD</td></tr>
+      </tbody>
+    </table>
+    <p>Example: By normalizing, StudentID and Course are separated from ProjectTitle to reduce redundancy and organize data.</p>
+    <div class="mini-quiz" style="margin-top:8px;">
+      <p><strong>Quick Check:</strong> Which normal form removes repeating groups?</p>
+      <button onclick="checkAnswer(this,true)">1NF</button>
+      <button onclick="checkAnswer(this,false)">2NF</button>
+      <button onclick="checkAnswer(this,false)">3NF</button>
+    </div>
+    <a href="quiz7.html" class="quiz-link-btn" id="quizLink">🧠Take Quiz 7</a>
+      <button class="quiz-link-btn" id="confirmUnlockBtn">🔓Unlock & Proceed</button>
+  </div>
+
+  <!-- Guided Practice Modal -->
+  <div class="modal" id="guidedModal" aria-hidden="true" role="dialog" aria-label="Guided Practice">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeGuidedX" aria-label="Close guided practice">❌</button>
+      <h2>📝 Guided Practice — Normalize this Table</h2>
+      <p class="guided-note">Case: You have a single table with columns: StudentID, Name, Course, ProjectTitle, ProjectSupervisor. Identify how you'd split this into normalized tables (1NF → 3NF). Write the tables and key columns below.</p>
+      <label for="guidedAnswer" style="font-weight:700;">Your normalized tables (brief):</label>
+      <textarea id="guidedAnswer" placeholder="Example:
+Students: StudentID (PK), Name
+Projects: ProjectID (PK), ProjectTitle, Supervisor
+Enrollment: StudentID (FK), ProjectID (FK)"></textarea>
+      <div style="margin-top:8px; display:flex; gap:8px; justify-content:flex-start;">
+        <button class="btn" id="showHintBtn">💡Need Hint</button>
+        <button class="btn secondary" id="showAnswerBtn">📝Show Sample Answer</button>
+      </div>
+      <div id="guidedHint" class="hint" style="margin-top:8px;">
+        Hint: Identify repeating groups first (e.g., multiple projects), then separate entities and use PK/FK relationships.
+      </div>
+      <div id="guidedSample" class="answer" style="margin-top:8px;">
+Sample:
+Students: StudentID (Number, PK), Name (Text)
+Projects: ProjectID (Number, PK), ProjectTitle (Text), Supervisor (Text)
+StudentProjects: StudentID (Number, FK), ProjectID (Number, FK) — this is the junction table (resolves many-to-many)
+      </div>
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+        <button class="btn secondary" id="closeGuidedBtn">❌Close</button>
+        <button class="btn" id="submitGuidedBtn">📤Submit & Unlock</button>
+      </div>
+    </div>
+  </div>
+
+ 
+
+  <!-- Help Modal -->
+  <div class="modal" id="helpModal" aria-hidden="true" role="dialog" aria-label="Learner Support">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeHelpX" aria-label="Close help">❌</button>
+      <h2>📚 Learner Support</h2>
+      <p><strong>FAQ</strong></p>
+      <ul>
+        <li><b>Where to start?</b> — Click "Start Lesson" to begin the story-based walkthrough.</li>
+        <li><b>How to save progress?</b> — Progress auto-saves in your browser (localStorage).</li>
+        <li><b>How to practice?</b> — Open Guided Practice and submit your normalization sample to proceed to the quiz.</li>
+      </ul>
+      <p style="margin-top:8px;"><strong>Tip:</strong> Start by removing repeating groups (1NF), then partial dependencies (2NF), then transitive dependencies (3NF).</p>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+        <button class="btn" id="closeHelpBtn">❌Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glossary Modal -->
+  <div class="modal" id="glossaryModal" aria-hidden="true" role="dialog" aria-label="Glossary">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeGlossaryX" aria-label="Close glossary">❌</button>
+      <h2>Glossary — Key Terms</h2>
+      <dl style="margin-top:6px; color:var(--muted);">
+        <dt style="font-weight:700;">1NF</dt>
+        <dd style="margin:0 0 8px 0;">First Normal Form — each column stores atomic values and there are no repeating groups.</dd>
+        <dt style="font-weight:700;">2NF</dt>
+        <dd style="margin:0 0 8px 0;">Second Normal Form — remove partial dependencies; attributes depend on the full primary key.</dd>
+        <dt style="font-weight:700;">3NF</dt>
+        <dd style="margin:0 0 8px 0;">Third Normal Form — remove transitive dependencies; non-key attributes depend only on the primary key.</dd>
+        <dt style="font-weight:700;">Normalization</dt>
+        <dd style="margin:0 0 8px 0;">A process to reduce redundancy and improve data integrity.</dd>
+      </dl>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+        <button class="btn" id="closeGlossaryBtn">❌Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile glossary popup -->
+  <div id="mobileGlossaryPopup" role="dialog" aria-hidden="true">
+    <p id="mobileGlossaryText" style="color:#fff; margin:0;"></p>
+    <div style="margin-top:8px;">
+      <button class="btn small" onclick="hideGlossaryPopup()">❌Close</button>
+    </div>
+  </div>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-group" aria-hidden="false">
+    <button class="fab glossary" id="fabGlossary" title="Glossary">G</button>
+    <button class="fab practice" id="fabPractice" title="Guided Practice">P</button>
+    <button class="fab help" id="fabHelp" title="Help">?</button>
+  </div>
+  <script src="scriptlesson7.js"></script> 
+</body>
+</html>

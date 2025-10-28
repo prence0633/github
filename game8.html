@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERDucate Lesson 8 - SQL Detective</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="game8.css">
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<audio id="successSound" src="ClappLesson1.mp3"></audio>
+<audio id="bgMusic" src="BackgroundLesson1.mp3" loop></audio>
+
+<header>
+  <div class="title">Lesson 8 — SQL Detective</div>
+  <div class="btn-group">
+    <button id="musicBtn" onclick="toggleMusic(this)">🔊 Mute</button>
+    <a href="quiz8.html">📋 Back to Quiz</a>
+    <a href="index.html">🏠 Home</a>
+  </div>
+</header>
+
+<div id="introModal" class="modal-bg">
+  <div class="modal">
+    <h2>SQL Detective Instructions 🔎</h2>
+    <p>Welcome to ERDucate SQL Detective!<br>
+    Help Frankie solve Lost-and-Found and Student/Products cases using SQL queries.<br><br>
+    <b>Rounds 1–5:</b> Drag & drop the SQL blocks into the right order.<br>
+    <b>Rounds 6–10:</b> SQL Bingo — pick the correct SQL query to match the scenario.<br><br>
+    Complete all 10 rounds to finish the challenge!</p>
+    <button class="cta-btn" onclick="startRound()">Start Round 1</button>
+  </div>
+</div>
+
+<h1 id="roundTitle">Round 1 — SQL Detective</h1>
+<div id="gameWrapper">
+  <div id="itemsColumn"></div>
+  <div id="boxesColumn"></div>
+  <div id="bingoBoard" style="display:none;"></div>
+  <div id="previewArea"></div>
+</div>
+
+<div id="congratsMessage"></div>
+<script src="game8.js"></script> 
+</body>
+</html>
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERDucate Lesson 6 - Data Type Sorting Challenge</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="game6.css">
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<audio id="successSound" src="ClappLesson1.mp3"></audio>
+<audio id="bgMusic" src="BackgroundLesson1.mp3" loop></audio>
+
+<header>
+  <div class="title">Lesson 6 — Data Type Sorting Challenge</div>
+  <div class="btn-group">
+    <button id="musicBtn" onclick="toggleMusic(this)">🔊 Mute</button>
+    <a href="quiz6.html">📋 Back to Quiz</a>
+    <a href="index.html">🏠 Home</a>
+  </div>
+</header>
+
+<div id="introModal" class="modal-bg">
+  <div class="modal">
+    <h2>Sorting Challenge Instructions 🎯</h2>
+    <p>Welcome to ERDucate!<br>
+    Click each attribute, then click the Data Type box to place it.<br>
+    Correctly placed items turn green, wrong placements flash red.<br>
+    Complete all attributes in 10 rounds to finish the challenge!</p>
+    <button class="cta-btn" onclick="startRound()">Start Round 1</button>
+  </div>
+</div>
+
+<h1 id="roundTitle">Round 1 — Data Type Sorting</h1>
+<div id="storyText"></div>
+<div id="gameWrapper">
+  <div class="column" id="itemsColumn"></div>
+  <div class="column" id="boxesColumn"></div>
+</div>
+
+<div id="congratsMessage">🎉 Correct! You completed this round! 🎉</div>
+<script src="game6.js"></script> 
+</body>
+</html>

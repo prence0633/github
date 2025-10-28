@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERDucate Lesson 7 - Normalization & Database Design Challenge</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="game7.css">
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<audio id="successSound" src="ClappLesson1.mp3"></audio>
+<audio id="bgMusic" src="BackgroundLesson1.mp3" loop></audio>
+
+<header>
+  <div class="title">Lesson 7 — Normalization & Database Design Challenge</div>
+  <div class="btn-group">
+    <button id="musicBtn" onclick="toggleMusic(this)">🔊 Mute</button>
+    <a href="quiz7.html">📋 Back to Quiz</a>
+    <a href="index.html">🏠 Home</a>
+  </div>
+</header>
+
+<div id="introModal" class="modal-bg">
+  <div class="modal">
+    <h2>Normalization Challenge Instructions 🎯</h2>
+    <p>Welcome to ERDucate!<br>
+    Help John organize his messy tables into proper Normal Forms:<br>
+    1st Normal Form, 2nd Normal Form, 3rd Normal Form.<br>
+    Drag or tap each table attribute to the correct Normal Form box.<br>
+    Correctly placed items turn green, wrong placements flash red.<br>
+    Complete all attributes in 10 rounds to finish the challenge!</p>
+    <button class="cta-btn" onclick="startRound()">Start Round 1</button>
+  </div>
+</div>
+
+<h1 id="roundTitle">Round 1 — Normalization Challenge</h1>
+<div id="gameWrapper">
+  <div class="column" id="itemsColumn"></div>
+  <div class="column" id="boxesColumn"></div>
+</div>
+
+<div id="congratsMessage">🎉 Correct! You completed this round! 🎉</div>
+  <script src="game7.js"></script> 
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERDucate - Homepage</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="index.css">
+<style>
+/* ===================== GLOBAL STYLES ===================== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: url("image.png") no-repeat center center fixed;
+  background-size: cover; /* <-- Para whole background */
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+
+
+
+/* ===================== HEADER ===================== */
+header {
+  background-color: #800000;
+  color: #fff;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .title {
+  font-size: 22px;
+  font-weight: 600;
+}
+header .nav-buttons button {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 10px 16px;
+  margin-left: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-size: 16px;
+}
+header .nav-buttons button:hover {
+  background: #fff;
+  color: #800000;
+}
+
+/* ===================== WELCOME ===================== */
+.welcome {
+  font-size: 16px;
+  padding: 10px 20px;
+  background: #ffe8e8;
+  color: #800000;
+}
+.cursor {
+  display: inline-block;
+  width: 8px;
+  background: #800000;
+  margin-left: 2px;
+  animation: blink 0.8s infinite;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ===================== MAIN CONTAINER ===================== */
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+  text-align: center;
+  flex-grow: 1;
+}
+
+/* ===================== SEARCH BAR ===================== */
+.search-bar {
+  margin-bottom: 30px;
+}
+.search-bar input {
+  width: 60%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* ===================== LESSON GRID ===================== */
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.topic {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  width: 220px;
+  height: 150px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: 0.3s ease;
+  text-decoration: none;
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.topic {
+  border: 2px solid rgba(255,255,255,0.35);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+.topic:hover {
+  box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+}
+
+.topic-card {
+  background: rgba(60, 0, 0, 0.55); /* lighter overlay */
+  border-radius: 14px;
+  padding: 30px 20px;
+  text-align: center;
+  color: #fff;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* ICON improvement */
+.topic-card img,
+.topic-card svg {
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+/* HOVER = MAS TUMINGKAD */
+.topic-card:hover {
+  background: rgba(120, 0, 0, 0.75); /* richer maroon */
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* ICON brighten on hover */
+.topic-card:hover img,
+.topic-card:hover svg {
+  opacity: 1;
+}
+
+/* FOR FOCUS VIA KEYBOARD or TAP */
+.topic-card:focus-within {
+  background: rgba(150, 0, 0, 0.85);
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Text improvement */
+
+/* BACKGROUND IMAGES PER LESSON */
+.topic[data-title*="introduction"] { background: url("Iesson1.png") center/cover no-repeat; }
+.topic[data-title*="basic concepts"] { background: url("Iesson2.png") center/cover no-repeat; }
+.topic[data-title*="identifying entities"] { background: url("Iesson3.png") center/cover no-repeat; }
+.topic[data-title*="table structures"] { background: url("Iesson4.png") center/cover no-repeat; }
+.topic[data-title*="relationships"] { background: url("Iesson5.png") center/cover no-repeat; }
+.topic[data-title*="data types"] { background: url("Iesson6.png") center/cover no-repeat; }
+.topic[data-title*="normalization"] { background: url("Iesson7.png") center/cover no-repeat; }
+.topic[data-title*="sql"] { background: url("Iesson8.png") center/cover no-repeat; }
+.topic[data-title*="practice designing"] { background: url("Iesson9.png") center/cover no-repeat; }
+
+/* DARK OVERLAY */
+.topic::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  transition: 0.3s ease;
+}
+
+/* TEXT OVERLAY FIX ✅ */
+.topic h3 {
+  position: relative;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 2;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  padding: 0 10px;
+  text-align: center;
+  line-height: 1.3em;
+  max-height: 3.9em;
+  overflow: hidden;
+}
+.lesson-card {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-radius: 14px;
+  backdrop-filter: blur(4px);
+}
+.topic:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+.topic:hover::before {
+  background: rgba(0,0,0,0.25);
+}
+
+/* ===================== CHATBOT BOX ===================== */
+.chatbot-box {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 220px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 13px;
+  color: #333;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  display: none;
+  z-index: 10001;
+}
+
+/* ===================== NO RESULTS ===================== */
+.no-results {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #999;
+}
+
+/* ===================== FOOTER ===================== */
+footer {
+  text-align: center;
+  background: #800000;
+  color: #fff;
+  padding: 15px;
+  font-size: 13px;
+}
+
+/* ===================== MODALS ===================== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  animation: fadeIn 0.4s ease;
+}
+.modal-content button {
+  width: 100%;
+  margin-top: 15px;
+  background: #800000;
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+/* ===================== HELP BUTTON ===================== */
+.help-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #800000;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .search-bar input { width: 80%; }
+  .topic { width: 100%; height: 160px; }
+}
+</style>
+</head>
+<body>
+
+
+<header>
+  <div class="title">ERDucate Web-based Module</div>
+  <div class="nav-buttons">
+    <button onclick="goToAbout()">👤 About</button>
+    <button onclick="goToFeedback()">💬 Feedback</button>
+    <button onclick="logout()">🚪 Logout</button>
+  </div>
+</header>
+
+<div class="welcome">
+  Welcome, <span id="user-name"></span> from <span id="user-course"></span><span class="cursor"></span>!
+</div>
+
+<div class="container">
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search Lesson..." onkeyup="filterTopics()" />
+  </div>
+
+  <div class="topics" id="topicsList">
+    <a href="Lesson1.html" class="topic" data-title="introduction to databases & importance of structuring">
+    </a>
+    <a href="Lesson2.html" class="topic" data-title="basic concepts of database structure">
+    </a>
+    <a href="Lesson3.html" class="topic" data-title="identifying entities & attributes">
+    </a>
+    <a href="Lesson4.html" class="topic" data-title="table structures & keys">
+    </a>
+    <a href="Lesson5.html" class="topic" data-title="table relationships">
+    </a>
+    <a href="Lesson6.html" class="topic" data-title="data types & designing the erd">
+    </a>
+    <a href="Lesson7.html" class="topic" data-title="normalization & database design">
+    </a>
+    <a href="Lesson8.html" class="topic" data-title="introduction to sql & querying databases">
+    </a>
+    <a href="practiceERD.html" class="topic lesson9" data-title="practice designing erd">
+    </a>
+  </div>
+
+  <div id="noResults" class="no-results" style="display:none;">No topics found.</div>
+</div>
+
+<footer>
+  <p>ERDucate Developer © 2025 | Technological University of the Philippines</p>
+</footer>
+
+<!-- Intro Modal -->
+<div class="modal" id="introModal">
+  <div class="modal-content">
+    <h2>Welcome to ERDucate!</h2>
+    <p><b>About this Module:</b> Learn <b>ERDs</b> step by step with lessons, quizzes, and games.</p>
+    <ul>
+      <p>✅ Start with each <b>Lesson</b></p>
+      <p>📝 Take the <b>Quiz</b> after every lesson</p>
+      <p>🎮 Play the <b>Game</b> to practice</p>
+      <p>🏆 Earn a <b>Certificate</b> when you finish</p>
+    </ul>
+    <p style="margin-top:10px; font-style:italic;">💡 Tip: Your progress is saved automatically.</p>
+    <button onclick="closeModal()">⚡ Got it, Let’s Start!</button>
+  </div>
+</div>
+
+<!-- Help Modal -->
+<div class="modal" id="helpModal">
+  <div class="modal-content">
+    <h2>📖 Help & FAQ</h2>
+    <p>Here are some quick tips to get started:</p>
+    <ul>
+      <li>🔍 Use the search bar to find lessons quickly.</li>
+      <li>💡 Choose the lessons to practice concepts.</li>
+      <li>📜 Progress is saved automatically per account.</li>
+      <li>❓ If confused, check the tutorials below.</li>
+    </ul>
+    <p><b>Quick Tutorials:</b></p>
+    <button onclick="goToQuickTutorial()">📺 Watch Quick Tutorial</button>
+    <button onclick="closeHelp()">Close</button>
+  </div>
+</div>
+
+<!-- Floating Help Button -->
+<button class="help-btn" onclick="openHelp()">❔</button>
+
+<!-- Chatbot-style Guide -->
+<div class="chatbot-box" id="chatbotBox">
+  <p>👋 Need help? Try these tips:</p>
+  <p>➡️ Start with Lesson 1 if you're new.</p>
+  <p>➡️ Your progress is saved after quizzes.</p>
+  <p>➡️ Certificates unlock after completing all activities.</p>
+</div>
+
+<script>
+const users = JSON.parse(localStorage.getItem('users')) || {};
+const currentUser = localStorage.getItem('loggedInUser');
+
+if (!currentUser || !users[currentUser]) {
+  window.location.href = 'login.html';
+} else {
+  const course = users[currentUser].course;
+  typeText("user-name", currentUser, 80, () => {
+    typeText("user-course", course, 80);
+  });
+}
+
+function typeText(elementId, text, speed = 100, callback = null) {
+  let i = 0;
+  const element = document.getElementById(elementId);
+  element.textContent = "";
+  function typing() {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    } else if (callback) {
+      callback();
+    }
+  }
+  typing();
+}
+
+function logout() {
+  localStorage.removeItem('loggedInUser');
+  window.location.href = 'login.html';
+}
+function goToAbout() { window.location.href = 'about.html'; }
+function goToFeedback() { window.location.href = 'feedback.html'; }
+function goToQuickTutorial() { window.location.href = 'quick_tutorial.html'; }
+
+function filterTopics() {
+  const input = document.getElementById('searchInput').value.toLowerCase();
+  const topics = document.querySelectorAll('.topic');
+  let found = false;
+  topics.forEach(topic => {
+    const title = topic.getAttribute('data-title');
+    if (title.includes(input)) {
+      topic.style.display = 'flex';
+      found = true;
+    } else {
+      topic.style.display = 'none';
+    }
+  });
+  document.getElementById('noResults').style.display = found ? 'none' : 'block';
+}
+
+window.onload = () => {
+  document.getElementById('introModal').style.display = 'flex';
+}
+
+/* ✅ Show & Hide Modals */
+function closeModal() {
+  document.getElementById('introModal').style.display = 'none';
+}
+function openHelp() {
+  document.getElementById('helpModal').style.display = 'flex';
+  document.getElementById('chatbotBox').style.display = 'block';
+}
+function closeHelp() {
+  document.getElementById('helpModal').style.display = 'none';
+  document.getElementById('chatbotBox').style.display = 'none';
+}
+</script>
+
+</body>
+</html>

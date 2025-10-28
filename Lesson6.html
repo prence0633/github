@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ERDucate Web Based Module — Lesson 6 (Integrated)</title>
+  <link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="lesson6.css"> 
+</head>
+<body>
+  <div class="page" role="main">
+    <h1>Lesson 6 — Data Types </h1>
+
+    <!-- Objectives card -->
+    <div class="modal-card" style="margin-bottom:18px;">
+      <h2>Lesson 6 Objectives</h2>
+      <p>At the end of the lesson, the student should be able to:</p>
+      <ul>
+        <li>Identify different Data Types (Text, Number, Date, Boolean)</li>
+        <li>Explain why choosing the correct Data Type prevents errors</li>
+        <li>Understand the purpose and structure of an Entity-Relationship Diagram (ERD)</li>
+        
+      </ul>
+    </div>
+
+    <!-- Story Scene -->
+    <div class="lesson-container" aria-label="Lesson scene" id="lessonScene">
+      <div class="scene-bg" role="img" aria-label="Classroom background"></div>
+      <div class="characters" aria-hidden="true">
+        <img src="teacher-image.png" alt="Teacher" class="teacher" id="teacherImg">
+        <img src="studentfrankie.png" alt="Frankie" class="student student1" id="student1Img">
+        <img src="john.png" alt="John" class="student student2" id="student2Img">
+      </div>
+
+      <!-- Bubbles -->
+      <div class="speech teacher" id="teacherBubble" role="status" aria-live="polite"></div>
+      <div class="speech student1-bubble" id="student1Bubble" role="status" aria-live="polite"></div>
+      <div class="speech student2-bubble" id="student2Bubble" role="status" aria-live="polite"></div>
+    </div>
+
+    <!-- Pause & reflect (appears at certain point) -->
+    <div id="pauseReflect" class="pause-reflect" aria-hidden="true">
+      <h3>Pause & Reflect</h3>
+      <p id="reflectQuestion" style="color:var(--muted)">Which data type would you use for <em>DateFound</em> in a Lost & Found table? Write one-word answer in your notebook.</p>
+      <div style="margin-top:10px; display:flex; justify-content:center; gap:10px;">
+        <button class="btn" id="continueBtn">➡️Continue</button>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls" role="navigation" aria-label="Lesson Controls">
+      <button class="btn" id="startBtn" aria-controls="lessonScene">🚀Start Lesson</button>
+       <button id="backBtn" class="btn">⬅️Back</button>
+      <button class="btn" id="nextBtn" disabled>➡️Next</button>
+      <button class="btn" id="skipBtn">⏩Skip to Quiz</button>
+
+      <button class="btn" id="showDbBtn" title="Show database summary">📊Show Summary</button>
+      <button class="btn" id="openGuidedBtn" title="Guided practice">🧭Guided Practice</button>
+      <button class="btn" id="openGlossaryBtn" title="Glossary">📚Glossary</button>
+    </div>
+  </div>
+
+  <!-- Intro Modal -->
+  <div class="modal show" id="introModal" aria-hidden="false" role="dialog" aria-label="Intro — Lesson Overview">
+    <div class="modal-card" role="document">
+      <h2>Introduction - Data Types </h2>
+      <p>
+  Today, the Teacher guides Frankie and John in learning about <strong>Data Types</strong> 
+  and how to design an <strong>Entity-Relationship Diagram (ERD)</strong>. 
+  Each attribute in a table must have a clear Data Type: <strong>Text</strong> for words, 
+  <strong>Number</strong> for numeric values, <strong>Date</strong> for dates, and 
+  <strong>Boolean</strong> for true/false flags. Choosing the correct Data Type prevents errors 
+  and ensures calculations or comparisons work properly. By assigning the correct types and linking 
+  tables with <strong>Primary Keys</strong> and <strong>Foreign Keys</strong>, they can create an ERD 
+  that clearly shows entities, attributes, and the relationships between them. Through this, Frankie 
+  and John can organize information efficiently and visualize how real-world data connects in a database system.
+</p>
+
+      <div class="modal-actions" style="margin-top:14px;">
+        <button class="btn" id="closeModalBtn">🔎Read Later</button>
+        <button class="btn" id="beginBtn">🚀Start Lesson</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DB Info floating -->
+  <div id="dbInfo" role="dialog" aria-hidden="true" aria-label="Summary — Data Types & ERD">
+    <button class="btn small" style="float:right; background:var(--maroon); color:#fff; border:none;" aria-label="Close summary" id="closeDbX">❌</button>
+    <h3>Summary — Data Types & ERD</h3>
+    <p><strong>Data Types:</strong> Text, Number, Date, Boolean — assign correctly to avoid errors.</p>
+    <p><strong>ERD:</strong> Diagram showing Entities, Attributes, and Relationships.</p>
+    <table aria-label="Example lost & found table">
+      <thead>
+        <tr><th>ItemID</th><th>ItemName</th><th>DateFound</th><th>IsClaimed</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>201</td><td>Umbrella</td><td>2025-09-15</td><td>false</td></tr>
+        <tr><td>202</td><td>Notebook</td><td>2025-09-16</td><td>true</td></tr>
+      </tbody>
+    </table>
+    <p>Example: <em>DateFound</em> must be a Date type to calculate how long items remain unclaimed.</p>
+    <div class="mini-quiz" style="margin-top:8px;">
+      <p><strong>Quick Check:</strong> Which type should DateFound be?</p>
+      <button onclick="checkAnswer(this,true)">Date</button>
+      <button onclick="checkAnswer(this,false)">Text</button>
+      <button onclick="checkAnswer(this,false)">Boolean</button>
+    </div>
+    <a href="quiz6.html" class="quiz-link-btn" id="quizLink">🧠Take Quiz 6</a>
+     <button class="quiz-link-btn" id="confirmUnlockBtn">🔓Unlock & Proceed</button>
+  </div>
+
+  <!-- Guided Practice modal -->
+  <div class="modal" id="guidedModal" aria-hidden="true" role="dialog" aria-label="Guided Practice">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeGuidedX" aria-label="Close guided practice">❌</button>
+      <h2>📝Guided Practice — Design a Simple ERD</h2>
+      <p class="guided-note">Case: Design a small ERD for a Lost & Found system with tables: Items, Students, Claims. For each table list one attribute and its data type.</p>
+      <div style="margin-top:8px;">
+        <label for="guidedAnswer" style="font-weight:700;">Your answer (3 lines suggested):</label>
+        <textarea id="guidedAnswer" placeholder="Example:
+Items: ItemID (Number), ItemName (Text)
+Students: StudentID (Number), Name (Text)
+Claims: ClaimID (Number), DateClaimed (Date)"></textarea>
+        <div class="practice-buttons" style="margin-top:8px; display:flex; gap:8px; justify-content:flex-start;">
+          <button class="btn" id="showHintBtn">💡Need Hint</button>
+          <button class="btn secondary" id="showAnswerBtn">📝Show Sample Answer</button>
+        </div>
+        <div id="guidedHint" class="hint" style="margin-top:8px;">Hint: Primary keys are usually numbers (auto-increment) and date fields should use Date type.</div>
+        <div id="guidedSample" class="answer" style="margin-top:8px;">Sample:
+Items: ItemID (Number), ItemName (Text), DateFound (Date), IsClaimed (Boolean)
+Students: StudentID (Number), Name (Text)
+Claims: ClaimID (Number), StudentID (Number - FK), ItemID (Number - FK), DateClaimed (Date)</div>
+      </div>
+
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+        <button class="btn secondary" id="closeGuidedBtn">❌Close</button>
+        <button class="btn" id="submitGuidedBtn">📤Submit & Proceed to Unlock</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Help modal -->
+  <div class="modal" id="helpModal" aria-hidden="true" role="dialog" aria-label="Learner Support">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeHelpX" aria-label="Close help">❌</button>
+      <h2>📚 Learner Support</h2>
+      <p><strong>FAQ</strong></p>
+      <ul>
+        <li><b>Where to start?</b> — Click "Start Lesson" to begin the story-based walkthrough.</li>
+        <li><b>How to save progress?</b> — Progress auto-saves in your browser (localStorage).</li>
+        <li><b>How to practice?</b> — Open Guided Practice and submit your ERD sample to proceed to the quiz.</li>
+      </ul>
+      <p style="margin-top:8px;"><strong>Tip:</strong> Write down Data Types before drawing your ERD; it makes implementation easier.</p>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+        <button class="btn" id="closeHelpBtn">❌Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glossary modal -->
+  <div class="modal" id="glossaryModal" aria-hidden="true" role="dialog" aria-label="Glossary">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeGlossaryX" aria-label="Close glossary">❌</button>
+      <h2>Glossary — Key Terms</h2>
+      <dl style="margin-top:6px; color:var(--muted);">
+        <dt style="font-weight:700;">Text</dt>
+        <dd style="margin:0 0 8px 0;">String of characters; used for names, descriptions.</dd>
+        <dt style="font-weight:700;">Number</dt>
+        <dd style="margin:0 0 8px 0;">Numeric type for counts, IDs, quantities.</dd>
+        <dt style="font-weight:700;">Date</dt>
+        <dd style="margin:0 0 8px 0;">Stores calendar dates; allows date arithmetic.</dd>
+        <dt style="font-weight:700;">Boolean</dt>
+        <dd style="margin:0 0 8px 0;">True/False values; useful for flags like IsClaimed.</dd>
+        <dt style="font-weight:700;">ERD</dt>
+        <dd style="margin:0 0 8px 0;">Entity-Relationship Diagram — visual map of entities and relationships.</dd>
+      </dl>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+        <button class="btn" id="closeGlossaryBtn">❌Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile glossary popup -->
+  <div id="mobileGlossaryPopup" role="dialog" aria-hidden="true">
+    <p id="mobileGlossaryText" style="color:#fff; margin:0;"></p>
+    <div style="margin-top:8px;">
+      <button class="btn small" onclick="hideGlossaryPopup()">❌Close</button>
+    </div>
+  </div>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-group" aria-hidden="false">
+    <button class="fab glossary" id="fabGlossary" title="Glossary">G</button>
+    <button class="fab practice" id="fabPractice" title="Guided Practice">P</button>
+    <button class="fab help" id="fabHelp" title="Help">?</button>
+  </div>
+<script src="scriptlesson6.js"></script> 
+  
+</body>
+</html>

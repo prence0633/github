@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERDucate Lesson 3 - Multi Game</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="game4.css"> 
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<audio id="successSound" src="ClappLesson1.mp3"></audio>
+<audio id="bgMusic" src="BackgroundLesson1.mp3" loop></audio>
+
+<header>
+  <div class="title">Lesson 4 — Multi-Game</div>
+  <div class="btn-group">
+    <button id="musicBtn" onclick="toggleMusic(this)">🔊 Mute</button>
+    <a href="quiz3.html">📋 Back to Quiz</a>
+    <a href="index.html">🏠 Home</a>
+  </div>
+</header>
+
+<h1 id="roundTitle">Round 1</h1>
+<p style="text-align:center;">❤️ Chances left: <span id="chanceDisplay">5</span></p>
+<div id="roundsWrapper"></div>
+
+<div id="progressBtnContainer" class="hidden">
+  <div id="congratsMessage" class="hidden">🎉 Congratulations! You completed Lesson 3! 🎉</div>
+  <a href="progress.html" class="cta-btn">📊 View Your Progress</a>
+</div>
+
+<div id="introUniqueKey" class="modal-bg">
+  <div class="modal">
+    <h2>Stage: Spot the Unique Column 🔑</h2>
+    <p>Identify the column that can serve as a Primary Key in the table. Click Start to begin!</p>
+    <button class="cta-btn" onclick="startUniqueGame()">Start Stage</button>
+  </div>
+</div>
+
+<div id="introBuildKey" class="modal-bg hidden">
+  <div class="modal">
+    <h2>Stage: Delivery Detective 🚚🔍</h2>
+    <p>Find the combination of columns that together form a unique key for each delivery record.</p>
+    <button class="cta-btn" onclick="startBuildGame()">Start Stage</button>
+  </div>
+</div>
+<script src="game4.js"></script> 
+</body>
+</html>

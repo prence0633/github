@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERDucate Lesson 5 - Multi-Round Matching Game</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="game5.css"> 
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<audio id="successSound" src="ClappLesson1.mp3"></audio>
+<audio id="bgMusic" src="BackgroundLesson1.mp3" loop></audio>
+
+<header>
+  <div class="title">Lesson 5 — Matching Game</div>
+  <div class="btn-group">
+    <button id="musicBtn" onclick="toggleMusic(this)">🔊 Mute</button>
+    <a href="quiz5.html">📋 Back to Quiz</a>
+    <a href="index.html">🏠 Home</a>
+  </div>
+</header>
+
+<h1 id="roundTitle"></h1>
+<p id="scenario"></p>
+<div id="lives">❤️❤️❤️</div>
+<div id="gameWrapper">
+  <div class="column" id="tablesColumn"></div>
+  <div class="column" id="relationsColumn"></div>
+</div>
+
+<div id="introModal" class="modal-bg">
+  <div class="modal">
+    <h2>Matching Game Instructions 🎯</h2>
+    <p>Welcome to ERDucate!<br>
+    You will play 10 rounds, each with a different scenario.<br>
+    Click a table on the left, then click the correct relationship on the right.<br>
+    Correct pairs turn green, wrong pairs flash red.<br>
+    Complete all 10 rounds to finish the game!<br>
+    You have <span id="lives">❤️❤️❤️</span> lives. Wrong matches cost 1 life!</p>
+    <button class="cta-btn" onclick="startRound()">Start Round 1</button>
+  </div>
+</div>
+
+<div id="congratsMessage"></div>
+<script src="game5.js"></script> 
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ERDucate Web Based Module — Lesson 3 (Integrated)</title>
+  <link rel="icon" href="ERDucate.ico">
+  <link rel="stylesheet" href="lesson3.css"> 
+</head>
+<body>
+  <div class="page" role="main">
+    <h1>Lesson 3 —  Entities & Attributes</h1>
+
+    <!-- Objectives card -->
+    <div class="modal-card" style="margin-bottom:18px;">
+      <h2>Lesson 3 Objectives</h2>
+      <p>By the end of this lesson the student will be able to:</p>
+      <ul>
+  <li><strong>Define Entities and Attributes</strong> – Learners will be able to explain what entities and attributes are in the context of data organization.</li>
+  <li><strong>Identify Entities and Attributes from Everyday Items</strong> – Learners will be able to recognize entities and their corresponding attributes in real-life situations.</li>
+  <li><strong>Assign Appropriate Data Types to Attributes</strong> – Learners will be able to match each attribute with the correct data type based on its characteristics.</li>
+</ul>
+
+    </div>
+
+    <!-- Story Scene -->
+    <div class="lesson-container" aria-label="Lesson scene" id="lessonScene">
+      <div class="scene-bg" role="img" aria-label="Background — classroom"></div>
+      <div class="characters" aria-hidden="true">
+        <!-- placeholders: replace with real images when deploying -->
+        <img src="studentfrankie.png" alt="Frankie (teacher)" class="teacher" id="teacherImg" />
+        <img src="john.png" alt="John (student)" class="student student1" id="student1Img" />
+      </div>
+
+      <!-- Speech bubbles -->
+      <div class="speech teacher" id="teacherBubble" role="status" aria-live="polite"></div>
+      <div class="speech student" id="studentBubble" role="status" aria-live="polite"></div>
+      <div class="speech frankie" id="frankieBubble" role="status" aria-live="polite"></div>
+      <div class="speech john" id="johnBubble" role="status" aria-live="polite"></div>
+    </div>
+
+    <!-- Pause & reflect card (shown during flow) -->
+    <div id="pauseReflect" class="pause-reflect" aria-hidden="true">
+      <h3>Pause & Reflect</h3>
+      <p id="reflectQuestion" style="color:var(--muted)">How would you describe the attribute "Location" for your watch? Write one short example in your notebook.</p>
+      <div style="margin-top:10px; display:flex; justify-content:center; gap:10px;">
+        <button class="btn" id="continueBtn">⬅️Continue</button>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls" role="navigation" aria-label="Lesson Controls">
+      <button class="btn" id="startBtn" aria-controls="lessonScene">🚀Start Lesson</button>
+      <button id="backBtn" class="btn">⬅️Back</button>
+      <button class="btn" id="nextBtn" disabled>⬅️Next</button>
+      <button class="btn" id="skipBtn">⏩Skip to Quiz</button>
+
+      <button class="btn small" id="showDbBtn" title="Show database summary">📊Show Summary</button>
+      <button class="btn small" id="openGuidedBtn" title="Guided practice">🧭Guided Practice</button>
+      <button class="btn small" id="openGlossaryBtn" title="Glossary">📚Glossary</button>
+    </div>
+  </div>
+
+  <!-- Intro Modal -->
+  <div class="modal show" id="introModal" aria-hidden="false" role="dialog" aria-label="Intro — Lesson Overview">
+    <div class="modal-card" role="document">
+      <h2>Introduction — Entities & Attributes</h2>
+   <p>
+  <p>
+  After class, John often misplaces his personal belongings, like his watch, bag, and notebook. 
+  Feeling frustrated, he struggles to keep track of them. 
+  Frankie shows him how to organize these items using basic database concepts: treating each item as an <strong>Entity</strong> and listing its details as <strong>Attributes</strong>. 
+  By assigning appropriate <strong>Data Types</strong> to each attribute (Text, Number, Date, Boolean) and arranging them in a simple table, John can clearly see and manage all his items. 
+  This exercise helps students define entities and attributes, recognize them in everyday situations, and build simple tables to organize information efficiently.
+</p>
+
+      <div class="modal-actions" style="margin-top:14px;">
+        <button class="btn" id="closeModalBtn">🔎Read Later</button>
+        <button class="btn" id="beginBtn">🚀Start Story</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DB Info floating -->
+  <div id="dbInfo" role="dialog" aria-hidden="true" aria-label="Summary — Entities & Attributes">
+    <button class="btn small" style="float:right; background:var(--maroon); color:#fff; border:none;" aria-label="Close summary" id="closeDbX">❌</button>
+    <h3>Summary — Entities & Attributes</h3>
+    <p><strong>Entity:</strong> An object you want to track (e.g., Watch, Bag)</p>
+    <p><strong>Attribute:</strong> Details describing the entity (e.g., Color, Location)</p>
+    <p><strong>Data Types:</strong> Text, Number, Boolean, Date</p>
+    <table aria-label="Example items table">
+      <thead>
+        <tr><th>Item</th><th>Category</th><th>Color</th><th>Location</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Watch</td><td>Accessory</td><td>Black</td><td>Desk</td><td>Lost</td></tr>
+        <tr><td>Shirt</td><td>Clothing</td><td>Blue</td><td>Closet</td><td>Found</td></tr>
+        <tr><td>Bag</td><td>Backpack</td><td>Red</td><td>Bedroom</td><td>With me</td></tr>
+      </tbody>
+    </table>
+
+    <div class="mini-quiz" style="margin-top:8px;">
+      <p><strong>Check Yourself:</strong> Which of these is an Attribute of the Watch?</p>
+      <button onclick="checkAnswer(this,true)">Color</button>
+      <button onclick="checkAnswer(this,false)">Desk</button>
+      <button onclick="checkAnswer(this,false)">Bag</button>
+    </div>
+
+    <a href="quiz3.html" class="quiz-link-btn" id="quizLink">🧠Take Quiz 3</a>
+     <button class="quiz-link-btn" id="confirmUnlockBtn">🔓Unlock & Proceed</button>
+  </div>
+
+  <!-- Guided Practice modal -->
+  <div class="modal" id="guidedModal" aria-hidden="true" role="dialog" aria-label="Guided Practice">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeGuidedX" aria-label="Close guided practice">🧠</button>
+      <h2>📝 Guided Practice — Design a simple item record</h2>
+      <p class="guided-note">Case: Create a simple record for "Keys" with attributes. Provide the attributes and a likely data type for each (one per line).</p>
+      <div style="margin-top:8px;">
+        <label for="guidedAnswer" style="font-weight:700;">Your record (one attribute per line):</label>
+        <div id="guidedFeedback" style="margin-top:8px; font-weight:600;"></div>
+        <textarea id="guidedAnswer" placeholder="Example:\nCategory: Text\nColor: Text\nLocation: Text\nStatus: Text"></textarea>
+        <div class="practice-buttons" style="margin-top:8px; display:flex; gap:8px; justify-content:flex-start;">
+          <button class="btn" id="showHintBtn">💡Need Hint</button>
+          <button class="btn secondary" id="showAnswerBtn">📝Show Sample Answer</button>
+        </div>
+        <div id="guidedHint" class="hint" style="margin-top:8px;">Hint: Use simple names and common data types like Text or Date.</div>
+        <div id="guidedSample" class="answer" style="margin-top:8px;">Sample answer:
+
+Category: Accessory (Text)
+Color: Silver (Text)
+Location: Kitchen (Text)
+Status: Lost (Text)
+LastSeen: 2025-10-01 (Date)</div>
+      </div>
+
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+        <button class="btn secondary" id="closeGuidedBtn">🧠Close</button>
+        <button class="btn" id="submitGuidedBtn">📤Submit & Proceed to Unlock</button>
+        
+      </div>
+    </div>
+  </div>
+
+  \
+
+  <!-- Help modal -->
+  <div class="modal" id="helpModal" aria-hidden="true" role="dialog" aria-label="Learner Support">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeHelpX" aria-label="Close help">❌</button>
+      <h2>📚 Learner Support</h2>
+      <p><strong>FAQ</strong></p>
+      <ul>
+        <li><b>Where to start?</b> — Click "Start Lesson" to begin the story-based walkthrough.</li>
+        <li><b>How to save progress?</b> — Progress auto-saves in your browser (localStorage).</li>
+        <li><b>How to practice?</b> — Open Guided Practice and submit your sample to proceed to the quiz.</li>
+      </ul>
+      <p style="margin-top:8px;"><strong>Tip:</strong> Use Attributes to filter and find items quickly.</p>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+        <button class="btn" id="closeHelpBtn">❌Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glossary modal -->
+  <div class="modal" id="glossaryModal" aria-hidden="true" role="dialog" aria-label="Glossary">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeGlossaryX" aria-label="Close glossary">❌</button>
+      <h2>Glossary — Key Terms</h2>
+      <dl style="margin-top:6px; color:var(--muted);">
+        <dt style="font-weight:700;">Entity</dt>
+        <dd style="margin:0 0 8px 0;">An object or thing you track in a database (e.g., Watch).</dd>
+        <dt style="font-weight:700;">Attribute</dt>
+        <dd style="margin:0 0 8px 0;">A property or detail that describes an Entity (e.g., Color).</dd>
+        <dt style="font-weight:700;">Data Type</dt>
+        <dd style="margin:0 0 8px 0;">Defines the kind of data an attribute holds (Text, Number, Date, Boolean).</dd>
+      </dl>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+        <button class="btn" id="closeGlossaryBtn">❌Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile glossary popup -->
+  <div id="mobileGlossaryPopup" role="dialog" aria-hidden="true">
+    <p id="mobileGlossaryText" style="color:#fff; margin:0;"></p>
+    <div style="margin-top:8px;">
+      <button class="btn small" onclick="hideGlossaryPopup()">❌Close</button>
+    </div>
+  </div>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-group" aria-hidden="false">
+    <button class="fab glossary" id="fabGlossary" title="Glossary">G</button>
+    <button class="fab practice" id="fabPractice" title="Guided Practice">P</button>
+    <button class="fab help" id="fabHelp" title="Help">?</button>
+  </div>
+  <script src="scriptlesson3.js"></script>
+</body>
+</html>

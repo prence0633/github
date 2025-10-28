@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ERDucate Web Module — Lesson 1 (Integrated)</title>
+<link rel="icon" href="ERDucate.ico">
+<link href="lesson1.css">
+<link rel="stylesheet" href="lesson1.css"> 
+<style>
+
+</style>
+</head>
+<body>
+  <div class="page" role="main">
+    <h1>Lesson 1 — Introduction to Databases & Importance of Structuring: The Attendance Problem</h1>
+
+    <div class="objectives modal-card" aria-hidden="false">
+      <h2>Lesson 1 Objectives</h2>
+      <p>At the end of the lesson, the student should be able to:</p>
+      <ul>
+        <li>Define what a <strong>Database</strong> is</li>
+        <li>Explain the idea of <strong>Structured Data</strong> with examples</li>
+        <li>Recognize the <strong>importance of structuring</strong> data in school record-keeping</li>
+      </ul>
+    </div>
+
+    <div class="lesson-container" aria-label="Lesson scene">
+      <div class="scene-bg" role="img" aria-label="School background"></div>
+
+      <div class="characters">
+        <img src="teacher-image.png" alt="Confused teacher" class="teacher" id="teacherImg">
+        <img src="lightbulb.png" alt="Lightbulb idea" class="lightbulb" id="lightbulb">
+        <img src="principal-image.png" alt="Principal" class="principal" id="principalImg">
+      </div>
+
+      <div class="speech teacher" id="teacherBubble" role="status" aria-live="polite"></div>
+      <div class="speech principal" id="principalBubble" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="pause-reflect" id="pauseReflect" aria-hidden="true">
+      <h3>Pause & Reflect</h3>
+      <p id="reflectQuestion" style="color:var(--muted)">How would structured records help avoid the principal's worry? Write one short sentence in your notebook.</p>
+      <div style="margin-top:10px; display:flex; justify-content:center; gap:10px;">
+        <button class="btn" id="continueBtn">➡️Continue</button>
+      </div>
+    </div>
+
+    <div class="controls" role="navigation" aria-label="Lesson Controls">
+      <button class="btn" id="introStartBtn">🚀Start Lesson</button>
+      <button id="backBtn" class="btn small">⬅️Back</button>
+      <button class="btn small" id="nextBtn" disabled>➡️Next</button>
+      <button class="btn small" id="skipBtn">⏭️Skip to Quiz</button>
+      <button class="btn small" id="showDbBtn" title="Show summary">📊Show Summary</button>
+      <button class="btn small" id="openGuidedBtn" title="Guided practice">🧭Guided Practice</button>
+      <button class="btn small" id="openGlossaryBtn" title="Glossary">📚Glossary</button>
+    </div>
+
+  </div>
+
+  <!-- Intro modal (preserved) -->
+  <div class="modal show" id="introModal" aria-hidden="false" role="dialog" aria-label="Lesson 1 introduction">
+  <div class="modal-card" role="document">
+    <h2>Introduction - Databases & Importance of Structuring</h2>
+    <p class="intromo" style="color:var(--muted)">
+   Imagine a school where student records are scattered everywhere — paper forms piled on desks, spreadsheets saved on different computers,
+    and handwritten attendance sheets that often go missing. Mistakes happen, some students are listed twice, and the principal becomes frustrated
+    by the disorganized system.
+    <br><br>
+    To solve this problem, a smarter way of organizing information was developed — a system that can store, protect,
+    and retrieve data efficiently. This system is known as a <strong>Database</strong>.
+    <br><br>
+    In this lesson, we will explore <strong>what a database</strong> is, <strong>why it is important</strong>, and <strong>how structured data helps keep information
+    accurate, accessible, and reliable.</strong>
+  </p>
+    <div style="display:flex; justify-content:center; margin-top:12px; gap:8px;">
+      <button class="btn" id="introStartBtn2">🚀Start Lesson</button>
+      <button class="btn" id="introReadLaterBtn">🔎Read Later</button>
+    </div>
+  </div>
+</div>
+  <!-- DB Info floating -->
+  <div id="dbInfo" aria-hidden="true" role="dialog" aria-label="Database summary">
+    <button class="btn small" id="closeDbInfoBtn" style="float:right; background:var(--maroon); color:#fff; border:none;" aria-label="Close summary">❌</button>
+    <h3>Database & Structured Data Summary</h3>
+     <p><strong>What is Data?</strong><br>
+    Data refers to raw facts and figures — such as names, grades, and contact numbers. On their own, they may not have meaning until processed or organized.</p>
+    <p><strong>What is a Database?</strong><br>
+    A database is a digital system that stores organized data in a structured way. It allows users to easily add, view, and update information without confusion or duplication.</p>
+    <p><strong>Why is Structuring Important?</strong><br>
+    Structuring ensures data is arranged properly — using tables, fields, and relationships — so it remains accurate, consistent, and easy to analyze. This process helps organizations avoid errors and make data-driven decisions effectively.</p>
+    <p style="color:var(--muted); font-size:13px;">Example table: Attendance (Name, Date, Status)</p>
+
+    <table aria-label="Sample attendance">
+      <thead><tr><th>Name</th><th>Date</th><th>Attendance</th></tr></thead>
+      <tbody>
+        <tr><td>Dado Suarez</td><td>June 11</td><td>Present</td></tr>
+        <tr><td>Maria Santos</td><td>June 11</td><td>Absent</td></tr>
+        <tr><td>Pedro Reyes</td><td>June 11</td><td>Present</td></tr>
+      </tbody>
+    </table>
+
+    <div class="mini-quiz">
+      <p style="font-weight:700; margin:6px 0;">Check Yourself: Which is an advantage of structured data?</p>
+      <button onclick="checkAnswer(this,true)">Easy to find and update.</button>
+      <button onclick="checkAnswer(this,false)">More disorganized and easy to lose.</button>
+      <button onclick="checkAnswer(this,false)">It will result in more paper loss.</button>
+    </div>
+
+    <button class="btn" id="quizBtn" style="width:100%; margin-top:10px;">🧠Proceed to Quiz 1</button>
+
+    <div style="margin-top:10px;">
+      <button class="btn secondary" id="unlockGuidedBtn">🔓Unlock & Proceed to Guided Practice</button>
+    </div>
+  </div>
+
+  <!-- Guided Practice modal -->
+  <div class="modal" id="guidedModal" aria-hidden="true" role="dialog" aria-label="Guided Practice">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeGuidedX" aria-label="Close guided practice">❌</button>
+      <h2>📝 Guided Practice — Structuring Attendance Data</h2>
+      <p>Case: You are designing an attendance table. Suggest the columns (fields) that should exist and explain why each is important. Try to give 4 columns.</p>
+
+      <div class="guided-practice" style="margin-top:8px;">
+        <label for="guidedAnswer" style="font-weight:700;">Your Column List & Short Rationale:</label>
+    <textarea id="guidedAnswer" placeholder="Example: Name — to identify student; Date — to record day; Status — Present/Absent ..."></textarea>
+<div id="guidedFeedback"></div>
+
+
+        <div class="practice-buttons">
+          <button class="btn" id="showHintBtn">💡Need Hint</button>
+          <button class="btn secondary" id="showAnswerBtn">📝Show Sample Answer</button>
+        </div>
+
+        <div id="guidedHint" class="hint" style="margin-top:8px;">
+          Hint: Think of the minimal info you need to know someone's attendance for a specific day and who they are.
+        </div>
+
+        <div id="guidedSample" class="answer" style="margin-top:8px;">
+-- Sample columns:
+1) Name — identify the student
+2) StudentID — unique identifier to avoid duplicate names
+3) Date — which day the record is for
+4) Status — Present / Absent / Late
+
+Optional: Remarks — teacher notes; TimeIn — time student arrived
+        </div>
+      </div>
+
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+        <button class="btn secondary" id="closeGuidedBtn">❌Close</button>
+        <button class="btn" id="submitGuidedBtn">📤Submit & Proceed to Quiz</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Help modal -->
+  <div class="modal" id="helpModal" aria-hidden="true" role="dialog" aria-label="Learner Support">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeHelpX" aria-label="Close help">❌</button>
+      <h2>📚 Learner Support</h2>
+      <p><strong>FAQ</strong></p>
+      <ul>
+        <li><b>Where to start?</b> — Click "Start Lesson" (at the top) to begin the story-based walkthrough.</li>
+        <li><b>How to save progress?</b> — Progress auto-saves in browser storage (localStorage).</li>
+        <li><b>How to practice?</b> — Use Guided Practice and then submit to proceed to the quiz.</li>
+      </ul>
+      <p style="margin-top:8px;"><strong>Tip:</strong> Structured data uses columns so each piece of info has a clear place.</p>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+        <button class="btn" id="closeHelpBtn">❌Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glossary modal -->
+  <div class="modal" id="glossaryModal" aria-hidden="true" role="dialog" aria-label="Glossary">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeGlossaryX" aria-label="Close glossary">❌</button>
+      <h2>Glossary — Key Terms</h2>
+      <dl style="margin-top:6px; color:var(--muted);">
+        <dt style="font-weight:700;">Database</dt>
+        <dd style="margin:0 0 8px 0;">A central place to store structured information so it can be organized and retrieved easily.</dd>
+        <dt style="font-weight:700;">Structured Data</dt>
+        <dd style="margin:0 0 8px 0;">Information arranged in a consistent format (e.g., tables with columns and rows).</dd>
+        <dt style="font-weight:700;">Table</dt>
+        <dd style="margin:0 0 8px 0;">A collection of related data organized in rows and columns.</dd>
+        <dt style="font-weight:700;">Field / Column</dt>
+        <dd style="margin:0 0 8px 0;">A single attribute in a table (e.g., Name, Date, Status).</dd>
+      </dl>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+        <button class="btn" id="closeGlossaryBtn">❌Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile glossary popup -->
+  <div id="mobileGlossaryPopup" role="dialog" aria-hidden="true">
+    <p id="mobileGlossaryText" style="color:#fff; margin:0;"></p>
+    <div style="margin-top:8px;">
+      <button class="btn small" onclick="hideGlossaryPopup()">❌Close</button>
+    </div>
+  </div>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-group" aria-hidden="false">
+    <button class="fab glossary" id="fabGlossary" title="Glossary">G</button>
+    <button class="fab practice" id="fabPractice" title="Guided Practice">P</button>
+    <button class="fab help" id="fabHelp" title="Help">?</button>
+  </div>
+<script src="scriptlesson1.js"></script> 
+</body>
+</html>

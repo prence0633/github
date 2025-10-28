@@ -1,0 +1,94 @@
+<!-- Save as quiz6.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz 6 – Data Types in ERD</title>
+  <link rel="icon" href="ERDucate.ico">
+ <link rel="stylesheet" href="quiz6.css">
+</head>
+<body>
+  <header>
+    <div class="title">ERDucate Web Based Module</div>
+    <div class="btn-group">
+      <a href="Lesson6.html">📚 Back to Lesson</a>
+      <a href="index.html">🏠 Home</a>
+    </div>
+  </header>
+
+  <main>
+    <h1>Quiz 6 — Data Types</h1>
+    <div class="meta-row"><div class="timer" aria-live="polite">Time left: <span id="time">250</span>s</div></div>
+
+    <form id="quizForm" autocomplete="off" novalidate>
+      <!-- PART 1: MCQs (10) -->
+      <section class="section" id="part1">
+        <h2>PART 1 — Multiple Choice: Identify Data Types </h2>
+        <strong>Directions:</strong><p class="hint">Choose the best data type for the item. Options: <strong>TEXT, NUMBER, DATE, BOOLEAN</strong>.</p>
+        <!-- injected by JS -->
+      </section>
+
+      <!-- PART 2: Matching (5) -->
+      <section class="section" id="part2">
+        <h2>PART 2 — Matching: Pick Data Type </h2>
+        <strong>Directions:</strong><p class="hint">From the dropdown select the most appropriate data type.</p>
+        <!-- injected by JS -->
+      </section>
+
+      <!-- PART 3: Short Answer (5) -->
+      <section class="section" id="part3">
+        <h2>PART 3 — Short Answer </h2>
+        <strong>Directions:</strong><p class="hint">First 4 are auto-checked by keywords. Q5 is reflection (NOT graded).</p>
+
+        <div class="question" id="s1">
+          <h3>1. Why does choosing the correct data type (e.g., NUMBER vs TEXT) prevent errors? (brief)</h3>
+          <textarea name="q_short_1" rows="3" placeholder="Answer..."></textarea>
+        </div>
+
+        <div class="question" id="s2">
+          <h3>2. Give one concrete example where wrong data type causes an error (brief).</h3>
+          <input type="text" name="q_short_2" placeholder="e.g., Storing price as TEXT causes calculation errors">
+        </div>
+
+        <div class="question" id="s3">
+          <h3>3. Which data type would you choose for a field 'Date of Birth'?</h3>
+          <input type="text" name="q_short_3" placeholder="e.g., DATE">
+        </div>
+
+        <div class="question" id="s4">
+          <h3>4. For a field 'IsActive' (yes/no), which data type is best?</h3>
+          <input type="text" name="q_short_4" placeholder="e.g., BOOLEAN">
+        </div>
+
+        <div class="question" id="s5">
+          <h3>5. Reflection (NOT GRADED): What did you learn about data types and ERD?</h3>
+          <textarea name="q_short_5" rows="4" placeholder="Reflection..."></textarea>
+        </div>
+      </section>
+
+      <p class="hint">Passing threshold: <strong>70%</strong> of graded items. Progress saved to system per logged-in user.</p>
+    </form>
+
+    <div class="controls"><button id="submitQuiz" class="submit-btn" type="button">Submit</button></div>
+  </main>
+
+  <!-- Results Modal -->
+  <div id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+    <div class="modal-content">
+      <button class="close-btn" aria-label="Close results">&times;</button>
+      <h2 id="resultTitle">Quiz Results & Rationalization</h2>
+      <p id="scoreText" style="font-weight:700"></p>
+      <p id="feedbackText" class="hint"></p>
+      <ul id="rationalizationList" aria-live="polite"></ul>
+      <div class="actions">
+        <button id="proceedBtn" title="Proceed to next activity">🎮 Proceed to Game 6</button>
+        <button id="retryBtn" title="Retry the quiz">🔁 Retry</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>ERDucate Developer © 2025 | Technological University of the Philippines</footer>
+<script src="quiz6.js"></script>
+</body>
+</html>

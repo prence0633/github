@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ERDucate Web Based Module — Lesson 5 (Integrated)</title>
+  <link rel="icon" href="ERDucate.ico">
+  <link rel="stylesheet" href="lesson5.css"> 
+</head>
+<body>
+  <div class="page" role="main">
+    <h1>Lesson 5 — Table Relationships</h1>
+
+    <!-- Objectives card -->
+    <div class="modal-card" style="margin-bottom:18px;">
+      <h2>Lesson 5 Objectives</h2>
+      <p>At the end of the lesson, the student should be able to:</p>
+      <ul>
+        <li>Explain the concept of One-to-One, One-to-Many, and Many-to-Many relationships</li>
+        <li>Identify examples of table relationships in real-life scenarios</li>
+        <li>Understand how relationships connect different tables</li>
+        <li>Apply relationships to organize information efficiently</li>
+      </ul>
+    </div>
+
+    <!-- Story Scene -->
+    <div class="lesson-container" aria-label="Lesson scene" id="lessonScene">
+      <div class="scene-bg" role="img" aria-label="Library background"></div>
+      <div class="characters" aria-hidden="true">
+        <img src="studentfrankie.png" alt="Frankie" class="student student1" id="student1Img">
+        <img src="john.png" alt="John" class="student student2" id="student2Img">
+        <img src="Student-Mia.png" alt="Mia" class="student student3" id="student3Img">
+      </div>
+
+      <!-- speech bubbles (teacher & generic student bubble are base elements; individual bubbles appended by JS) -->
+      <div class="speech teacher" id="teacherBubble" role="status" aria-live="polite"></div>
+      <div class="speech student" id="studentBubble" role="status" aria-live="polite"></div>
+    </div>
+
+    <!-- Pause & reflect (appears at certain point) -->
+    <div id="pauseReflect" class="pause-reflect" aria-hidden="true">
+      <h3>Pause & Reflect</h3>
+      <p id="reflectQuestion" style="color:var(--muted)">Which type of relationship would you use if each student has exactly one ID card? Write short answer.</p>
+      <div style="margin-top:10px; display:flex; justify-content:center; gap:10px;">
+        <button class="btn" id="continueBtn">➡️Continue</button>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls" role="navigation" aria-label="Lesson Controls">
+      <button class="btn" id="startBtn" aria-controls="lessonScene">🚀Start Lesson</button>
+      <button id="backBtn" class="btn">⬅️Back</button>
+      <button class="btn" id="nextBtn" disabled>➡️Next</button>
+      <button class="btn" id="skipBtn">⏩Skip to Quiz</button>
+
+      <button class="btn small" id="showDbBtn" title="Show database summary">Show Summary</button>
+      <button class="btn small" id="openGuidedBtn" title="Guided practice">🧭 Guided Practice</button>
+      <button class="btn small" id="openGlossaryBtn" title="Glossary">📊 Glossary</button>
+    </div>
+  </div>
+
+  <!-- Intro Modal -->
+  <div class="modal show" id="introModal" aria-hidden="false" role="dialog" aria-label="Intro — Lesson Overview">
+    <div class="modal-card" role="document">
+      <h2>Introduction — Table Relationships</h2>
+      <p>
+  Today, John investigates his lost items and discovers that they are connected to other students through their records. 
+  Frankie introduces <strong>Table Relationships</strong> to reveal the connections between tables. 
+  Relationships organize data in different ways: 
+  <strong>One-to-One</strong> links each item to a single record (like Student → ID Card), 
+  <strong>One-to-Many</strong> links one record to multiple related entries (like Student → Attendance Records), 
+  and <strong>Many-to-Many</strong> connects multiple records to multiple entries (like Students → Clubs). 
+  By understanding these relationships, John can efficiently track items, see connections across tables, and organize information clearly.
+</p>
+      <div class="modal-actions" style="margin-top:14px;">
+        <button class="btn" id="closeModalBtn">🔎Read Later</button>
+        <button class="btn" id="beginBtn">🚀Start Story</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DB Info floating -->
+  <div id="dbInfo" role="dialog" aria-hidden="true" aria-label="Summary — Table Relationships">
+    <button class="btn small" style="float:right; background:var(--maroon); color:#fff; border:none;" aria-label="Close summary" id="closeDbX">❌</button>
+    <h3>Summary — Table Relationships</h3>
+    <p><strong>One-to-One:</strong> Each row in Table A matches exactly one row in Table B (e.g., Student ↔ ID Card).</p>
+    <p><strong>One-to-Many:</strong> One row in Table A relates to multiple rows in Table B (e.g., Student ↔ Attendance records).</p>
+    <p><strong>Many-to-Many:</strong> Multiple rows in Table A relate to multiple rows in Table B (e.g., Students ↔ Clubs).</p>
+    <table aria-label="Example relationships table">
+      <thead>
+        <tr><th>StudentID</th><th>Name</th><th>Club</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>101</td><td>John</td><td>Chess Club</td></tr>
+        <tr><td>102</td><td>Frankie</td><td>Math Club</td></tr>
+        <tr><td>103</td><td>Mia</td><td>Art Club</td></tr>
+      </tbody>
+    </table>
+    <p>Relationships help us link data efficiently, making information meaningful.</p>
+    <a href="quiz5.html" class="quiz-link-btn" id="quizLink">🧠Take Quiz 5</a>
+     <button class="quiz-link-btn" id="confirmUnlockBtn">🔓Unlock & Proceed</button>
+  </div>
+
+  <!-- Guided Practice modal -->
+  <div class="modal" id="guidedModal" aria-hidden="true" role="dialog" aria-label="Guided Practice">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeGuidedX" aria-label="Close guided practice">❌</button>
+      <h2>📝 Guided Practice — Map Relationships</h2>
+      <p class="guided-note">Case: You have three tables — <strong>Students</strong>, <strong>Clubs</strong>, and <strong>Memberships</strong>. Explain which tables are linked and what kind of relationship they represent.</p>
+      <div style="margin-top:8px;">
+        <label for="guidedAnswer" style="font-weight:700;">Your answer (one or two lines):</label>
+        <textarea id="guidedAnswer" placeholder="Example: Students ↔ Memberships ↔ Clubs — Many-to-Many via Memberships table."></textarea>
+        <div class="practice-buttons" style="margin-top:8px; display:flex; gap:8px; justify-content:flex-start;">
+          <button class="btn" id="showHintBtn">💡Need Hint</button>
+          <button class="btn secondary" id="showAnswerBtn">📝Show Sample Answer</button>
+        </div>
+        <div id="guidedHint" class="hint" style="margin-top:8px;">Hint: Many-to-Many relationships are usually represented by a join table that stores pairs of IDs.</div>
+        <div id="guidedSample" class="answer" style="margin-top:8px;">Sample answer:
+Students ↔ Memberships (One-to-Many)
+Clubs ↔ Memberships (One-to-Many)
+Combined they form Students ↔ Clubs (Many-to-Many) via Memberships.</div>
+      </div>
+
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+        <button class="btn secondary" id="closeGuidedBtn">❌Close</button>
+        <button class="btn" id="submitGuidedBtn">📤Submit & Proceed to Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help modal -->
+  <div class="modal" id="helpModal" aria-hidden="true" role="dialog" aria-label="Learner Support">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeHelpX" aria-label="Close help">❌</button>
+      <h2>📚 Learner Support</h2>
+      <p><strong>FAQ</strong></p>
+      <ul>
+        <li><b>Where to start?</b> — Click "Start Lesson" to begin the story-based walkthrough.</li>
+        <li><b>How to save progress?</b> — Progress auto-saves in your browser (localStorage).</li>
+        <li><b>How to practice?</b> — Open Guided Practice and submit your answer to proceed to the quiz.</li>
+      </ul>
+      <p style="margin-top:8px;"><strong>Tip:</strong> Draw relationship diagrams to visualize One-to-Many vs Many-to-Many.</p>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+        <button class="btn" id="closeHelpBtn">❌Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glossary modal -->
+  <div class="modal" id="glossaryModal" aria-hidden="true" role="dialog" aria-label="Glossary">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeGlossaryX" aria-label="Close glossary">❌</button>
+      <h2>Glossary — Key Terms</h2>
+      <dl style="margin-top:6px; color:var(--muted);">
+        <dt style="font-weight:700;">One-to-One</dt>
+        <dd style="margin:0 0 8px 0;">One row in Table A corresponds to one row in Table B.</dd>
+        <dt style="font-weight:700;">One-to-Many</dt>
+        <dd style="margin:0 0 8px 0;">One row in Table A corresponds to many rows in Table B.</dd>
+        <dt style="font-weight:700;">Many-to-Many</dt>
+        <dd style="margin:0 0 8px 0;">Many rows in Table A relate to many rows in Table B, usually via a join table.</dd>
+      </dl>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+        <button class="btn" id="closeGlossaryBtn">❌Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile glossary popup -->
+  <div id="mobileGlossaryPopup" role="dialog" aria-hidden="true">
+    <p id="mobileGlossaryText" style="color:#fff; margin:0;"></p>
+    <div style="margin-top:8px;">
+      <button class="btn small" onclick="hideGlossaryPopup()">❌Close</button>
+    </div>
+  </div>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-group" aria-hidden="false">
+    <button class="fab glossary" id="fabGlossary" title="Glossary">G</button>
+    <button class="fab practice" id="fabPractice" title="Guided Practice">P</button>
+    <button class="fab help" id="fabHelp" title="Help">?</button>
+  </div>
+<script src="scriptlesson5.js"></script> 
+</body>
+</html>

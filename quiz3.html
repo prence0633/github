@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ERDucate Lesson3 - Entities & Attributes (Quiz 3)</title>
+  <link rel="icon" href="ERDucate.ico">
+  <meta name="author" content="ERDucate Developer">
+  <link rel="stylesheet" href="quiz3.css">
+  
+</head>
+<body>
+  <header>
+    <div class="title">ERDucate Web Based Module</div>
+    <div class="btn-group">
+      <a href="Lesson3.html">📚 Back to Lesson</a>
+      <a href="index.html">🏠 Home</a>
+    </div>
+  </header>
+
+  <main>
+    <h1 class="Test">Quiz 3 - Entities & Attributes</h1>
+    <div class="meta-row">
+      <div class="timer" aria-live="polite">Time left: <span id="time">180</span>s</div>
+    </div>
+
+    <form id="quizForm" autocomplete="off" novalidate>
+      <!-- PART 1: TRUE / FALSE (10) -->
+      <h2 class="section-title">PART 1: True / False — Define Entities & Attributes</h2>
+      <p><strong>Directions:</strong> Read each statement and select True or False.</p>
+
+      <div class="question" id="q1">
+        <h3>1. A "Student" entry in a school database is an example of an entity.</h3>
+        <label><input type="radio" name="q1" value="true"> True</label>
+        <label><input type="radio" name="q1" value="false"> False</label>
+      </div>
+
+      <div class="question" id="q2">
+        <h3>2. "Color" or "Price" are examples of attributes that describe an entity.</h3>
+        <label><input type="radio" name="q2" value="true"> True</label>
+        <label><input type="radio" name="q2" value="false"> False</label>
+      </div>
+
+      <div class="question" id="q3">
+        <h3>3. An entity always refers to a column in a table.</h3>
+        <label><input type="radio" name="q3" value="true"> True</label>
+        <label><input type="radio" name="q3" value="false"> False</label>
+      </div>
+
+      <div class="question" id="q4">
+        <h3>4. A "Book" can be modeled as an entity in a library database.</h3>
+        <label><input type="radio" name="q4" value="true"> True</label>
+        <label><input type="radio" name="q4" value="false"> False</label>
+      </div>
+
+      <div class="question" id="q5">
+        <h3>5. Attributes are used to store values like text, numbers, dates or boolean flags.</h3>
+        <label><input type="radio" name="q5" value="true"> True</label>
+        <label><input type="radio" name="q5" value="false"> False</label>
+      </div>
+
+      <div class="question" id="q6">
+        <h3>6. "StudentID" is usually an attribute but often used as a primary key to identify entities uniquely.</h3>
+        <label><input type="radio" name="q6" value="true"> True</label>
+        <label><input type="radio" name="q6" value="false"> False</label>
+      </div>
+
+      <div class="question" id="q7">
+        <h3>7. An entity cannot have multiple attributes.</h3>
+        <label><input type="radio" name="q7" value="true"> True</label>
+        <label><input type="radio" name="q7" value="false"> False</label>
+      </div>
+
+      <div class="question" id="q8">
+        <h3>8. Attributes help describe entities so users or systems can search, sort, and filter data.</h3>
+        <label><input type="radio" name="q8" value="true"> True</label>
+        <label><input type="radio" name="q8" value="false"> False</label>
+      </div>
+
+      <div class="question" id="q9">
+        <h3>9. Choosing correct data types for attributes (e.g., Number, Text, Date) is important for validation and queries.</h3>
+        <label><input type="radio" name="q9" value="true"> True</label>
+        <label><input type="radio" name="q9" value="false"> False</label>
+      </div>
+
+      <div class="question" id="q10">
+        <h3>10. An attribute and an entity are the same concept.</h3>
+        <label><input type="radio" name="q10" value="true"> True</label>
+        <label><input type="radio" name="q10" value="false"> False</label>
+      </div>
+
+      <div class="section-break"></div>
+
+      <!-- PART 2: Matching with dropdowns (10) -->
+      <h2 class="section-title">PART 2: Matching — Identify Entities & Attributes / Assign Data Types</h2>
+      <p><strong>Directions:</strong> For each entity, choose the best attribute (and implied data type) from the dropdown.</p>
+
+      <div class="question" id="q11">
+        <h3>11. Entity: Student — Attribute:</h3>
+        <select name="q11" aria-label="Student attribute selection">
+          <option value="">-- choose --</option>
+          <option value="Name">Name (Text)</option>
+          <option value="Serial">Serial Number</option>
+          <option value="Price">Price</option>
+          <option value="Plate">Plate Number</option>
+          <option value="Published">Published Date</option>
+        </select>
+      </div>
+
+      <div class="question" id="q12">
+        <h3>12. Entity: Laptop — Attribute:</h3>
+        <select name="q12" aria-label="Laptop attribute selection">
+          <option value="">-- choose --</option>
+          <option value="Brand">Brand (Text)</option>
+          <option value="ISBN">ISBN</option>
+          <option value="Author">Author</option>
+          <option value="Birth">Birthdate</option>
+          <option value="Quantity">Quantity</option>
+        </select>
+      </div>
+
+      <div class="question" id="q13">
+        <h3>13. Entity: Book — Attribute:</h3>
+        <select name="q13" aria-label="Book attribute selection">
+          <option value="">-- choose --</option>
+          <option value="Title">Title (Text)</option>
+          <option value="Color">Color</option>
+          <option value="Warranty">Warranty Period</option>
+          <option value="Mileage">Mileage</option>
+          <option value="InStock">In Stock (Boolean)</option>
+        </select>
+      </div>
+
+      <div class="question" id="q14">
+        <h3>14. Entity: Employee — Attribute:</h3>
+        <select name="q14" aria-label="Employee attribute selection">
+          <option value="">-- choose --</option>
+          <option value="Salary">Salary (Number)</option>
+          <option value="ISBN">ISBN</option>
+          <option value="Plate">Plate Number</option>
+          <option value="Battery">Battery Life</option>
+          <option value="Owner">Owner</option>
+        </select>
+      </div>
+
+      <div class="question" id="q15">
+        <h3>15. Entity: Car — Attribute:</h3>
+        <select name="q15" aria-label="Car attribute selection">
+          <option value="">-- choose --</option>
+          <option value="Plate">Plate Number (Text)</option>
+          <option value="Author">Author</option>
+          <option value="Published">Published Date</option>
+          <option value="Name">Name</option>
+          <option value="Quantity">Quantity</option>
+        </select>
+      </div>
+
+      <div class="question" id="q16">
+        <h3>16. Entity: Product — Attribute:</h3>
+        <select name="q16" aria-label="Product attribute selection">
+          <option value="">-- choose --</option>
+          <option value="Price">Price (Number)</option>
+          <option value="Brand">Brand</option>
+          <option value="Title">Title</option>
+          <option value="Plate">Plate Number</option>
+          <option value="ISBN">ISBN</option>
+        </select>
+      </div>
+
+      <div class="question" id="q17">
+        <h3>17. Entity: LibraryRecord — Attribute:</h3>
+        <select name="q17" aria-label="LibraryRecord attribute selection">
+          <option value="">-- choose --</option>
+          <option value="ISBN">ISBN (Text)</option>
+          <option value="Battery">Battery Life</option>
+          <option value="Mileage">Mileage</option>
+          <option value="Owner">Owner</option>
+          <option value="InStock">In Stock (Boolean)</option>
+        </select>
+      </div>
+
+      <div class="question" id="q18">
+        <h3>18. Entity: Order — Attribute:</h3>
+        <select name="q18" aria-label="Order attribute selection">
+          <option value="">-- choose --</option>
+          <option value="Quantity">Quantity (Number)</option>
+          <option value="Color">Color</option>
+          <option value="Name">Name</option>
+          <option value="Published">Published Date</option>
+          <option value="Brand">Brand</option>
+        </select>
+      </div>
+
+      <div class="question" id="q19">
+        <h3>19. Entity: BlogPost — Attribute:</h3>
+        <select name="q19" aria-label="BlogPost attribute selection">
+          <option value="">-- choose --</option>
+          <option value="Published">Published Date (Date)</option>
+          <option value="Plate">Plate Number</option>
+          <option value="Serial">Serial Number</option>
+          <option value="Salary">Salary</option>
+          <option value="Author">Author (Text)</option>
+        </select>
+      </div>
+
+      <div class="question" id="q20">
+        <h3>20. Entity: Inventory — Attribute:</h3>
+        <select name="q20" aria-label="Inventory attribute selection">
+          <option value="">-- choose --</option>
+          <option value="InStock">In Stock (Boolean)</option>
+          <option value="ISBN">ISBN</option>
+          <option value="Plate">Plate Number</option>
+          <option value="Brand">Brand</option>
+          <option value="Title">Title</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
+    </form>
+  </main>
+
+  <!-- Result Modal -->
+  <div id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+    <div class="modal-content" role="document">
+      <button class="close-btn" aria-label="Close results">&times;</button>
+      <h2 id="resultTitle">Quiz Results & Rationalization</h2>
+      <p id="scoreText" style="font-weight:700"></p>
+      <p class="muted" id="feedbackText"></p>
+      <div class="summary-line" id="sectionSummary"></div>
+      <ul id="rationalizationList"></ul>
+      <button id="proceedBtn">🎮 Proceed to Game 3</button>
+    </div>
+  </div>
+
+  <footer>
+    ERDucate Developer © 2025 | Technological University of the Philippines
+  </footer>
+
+  <script src="quiz3.js"></script>
+</body>
+</html>

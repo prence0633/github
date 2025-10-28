@@ -1,0 +1,93 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERDucate Lesson 3 - Multi Game</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="game3.css">
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<audio id="successSound" src="ClappLesson1.mp3"></audio>
+<audio id="bgMusic" src="BackgroundLesson1.mp3" loop></audio>
+
+<header>
+  <div class="title">Lesson 3 — Multi-Game Entities</div>
+  <div class="btn-group">
+    <button id="musicBtn" onclick="toggleMusic(this)">🔊 Mute</button>
+    <a href="quiz3.html">📋 Back to Quiz</a>
+    <a href="index.html">🏠 Home</a>
+  </div>
+</header>
+
+<!-- Game Mechanics Popup -->
+<div id="gameMechanics" class="modal hidden">
+  <div class="modal-content">
+    <h2>📘 Game Mechanics</h2>
+    <p>Welcome to the ERDucate Click Game!</p>
+    <ul style="text-align:left; max-width:400px; margin:10px auto;">
+      <li>🎯 Stage 1: Identify correct Entities in different scenes.</li>
+      <li>🗂️ Stage 2: Sort attributes into Student or Teacher categories.</li>
+      <li>🔗 Stage 3: Match entities with their correct relationships.</li>
+      <li>❌ Wrong answers reduce your <strong>5 chances</strong>.</li>
+      <li>✅ Complete all scenes to unlock your achievement!</li>
+    </ul>
+    <button class="cta-btn" onclick="startMechanics()">Start Game</button>
+  </div>
+</div>
+
+
+<h1 id="roundTitle">Scene 1</h1>
+<p style="text-align:center;">❤️ Chances left: <span id="chanceDisplay">5</span></p>
+<div id="roundsWrapper"></div>
+
+<div id="progressBtnContainer" class="hidden">
+  <div id="congratsMessage" class="hidden">🎉 Congratulations! You completed Lesson 3! 🎉</div>
+  <a href="progress.html" class="cta-btn">📊 View Your Progress</a>
+</div>
+
+<!-- Intro Modals -->
+<div id="introEntities" class="modal-bg hidden">
+  <div class="modal"> 
+  <h2>📘 Game Mechanics</h2>
+  <ul style="text-align:left; margin:10px auto; max-width:420px;">
+    <li>You have <strong>5 chances</strong> in the whole game.</li>
+    <li>There are 3 stages:
+      <ul>
+        <li><strong>Stage 1</strong>: Choose Entities</li>
+        <li><strong>Stage 2</strong>: Sort Attributes</li>
+        <li><strong>Stage 3</strong>: Match Relationships</li>
+      </ul>
+    </li>
+    <li>Noise items don’t belong anywhere — just remove them.</li>
+    <li>Finish all stages to complete the game 🎉</li>
+  </ul>
+
+  <hr style="margin:15px 0;">
+
+  <h3>🎯 Stage 1 Mechanics</h3>
+  <p style="margin:10px auto; max-width:400px;">
+    Tap a <strong>word card</strong>, then tap the correct <strong>Entity box</strong>.  
+    Remove all items (including noise) to finish the round.
+  </p>
+  <button class="cta-btn" onclick="startStage(1)">Start Stage 1</button>
+</div>
+<div id="introSorting" class="modal-bg hidden">
+  <div class="modal">
+    <h2>Stage 2: Sorting Attributes</h2>
+    <p>Tap an attribute, then tap Student or Teacher.</p>
+    <button class="cta-btn" onclick="startStage(2)">Start Stage 2</button>
+  </div>
+</div>
+<div id="introMatching" class="modal-bg hidden">
+  <div class="modal">
+    <h2>Stage 3: Matching Relationships</h2>
+    <p>Tap an Entity, then tap the correct Relationship.</p>
+    <button class="cta-btn" onclick="startStage(3)">Start Stage 3</button>
+  </div>
+</div>
+<script src="game3.js"></script>   
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERDucate Progress & Certificates</title>
+<link rel="icon" href="ERDucate.ico">
+<style>
+body {
+  margin: 0;
+  font-family: "Poppins", system-ui, sans-serif;
+  background: linear-gradient(rgba(40,0,0,0.88), rgba(10,0,0,0.9)),
+              url("Image.png") no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+h1 {
+  text-align: center;
+  padding: 25px 0 10px;
+  font-size: 2.4rem;
+  letter-spacing: 1.5px;
+  color: #ffdedf;
+  text-shadow: 0px 0px 10px rgba(255,200,200,0.3);
+}
+
+/* STUDENT NAME */
+#studentName {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #ffe5e5;
+  font-size: 1.1rem;
+}
+
+/* TOPIC CARD */
+.topic {
+  width: 75%;
+  margin: 20px auto;
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,200,200,0.25);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.45);
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+.topic:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 5px 28px rgba(255,120,120,0.4);
+  border-color: rgba(255,160,160,0.45);
+}
+
+/* STATUS LABELS */
+.done {
+  color: #4dff8c;
+  font-weight: 700;
+  text-shadow: 0px 0px 6px rgba(80,255,80,0.35);
+}
+.notdone {
+  color: #ff6f6f;
+  font-weight: 600;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  background: linear-gradient(to right, #a00000, #600000);
+  padding: 12px 22px;
+  border: none;
+  color: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 100;
+  margin: 12px 5px 0 0;
+  transition: .25s ease-in-out;
+  letter-spacing: .4px;
+  box-shadow: 0 0px 10px rgba(255,50,50,0.3);
+}
+.btn:hover {
+  background: linear-gradient(to right, #ff1f1f, #9a0000);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(255, 50, 50, 0.5);
+}
+
+/* PARTICLES */
+.animated-bg span {
+  background: rgba(255,255,255,0.35);
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.4));
+}
+
+/* CERTIFICATE CANVAS */
+canvas {
+  display: none;
+  margin: 30px auto;
+  border-radius: 16px;
+  border: 4px solid #ffc8c8;
+}
+
+
+
+/* ---------------------- */
+/* RESPONSIVENESS SECTION */
+/* ---------------------- */
+
+/* For laptops & small desktops */
+@media (max-width: 1024px) {
+  .topic {
+    width: 70%;
+  }
+}
+
+/* For tablets */
+@media (max-width: 768px) {
+  body {
+    margin: 15px;
+  }
+  .topic {
+    width: 80%;
+    padding: 12px;
+  }
+  .btn {
+    padding: 8px 16px;
+    font-size: 0.95rem;
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+  body {
+    margin: 10px;
+    font-size: 0.95rem;
+  }
+  .topic {
+    width: 95%;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 6px;
+  }
+  .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  canvas {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="animated-bg">
+  <span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<h1>My Progress & Certificates</h1>
+<p id="studentName"></p>
+<div id="progressList"></div>
+
+<canvas id="certCanvas" width="800" height="600"></canvas>
+
+<button class="btn" onclick="window.location.href='index.html'">🏠Back to Homepage</button>
+
+<script>
+// ===== Topics =====
+const topics = [
+  "Introduction to Databases & Importance of Structuring",
+  "Basic Concepts of Database Structure",
+  "Identifying Entities & Attributes",
+  "Table Structures & Keys",
+  "Table Relationships",
+  "Data Types & Designing the ERD",
+  "Normalization & Database Design",       
+  "Introduction to SQL & Querying Databases" 
+];
+
+// ===== Initialize users if missing =====
+function initUsers() {
+  if (!localStorage.getItem("users")) {
+    const demoUsers = { "DemoUser": { progress: {} } };
+    topics.forEach((t,i)=>{
+      demoUsers["DemoUser"].progress[`lesson${i+1}`] = false;
+      demoUsers["DemoUser"].progress[`quiz${i+1}`] = false;
+      demoUsers["DemoUser"].progress[`game${i+1}`] = false;
+      demoUsers["DemoUser"].progress[`achievement${i+1}`] = false;
+    });
+    localStorage.setItem("users", JSON.stringify(demoUsers));
+    localStorage.setItem("loggedInUser", "DemoUser");
+  }
+}
+
+// ===== Load current user =====
+function loadCurrentUser() {
+  const users = JSON.parse(localStorage.getItem("users")) || {};
+  const currentUser = localStorage.getItem("loggedInUser");
+  if (!currentUser || !users[currentUser]) return null;
+  return { users, currentUser, progress: users[currentUser].progress };
+}
+
+// ===== Update progress =====
+function updateProgress(type, topicNum, value=true) {
+  const data = loadCurrentUser();
+  if(!data) return;
+  data.users[data.currentUser].progress[`${type}${topicNum}`] = value;
+  localStorage.setItem("users", JSON.stringify(data.users));
+  renderProgress();
+}
+
+// ===== Render progress list =====
+function renderProgress() {
+  const data = loadCurrentUser();
+  if(!data) {
+    document.body.innerHTML = "<h2>No user found. Please login again.</h2><a href='index.html'>Go to Homepage</a>";
+    return;
+  }
+
+  const { currentUser, progress } = data;
+  document.getElementById("studentName").textContent = `Student: ${currentUser}`;
+  const list = document.getElementById("progressList");
+  list.innerHTML = "";
+
+  topics.forEach((topic,i)=>{
+    const lesson = progress[`lesson${i+1}`];
+    const quiz = progress[`quiz${i+1}`];
+    const game = progress[`game${i+1}`];
+    const achievement = progress[`achievement${i+1}`];
+    const completed = lesson && quiz && game;
+    const unlocked = i === 0 || (progress[`lesson${i}`] && progress[`quiz${i}`] && progress[`game${i}`]);
+
+    const topicDiv = document.createElement("div");
+    topicDiv.className = "topic";
+    topicDiv.innerHTML = `
+      <h2>Topic ${i+1}: ${topic}</h2>
+      <p>Lesson: <span class="${lesson?'done':'notdone'}">${lesson?'✅ Completed':'❌ Not Completed'}</span></p>
+      <p>Quiz: <span class="${quiz?'done':'notdone'}">${quiz?'✅ Completed':'❌ Not Completed'}</span></p>
+      <p>Game: <span class="${game?'done':'notdone'}">${game?'✅ Completed':'❌ Not Completed'}</span></p>
+      <p>Achievement: <span class="${achievement?'done':'notdone'}">${achievement?'🏆 Certificate Downloaded':'❌ Locked'}</span></p>
+    `;
+
+    if(completed && !achievement){
+      const certBtn = document.createElement("button");
+      certBtn.className = "btn";
+      certBtn.textContent = `Download Certificate for Topic ${i+1}`;
+      certBtn.onclick = () => generateCert(i+1);
+      topicDiv.appendChild(certBtn);
+
+      // Unlock next lesson
+      if (i < topics.length - 1) {
+        const nextBtn = document.createElement("button");
+        nextBtn.className = "btn";
+        nextBtn.textContent = `Unlock Next Lesson (${i+2})`;
+        nextBtn.onclick = () => {
+          window.location.href = `Lesson${i+2}.html`;
+        };
+        topicDiv.appendChild(nextBtn);
+      }
+
+    } else if(!completed){
+      const note = document.createElement("p");
+      note.className = "notdone";
+      note.textContent = "📌 Finish Lesson, Quiz, and Game to unlock certificate.";
+      topicDiv.appendChild(note);
+
+      if(unlocked && i>0){
+        const startBtn = document.createElement("button");
+        startBtn.className = "btn";
+        startBtn.textContent = `Start Lesson ${i+1}`;
+        startBtn.onclick = () => {
+          window.location.href = `Lesson${i+1}.html`;
+        };
+        topicDiv.appendChild(startBtn);
+      } else if(!unlocked && i>0){
+        const lockNote = document.createElement("p");
+        lockNote.className = "notdone";
+        lockNote.textContent = "🔒 Locked until previous lesson is completed.";
+        topicDiv.appendChild(lockNote);
+      }
+    }
+
+    list.appendChild(topicDiv);
+  });
+}
+
+// ===== Certificate Generation =====
+async function generateCert(topicNum) {
+  const data = loadCurrentUser();
+  if(!data) return;
+  const { users, currentUser } = data;
+
+  users[currentUser].progress[`achievement${topicNum}`] = true;
+  localStorage.setItem("users", JSON.stringify(users));
+
+  renderProgress();
+
+  const canvas = document.getElementById("certCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.style.display = "block";
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = "#f8f8f8"; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.strokeStyle = "maroon"; ctx.lineWidth = 10; ctx.strokeRect(20,20,canvas.width-40,canvas.height-40);
+
+  ctx.fillStyle = "maroon"; ctx.font="40px Arial"; ctx.textAlign="center";
+  ctx.fillText("CERTIFICATE OF APPRECIATION", canvas.width/2, 120);
+
+  ctx.fillStyle = "black"; ctx.font="22px Arial";
+  ctx.fillText("This Certificate is proudly presented to", canvas.width/2, 180);
+
+  ctx.font="bold 32px Arial";
+  ctx.fillText(currentUser, canvas.width/2, 240);
+
+  ctx.font="28px Arial"; ctx.fillStyle="maroon";
+  ctx.fillText(topics[topicNum-1], canvas.width/2, 300);
+
+  ctx.font="18px Arial"; ctx.fillStyle="black";
+  const message = "in recognition of outstanding performance, dedication, and commitment.\n" +
+                  "Your perseverance and excellence have brought great credit to yourself \n" +
+                  "and serve as an inspiration.\n\n" +
+                  "Congratulations on this remarkable achievement! \nBy the developer";
+  message.split("\n").forEach((line, idx)=>ctx.fillText(line, canvas.width/2, 360+idx*28));
+
+  ctx.font="16px Arial";
+  ctx.fillText(`Date: ${new Date().toLocaleDateString()}`, canvas.width/2, 520);
+
+  const dataURL = canvas.toDataURL("image/png");
+
+  if (navigator.canShare && navigator.canShare({ files: [] })) {
+    const response = await fetch(dataURL);
+    const blob = await response.blob();
+    const file = new File([blob], `${topics[topicNum-1]}_Certificate.png`, { type: "image/png" });
+    await navigator.share({
+      files: [file],
+      title: "Your Certificate",
+      text: "Download or share your certificate."
+    }).catch(err => console.log("Share cancelled", err));
+  } else {
+    const link = document.createElement("a");
+    link.download = `${topics[topicNum-1]}_Certificate.png`;
+    link.href = dataURL;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  // 🎯 NEW: Redirect to practiceERD.html after Lesson 8 certificate
+  if(topicNum === 8){
+    setTimeout(() => {
+      alert("🎉 Congratulations! You’ve completed all lessons. Redirecting to Practice ERD...");
+      window.location.href = "practiceERD.html";
+    }, 1500);
+  }
+}
+
+// ===== Init =====
+initUsers();
+renderProgress();
+</script>
+</body>
+</html>

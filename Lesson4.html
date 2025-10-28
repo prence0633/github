@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ERDucate Web Based Module — Lesson 4</title>
+  <link rel="icon" href="ERDucate.ico">
+ <link rel="stylesheet" href="lesson4.css"> 
+</head>
+<body>
+  <div class="page" role="main">
+    <h1>Lesson 4 — Table Structures & Keys</h1>
+
+    <!-- Objectives card -->
+    <div class="modal-card" style="margin-bottom:18px;">
+      <h2>Lesson 4 Objectives</h2>
+  <p>At the end of the lesson, the student should be able to:</p>
+  <ul>
+    <li>Explain how Entities and Attributes map to Tables</li>
+    <li>Differentiate Rows and Columns</li>
+    <li>Apply Primary Key and Foreign Key to relate tables and maintain data connections</li>
+    <li>Relate table relationships to real-life examples</li>
+  </ul>
+    </div>
+
+    <!-- Story Scene -->
+    <div class="lesson-container" aria-label="Lesson scene" id="lessonScene">
+      <div class="scene-bg" role="img" aria-label="Classroom background"></div>
+      <div class="characters" aria-hidden="true">
+        <img src="teacher-image.png" alt="Teacher" class="teacher" id="teacherImg">
+        <img src="studentfrankie.png" alt="Frankie" class="student student1" id="student1Img">
+        <img src="john.png" alt="John" class="student student2" id="student2Img">
+      </div>
+
+      <div class="speech teacher" id="teacherBubble" role="status" aria-live="polite"></div>
+      <div class="speech student" id="studentBubble" role="status" aria-live="polite"></div>
+    </div>
+
+    <!-- Pause & reflect -->
+    <div id="pauseReflect" class="pause-reflect" aria-hidden="true">
+      <h3>Pause & Reflect</h3>
+      <p id="reflectQuestion" style="color:var(--muted)">What would you use as a Primary Key for a student table? Write a short answer in your notebook.</p>
+      <div style="margin-top:10px; display:flex; justify-content:center; gap:10px;">
+        <button class="btn" id="continueBtn">➡️Continue</button>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls" role="navigation" aria-label="Lesson Controls">
+      <button class="btn" id="startBtn" aria-controls="lessonScene">🚀Start Lesson</button>
+      <button id="backBtn" class="btn">⬅️Back</button>
+      <button class="btn" id="nextBtn" disabled>➡️Next</button>
+      <button class="btn" id="skipBtn">⏩Skip to Quiz</button>
+      <button class="btn small" id="showDbBtn" title="Show database summary">📊Show Summary</button>
+      <button class="btn small" id="openGuidedBtn" title="Guided practice">🧭Guided Practice</button>
+      <button class="btn small" id="openGlossaryBtn" title="Glossary">📚Glossary</button>
+    </div>
+  </div>
+
+  <!-- Intro Modal -->
+  <div class="modal show" id="introModal" aria-hidden="false" role="dialog" aria-label="Intro — Lesson Overview">
+    <div class="modal-card" role="document">
+      <h2>Introduction- Table Structures & Keys<br></h2>
+    <p>
+  In this lesson, students learn how <strong>Entities</strong> and <strong>Attributes</strong> are stored in <strong>Tables</strong>. 
+  Frankie and John explore how <strong>Rows</strong> represent entities (records) and <strong>Columns</strong> represent attributes (fields). 
+  They also see how <strong>Primary Keys</strong> uniquely identify each row and how <strong>Foreign Keys</strong> connect tables to maintain relationships. 
+  By organizing data this way, students understand how tables relate to each other and how real-world scenarios can be modeled efficiently in a database.
+</p>
+
+
+      <div class="modal-actions" style="margin-top:14px;">
+        <button class="btn" id="closeModalBtn">🔎Read Later</button>
+        <button class="btn" id="beginBtn">🚀Start Story</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DB Info floating -->
+  <div id="dbInfo" role="dialog" aria-hidden="true" aria-label="Summary — Tables & Keys">
+    <button class="btn small" style="float:right; background:var(--maroon); color:#fff; border:none;" aria-label="Close summary" id="closeDbX">❌</button>
+    <h3>Summary — Tables & Keys</h3>
+    <p><strong>Table:</strong> Stores Entities (rows) and Attributes (columns).</p>
+    <p><strong>Primary Key:</strong> Unique identifier for each row (e.g., StudentID).</p>
+    <p><strong>Foreign Key:</strong> A column that links one table to another.</p>
+    <table aria-label="Example student table">
+      <thead><tr><th>StudentID</th><th>Name</th><th>Age</th><th>Grade</th></tr></thead>
+      <tbody>
+        <tr><td>101</td><td>John</td><td>15</td><td>9</td></tr>
+        <tr><td>102</td><td>Frankie</td><td>15</td><td>9</td></tr>
+      </tbody>
+    </table>
+    <p>Example: StudentID in Attendance Table is a Foreign Key that links back to Student Table.</p>
+    <div class="mini-quiz" style="margin-top:8px;">
+      <p><strong>Quick Check:</strong> Which of the following is a Primary Key?</p>
+      <button onclick="checkAnswer(this,true)">StudentID</button>
+      <button onclick="checkAnswer(this,false)">Name</button>
+      <button onclick="checkAnswer(this,false)">Grade</button>
+    </div>
+    <a href="quiz4.html" class="quiz-link-btn" id="quizLink">🧠Take Quiz 4</a>
+      <button class="quiz-link-btn" id="confirmUnlockBtn">🔓Unlock & Proceed</button>
+  </div>
+
+  <!-- Guided Practice modal -->
+  <div class="modal" id="guidedModal" aria-hidden="true" role="dialog" aria-label="Guided Practice">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeGuidedX" aria-label="Close guided practice">❌</button>
+      <h2>📝 Guided Practice — Identify Keys</h2>
+      <p class="guided-note">Case: You have a <strong>Book</strong> table with columns: BookID, Title, Author, ISBN, Shelf. Identify which column should be the Primary Key and which could be a Foreign Key (if any).</p>
+      <div style="margin-top:8px;">
+        <label for="guidedAnswer" style="font-weight:700;">Your answer (one line):</label>
+        <textarea id="guidedAnswer" placeholder="Example: Primary Key: BookID (Number) — Foreign Key: none or ISBN (Text)"></textarea>
+        <div class="practice-buttons" style="margin-top:8px; display:flex; gap:8px; justify-content:flex-start;">
+          <button class="btn" id="showHintBtn">💡Need Hint</button>
+          <button class="btn secondary" id="showAnswerBtn">📝Show Sample Answer</button>
+        </div>
+        <div id="guidedHint" class="hint" style="margin-top:8px;">Hint: Primary keys uniquely identify rows. ISBN is unique per edition but BookID is typical as an auto-increment ID.</div>
+        <div id="guidedSample" class="answer" style="margin-top:8px;">Sample answer:
+Primary Key: BookID (Number)
+Foreign Key: Could be none; ISBN may be unique but is not ideal as a FK unless linking to an Editions table.</div>
+      </div>
+
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+        <button class="btn secondary" id="closeGuidedBtn">❌Close</button>
+        <button class="btn" id="submitGuidedBtn">📤Submit & Proceed to Unlock</button>
+      </div>
+    </div>
+  </div>
+
+ 
+
+  <!-- Help modal -->
+  <div class="modal" id="helpModal" aria-hidden="true" role="dialog" aria-label="Learner Support">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeHelpX" aria-label="Close help">❌</button>
+      <h2>📚 Learner Support</h2>
+      <p><strong>FAQ</strong></p>
+      <ul>
+        <li><b>Where to start?</b> — Click "Start Lesson" to begin the story-based walkthrough.</li>
+        <li><b>How to save progress?</b> — Progress auto-saves in your browser (localStorage).</li>
+        <li><b>How to practice?</b> — Open Guided Practice and submit your answer to proceed to the quiz.</li>
+      </ul>
+      <p style="margin-top:8px;"><strong>Tip:</strong> Use Primary Keys to uniquely identify rows and Foreign Keys to link tables.</p>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+        <button class="btn" id="closeHelpBtn">❌Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glossary modal -->
+  <div class="modal" id="glossaryModal" aria-hidden="true" role="dialog" aria-label="Glossary">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeGlossaryX" aria-label="Close glossary">❌</button>
+      <h2>Glossary — Key Terms</h2>
+      <dl style="margin-top:6px; color:var(--muted);">
+        <dt style="font-weight:700;">Table</dt>
+        <dd style="margin:0 0 8px 0;">A collection of rows (records) and columns (attributes).</dd>
+        <dt style="font-weight:700;">Row</dt>
+        <dd style="margin:0 0 8px 0;">A single record in a table (an entity instance).</dd>
+        <dt style="font-weight:700;">Column</dt>
+        <dd style="margin:0 0 8px 0;">An attribute or field that stores one type of data for all rows.</dd>
+        <dt style="font-weight:700;">Primary Key</dt>
+        <dd style="margin:0 0 8px 0;">A unique identifier for each row.</dd>
+        <dt style="font-weight:700;">Foreign Key</dt>
+        <dd style="margin:0 0 8px 0;">A column referencing a Primary Key in another table, used to create relationships.</dd>
+      </dl>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+        <button class="btn" id="closeGlossaryBtn">❌Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile glossary popup -->
+  <div id="mobileGlossaryPopup" role="dialog" aria-hidden="true">
+    <p id="mobileGlossaryText" style="color:#fff; margin:0;"></p>
+    <div style="margin-top:8px;">
+      <button class="btn small" onclick="hideGlossaryPopup()">❌Close</button>
+    </div>
+  </div>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-group" aria-hidden="false">
+    <button class="fab glossary" id="fabGlossary" title="Glossary">G</button>
+    <button class="fab practice" id="fabPractice" title="Guided Practice">P</button>
+    <button class="fab help" id="fabHelp" title="Help">?</button>
+  </div>
+<script src="scriptlesson4.js"></script> 
+
+</body>
+</html>

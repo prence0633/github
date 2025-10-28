@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERDucate Lesson4 - Table Structures & Keys</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="quiz4.css">
+</head>
+<body>
+  <header>
+    <div class="title">ERDucate Web Based Module</div>
+    <div class="btn-group">
+      <a href="Lesson4.html">📚 Back to Lesson</a>
+      <a href="index.html">🏠 Home</a>
+    </div>
+  </header>
+
+  <h1>Quiz 4 — Table Structures & Keys </h1>
+  <div class="timer" aria-live="polite">Time left: <span id="time">180</span>s</div>
+
+  <form id="quizForm" autocomplete="off" novalidate>
+    <!-- PART 1: Matching (Drag & Drop) - 5 items -->
+    <h2 class="section-title">PART 1 — Match Entities & Columns (Drag & Drop)</h2>
+   <strong>Directions:</strong>
+<p class="muted">
+Drag and drop each item from the left to its correct match on the right. 
+Use your understanding of how <strong>Entities</strong> and <strong>Attributes</strong> map to <strong>Tables</strong> and <strong>Columns</strong>. 
+As you match, recall that <em>rows represent individual records</em> and <em>columns represent data fields</em>. 
+Think about how <strong>Primary Keys</strong> and <strong>Foreign Keys</strong> connect these tables to reflect 
+real-life data relationships (e.g., Students and their Orders, Books and their Authors).
+</p>
+    <div class="question">
+      <h3>Match the entity/attribute to the correct table/column</h3>
+      <div class="dnd-container" aria-hidden="false">
+        <div class="dnd-bank" id="bank" aria-label="Draggable items">
+          <!-- draggable items inserted by JS -->
+        </div>
+        <div class="dnd-targets" id="targets" aria-label="Drop targets">
+          <!-- targets inserted by JS -->
+        </div>
+      </div>
+      <div class="muted" style="margin-top:8px;">(Matches: Student → Students Table, StudentID → Column: ID, Book → Books Table, AuthorName → Column: Name, Borrower → Borrowers Table)</div>
+    </div>
+
+    <!-- PART 2: Rows vs Columns (Highlighting / Multiple Choice) - 5 items -->
+    <h2 class="section-title">PART 2 — Rows vs Columns & Table Interaction</h2>
+<strong>Directions:</strong>
+<p class="muted">
+Study the sample table carefully and answer the questions that follow. 
+Understand how <strong>rows</strong> represent individual records or entries, while <strong>columns</strong> define specific data fields or attributes. 
+As you interact with the table, apply your knowledge of how <strong>Entities</strong> and <strong>Attributes</strong> are organized into structured tables 
+that use <strong>Primary Keys</strong> and <strong>Foreign Keys</strong> to connect related data — just like in real-world scenarios (e.g., students enrolled in courses or customers placing orders).
+</p>
+
+    <div class="question" id="tableQuestion">
+      <h3>Reference Table — Students</h3>
+      <table class="mini-table" id="studentsTable" aria-label="Students sample table">
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Address</th><th>Age</th></tr>
+        </thead>
+        <tbody>
+          <tr data-row="1"><td>ST001</td><td>John Doe</td><td>Rizal St.</td><td>18</td></tr>
+          <tr data-row="2"><td>ST002</td><td>Mary Cruz</td><td>Quezon Ave.</td><td>19</td></tr>
+          <tr data-row="3"><td>ST003</td><td>Juan Dela Cruz</td><td>Mabini St.</td><td>18</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:10px;">
+        <label>Q6. Which represents a single record?</label>
+        <label><input type="radio" name="q6" value="row"> Row</label>
+        <label><input type="radio" name="q6" value="column"> Column</label>
+
+        <label style="margin-top:8px;">Q7. Which represents a field (same type of data)?</label>
+        <label><input type="radio" name="q7" value="row"> Row</label>
+        <label><input type="radio" name="q7" value="column"> Column</label>
+
+        <label style="margin-top:8px;">Q8. Click the row that contains <strong>John Doe</strong> to highlight it (then press "Mark Row").</label><br>
+        <button type="button" id="markJohn" class="muted" style="padding:8px 10px;border-radius:6px;border:1px solid #ddd;background:#fff;">Mark Row</button>
+        <input type="hidden" name="q8" id="q8" value="">
+
+        <label style="margin-top:8px;">Q9. Click the column labeled <strong>Address</strong> then press "Mark Column".</label><br>
+        <button type="button" id="markAddress" class="muted" style="padding:8px 10px;border-radius:6px;border:1px solid #ddd;background:#fff;">Mark Column</button>
+        <input type="hidden" name="q9" id="q9" value="">
+
+        <label style="margin-top:8px;">Q10. True/False: Each column stores the same type of data.</label>
+        <label><input type="radio" name="q10" value="true"> True</label>
+        <label><input type="radio" name="q10" value="false"> False</label>
+      </div>
+    </div>
+
+    <!-- PART 3: Primary Keys (Checkbox / Selection / Composite)  items -->
+    <h2 class="section-title">PART 3 — Primary Keys</h2>
+<strong>Directions:</strong>
+<p class="muted">
+Examine the given tables and respond to each question carefully. 
+Identify which columns serve as the <strong>Primary Key (PK)</strong> — the unique identifiers that distinguish one record from another. 
+Remember that a Primary Key must contain <em>unique and non-null values</em> to ensure data accuracy and prevent duplication. 
+Apply your understanding of how Primary Keys maintain organized and reliable table structures within a relational database.
+</p>
+    <div class="question">
+      <h3>Q11. Which column uniquely identifies each student?</h3>
+      <div class="cols-list" role="list" aria-label="Student columns">
+        <label class="col-item"><input type="radio" name="q11" value="StudentID"> StudentID</label>
+        <label class="col-item"><input type="radio" name="q11" value="Name"> Name</label>
+        <label class="col-item"><input type="radio" name="q11" value="Section"> Section</label>
+      </div>
+
+      <h3 style="margin-top:10px;">Q12. In Orders table which is PK?</h3>
+      <div class="cols-list">
+        <label class="col-item"><input type="radio" name="q12" value="OrderID"> OrderID</label>
+        <label class="col-item"><input type="radio" name="q12" value="ProductName"> ProductName</label>
+        <label class="col-item"><input type="radio" name="q12" value="Quantity"> Quantity</label>
+      </div>
+
+      <h3 style="margin-top:10px;">Q13. Identify the composite key for Parcels (choose all that apply)</h3>
+      <div class="cols-list">
+        <label class="col-item"><input type="checkbox" name="q13" value="Recipient"> Recipient</label>
+        <label class="col-item"><input type="checkbox" name="q13" value="Address"> Address</label>
+        <label class="col-item"><input type="checkbox" name="q13" value="ParcelID"> ParcelID</label>
+        <label class="col-item"><input type="checkbox" name="q13" value="Weight"> Weight</label>
+      </div>
+
+      <h3 style="margin-top:10px;">Q14. True/False: A Primary Key can have duplicate values.</h3>
+      <label><input type="radio" name="q14" value="true"> True</label>
+      <label><input type="radio" name="q14" value="false"> False</label>
+
+      <h3 style="margin-top:10px;">Q15. Select the PK for Books table:</h3>
+      <div class="cols-list">
+        <label class="col-item"><input type="radio" name="q15" value="BookID"> BookID</label>
+        <label class="col-item"><input type="radio" name="q15" value="Title"> Title</label>
+        <label class="col-item"><input type="radio" name="q15" value="ISBN"> ISBN</label>
+      </div>
+    </div>
+
+    <!-- PART 4: Foreign Keys (Checkbox/Selection) - 5 items -->
+    <h2 class="section-title">PART 3 — Primary Keys</h2>
+<strong>Directions:</strong>
+<p class="muted">
+Observe the small sample tables and analyze how each column functions within the data. 
+Select the correct answer for each item to identify which columns serve as 
+<strong>Primary Keys</strong> — the unique identifiers that distinguish one record from another.
+</p>
+
+<!-- Questions Q11–Q15 go here -->
+
+    <div class="question">
+      <h3>Q16. Which column in Orders links to Students table?</h3>
+      <label><input type="radio" name="q16" value="StudentID"> StudentID</label>
+      <label><input type="radio" name="q16" value="OrderDate"> OrderDate</label>
+      <label><input type="radio" name="q16" value="Amount"> Amount</label>
+
+      <h3 style="margin-top:10px;">Q17. Which column in BorrowedBooks links to Borrowers table?</h3>
+      <label><input type="radio" name="q17" value="BorrowerID"> BorrowerID</label>
+      <label><input type="radio" name="q17" value="BorrowDate"> BorrowDate</label>
+      <label><input type="radio" name="q17" value="ReturnDate"> ReturnDate</label>
+
+      <h3 style="margin-top:10px;">Q18. Which column in Books links to Authors table?</h3>
+      <label><input type="radio" name="q18" value="AuthorID"> AuthorID</label>
+      <label><input type="radio" name="q18" value="Pages"> Pages</label>
+      <label><input type="radio" name="q18" value="Publisher"> Publisher</label>
+
+      <h3 style="margin-top:10px;">Q19. True/False: A Foreign Key must match the Primary Key data type of referenced table.</h3>
+      <label><input type="radio" name="q19" value="true"> True</label>
+      <label><input type="radio" name="q19" value="false"> False</label>
+
+      <h3 style="margin-top:10px;">Q20. Identify the FK in Orders linking to Products table</h3>
+      <div class="cols-list">
+        <label class="col-item"><input type="radio" name="q20" value="ProductID"> ProductID</label>
+        <label class="col-item"><input type="radio" name="q20" value="ProductName"> ProductName</label>
+        <label class="col-item"><input type="radio" name="q20" value="Category"> Category</label>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+
+  <!-- Result Modal -->
+  <div id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+    <div class="modal-content" role="document">
+      <button class="close-btn" aria-label="Close results">&times;</button>
+      <h2 id="resultTitle">Quiz Results & Rationalization</h2>
+      <p id="scoreText" style="font-weight:700"></p>
+      <p class="muted" id="feedbackText"></p>
+      <ul id="rationalizationList"></ul>
+      <button id="proceedBtn">🎮 Proceed to Game 4</button>
+    </div>
+  </div>
+
+  <footer>ERDucate Developer © 2025 | Technological University of the Philippines</footer>
+
+<script src="quiz4.js"></script>
+</body>
+</html>

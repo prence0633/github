@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERDucate Lesson 1: Introduction to Databases & Importance of Structuring Game</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="game1.css"> 
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<audio id="successSound" src="ClappLesson1.mp3"></audio>
+<audio id="bgMusic" src="BackgroundLesson1.mp3" loop></audio>
+
+<header>
+  <div class="title">Lesson 1 — Sorting Challenge</div>
+  <div class="btn-group">
+    <button onclick="toggleMusic(this)">🔊 Mute</button>
+    <a href="quiz1.html">📋 Back to Quiz</a>
+    <a href="index.html">🏠 Home</a>
+  </div>
+</header>
+
+<h1 id="roundTitle">Scene 1</h1>
+<p style="text-align:center;">❤️ Chances left: <span id="chanceDisplay">5</span></p>
+<div id="roundsWrapper"></div>
+
+<div id="progressBtnContainer" class="hidden">
+  <div id="congratsMessage" class="hidden">🎉 Congratulations! You completed Lesson 1! 🎉</div>
+  <a href="progress.html" class="cta-btn">📊 View Your Progress</a>
+</div>
+
+<div id="introModal" class="modal-bg hidden">
+  <div class="modal">
+    <h2 id="introTitle">Welcome!</h2>
+    <p id="introText">Drag the information into the correct column: what should be stored in a database and what should NOT.</p>
+    <button class="cta-btn" onclick="startRound()">Start</button>
+  </div>
+</div>
+
+<script src="game1.js"></script> 
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERDucate - Login</title>
+<link rel="icon" href="ERDucate.ico">
+
+<style>
+/* ================= GLOBAL STYLES ================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+/* === MAIN: make the page a flex container so the login-box centers mid-screen === */
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: url('image2.jpg') center/cover no-repeat fixed;
+  color: #fff;
+
+  /* <-- ADDED: center content mid-screen */
+  display: flex;
+  align-items: center;    /* vertical center */
+  justify-content: center;/* horizontal center */
+  min-height: 100vh;
+}
+
+/* keep all your existing styles below exactly as provided */
+.lesson-card {
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 14px;
+  padding: 18px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: transform .25s, box-shadow .25s;
+}
+.lesson-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.55);
+}
+
+.lesson-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 0 6px rgba(255,255,255,0.4);
+}
+
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== Floating particles effect ===== */
+.particles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.particles span {
+  position: absolute;
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 50%;
+  animation: float 10s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) scale(0.5); }
+  100% { transform: translateY(-10vh) scale(1); }
+}
+
+/* Randomized positions + speeds */
+.particles span:nth-child(1) { left: 10%; animation-duration: 8s; }
+.particles span:nth-child(2) { left: 20%; animation-duration: 12s; }
+.particles span:nth-child(3) { left: 35%; animation-duration: 10s; }
+.particles span:nth-child(4) { left: 50%; animation-duration: 14s; }
+.particles span:nth-child(5) { left: 65%; animation-duration: 9s; }
+.particles span:nth-child(6) { left: 80%; animation-duration: 11s; }
+.particles span:nth-child(7) { left: 90%; animation-duration: 13s; }
+.particles span:nth-child(8) { left: 45%; animation-duration: 15s; }
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("tup-logo.png") no-repeat center;
+  background-size: 250px;
+  opacity: 0.04;
+  z-index: 0;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-15px);} to { opacity: 1; transform: translateY(0);} }
+@keyframes popIn { to { transform: scale(1); } }
+@keyframes fadeBg { from { background: rgba(0,0,0,0);} to { background: rgba(0,0,0,0.4);} }
+
+/* ================= LOGIN BOX ================= */
+/* NOTE: kept your original .login-box rules; only the page flex container above centers it */
+.login-box {
+  display: none;
+  background: linear-gradient(145deg,#ffffff,#f3f3f3);
+  padding: 45px 35px;
+  border-radius: 25px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+  text-align: center;
+  width: 100%;
+  max-width: 380px;
+  animation: fadeIn 0.8s ease-in-out;
+  z-index: 2;
+  position: relative;
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease;
+  margin: auto;
+}
+
+.login-box:hover {
+  transform: perspective(600px) rotateX(2deg) rotateY(2deg);
+}
+
+.login-box img {
+  width: 80px;
+  margin-bottom: 12px;
+  transition: transform 0.3s ease;
+}
+
+.login-box img:hover {
+  transform: rotate(-5deg);
+}
+
+.login-box h1 {
+  margin: 8px 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #800000;
+}
+
+.login-box p {
+  margin: 0 0 25px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* ================= INPUTS ================= */
+.input-group {
+  position: relative;
+  margin: 12px 0;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 45px 14px 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 14px;
+  background: #fff;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+  border: 1px solid #800000;
+  outline: none;
+  box-shadow: 0 0 8px rgba(128,0,0,0.25);
+}
+
+.show-pass-check {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #555;
+}
+
+/* ================= BUTTONS ================= */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  top:0;
+  left:50%;
+  width:0;
+  height:100%;
+  background: rgba(255,255,255,0.2);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+button:hover::after {
+  width: 300%;
+}
+
+.login-box button {
+  background: #800000;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(128,0,0,0.2);
+}
+
+.login-box button:hover {
+  background: #a00000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(128,0,0,0.3);
+}
+
+.alt-btn {
+  background: #555;
+  margin-top: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.alt-btn:hover {
+  background: #333;
+}
+
+/* ================= ERROR MESSAGE ================= */
+.error-message {
+  color: #c00000;
+  margin-bottom: 12px;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* ================= MODALS ================= */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+  animation: fadeBg 0.3s ease;
+}
+
+.modal-content {
+  background: #fff;
+  backdrop-filter: blur(12px);
+  padding: 35px 30px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+  transform: scale(0.85);
+  animation: popIn 0.3s ease forwards;
+  position: relative;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: #800000;
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #800000;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close:hover {
+  color: #a00000;
+  transform: scale(1.2);
+}
+
+.signup-btn {
+  background: #00804b;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0,128,75,0.2);
+}
+
+.signup-btn:hover {
+  background: #00a060;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,128,75,0.3);
+}
+
+/* ================= WELCOME MODAL ================= */
+#welcomeModal {
+  display: flex;
+  position: fixed;
+  z-index: 15;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+}
+
+#welcomeModal .modal-content {
+  max-width: 450px;
+  padding: 35px 30px;
+  border-radius: 25px;
+  background: linear-gradient(145deg,#ffffff,#f7f7f7);
+  animation: popIn 0.4s ease forwards;
+}
+
+#welcomeModal h2 {
+  font-size: 26px;
+  color: #800000;
+  margin-bottom: 15px;
+}
+
+#welcomeModal p {
+  font-size: 14px;
+  margin-bottom: 25px;
+  color: #555;
+}
+
+#welcomeModal button {
+  padding: 14px 22px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  background: #800000;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(128,0,0,0.2);
+}
+
+#welcomeModal button:hover {
+  background: #a00000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(128,0,0,0.3);
+}
+
+/* ================= TOOLTIP ================= */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  color:#800000;
+  font-weight:600;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #800000;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 8px 10px;
+  position: absolute;
+  z-index: 20;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity:0;
+  transition: opacity 0.3s;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+  .login-box,.modal-content,#welcomeModal .modal-content{max-width:340px;padding:30px 20px;}
+  .login-box h1{font-size:22px;}
+  .login-box p,#welcomeModal p{font-size:13px;}
+  .input-group input{font-size:13px;padding:12px 38px 12px 10px;}
+  button,.signup-btn,#welcomeModal button{font-size:14px;padding:12px;}
+}
+
+@media(max-width:480px){
+  .login-box,.modal-content,#welcomeModal .modal-content{max-width:300px;padding:25px 18px;}
+  .login-box img{width:70px;}
+  .login-box h1{font-size:20px;}
+  .login-box p,#welcomeModal p{font-size:12px;}
+  .input-group input{font-size:12px;padding:10px 35px 10px 10px;}
+  button,.signup-btn,#welcomeModal button{font-size:13px;padding:10px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== WELCOME MODAL ===== -->
+<div id="welcomeModal">
+  <div class="modal-content">
+    <h2 id="greeting">🎉 Welcome to ERDucate!</h2>
+    <p>
+      <p>
+  Welcome to <strong>ERDucate</strong> — a new and modern way to learn 
+  <strong>Entity-Relationship Diagrams (ERDs)</strong>! 🌟
+
+  <br><br>
+
+  Discover ERDs through interactive lessons, story-based scenarios, and learning games 
+  designed to make database concepts simple, visual, and fun.
+
+  <br><br>
+
+  Curious about ERDs? Hover over 
+  <span class="tooltip">ERD
+    <span class="tooltiptext">
+      A diagram that shows data, entities (tables), and how they relate to each other.
+    </span>
+  </span> 
+  to reveal a quick tip!
+
+  <br><br>
+
+  <strong>Let’s start building your database knowledge — one fun step at a time! 🚀</strong>
+</p>
+
+    <button onclick="startLearning()">Start Learning🎓</button>
+  </div>
+</div>
+
+<!-- ===== LOGIN BOX ===== -->
+<div class="login-box">
+  <img src="tup-logo.jpg" alt="TUP Logo">
+  <h1>ERDucate Login</h1>
+  <p>Technological University of the Philippines</p>
+
+  <form onsubmit="return login(event)">
+    <div id="error" class="error-message"></div>
+    <div class="input-group">
+      <input type="text" id="username" placeholder="Enter your username" autofocus>
+    </div>
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Enter your password">
+      <span class="show-pass-check">
+        <input type="checkbox" onclick="togglePassword('password')">
+        <label>👁 show password</label>
+      </span>
+    </div>
+    <button type="submit">🔒 Login</button>
+    <button type="button" class="alt-btn" onclick="openSignup()">👤 Sign Up</button>
+  </form>
+</div>
+
+<!-- ===== SIGNUP MODAL ===== -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSignup()">&times;</span>
+    <h2>👤 Create Account</h2>
+    <div id="signupError" class="error-message"></div>
+    <div class="input-group"><input type="text" id="newUsername" placeholder="Choose username"></div>
+    <div class="input-group"><input type="text" id="newCourse" placeholder="Enter course"></div>
+    <div class="input-group">
+      <input type="password" id="newPassword" placeholder="Enter password">
+      <span class="show-pass-check"><input type="checkbox" onclick="togglePassword('newPassword')"><label>👁 show password</label></span>
+    </div>
+    <div class="input-group">
+      <input type="password" id="confirmPassword" placeholder="Confirm password">
+      <span class="show-pass-check"><input type="checkbox" onclick="togglePassword('confirmPassword')"><label>👁 show password</label></span>
+    </div>
+    <button class="signup-btn" onclick="signup()">👤 Sign Up</button>
+  </div>
+</div>
+
+<script>
+// ================= LOGIN / SIGNUP LOGIC =================
+function login(event){
+  event.preventDefault();
+  const username=document.getElementById('username').value.trim();
+  const password=document.getElementById('password').value.trim();
+  const errorDiv=document.getElementById('error');
+  if(!username){ errorDiv.textContent="⚠️ Please enter your username."; return false; }
+  if(!password){ errorDiv.textContent="⚠️ Please enter your password."; return false; }
+  let users=JSON.parse(localStorage.getItem("users"))||{};
+  if(!users[username]){ errorDiv.textContent="⚠️ Username not found. Please sign up."; return false; }
+  if(users[username].password!==password){ errorDiv.textContent="⚠️ Incorrect password."; return false; }
+  localStorage.setItem("loggedInUser", username);
+  window.location.href="./index.html"; return true;
+}
+
+function openSignup(){ document.getElementById("signupModal").style.display="flex"; }
+function closeSignup(){ document.getElementById("signupModal").style.display="none"; }
+
+function signup(){
+  const username=document.getElementById('newUsername').value.trim();
+  const course=document.getElementById('newCourse').value.trim();
+  const password=document.getElementById('newPassword').value.trim();
+  const confirmPassword=document.getElementById('confirmPassword').value.trim();
+  const errorDiv=document.getElementById('signupError');
+  if(!username||!course||!password||!confirmPassword){ errorDiv.textContent="⚠️ All fields are required."; return; }
+  if(password!==confirmPassword){ errorDiv.textContent="⚠️ Passwords do not match."; return; }
+  let users=JSON.parse(localStorage.getItem("users"))||{};
+  if(users[username]){ errorDiv.textContent="⚠️ Username already exists."; return; }
+  users[username]={course, password, progress:{lessons:[false,false,false,false], quizzes:[false,false,false,false], games:[false,false,false,false], achievements:[false,false,false,false]}};
+  localStorage.setItem("users", JSON.stringify(users));
+  alert("✅ Account created! You can now log in.");
+  closeSignup();
+}
+
+function togglePassword(id){
+  const input=document.getElementById(id);
+  input.type = input.type==="password"?"text":"password";
+}
+
+function startLearning(){
+  document.getElementById('welcomeModal').style.display="none";
+  document.querySelector('.login-box').style.display="block";
+}
+
+// ================= GREETING =================
+(function(){
+  const now=new Date();
+  const hour=now.getHours();
+  let greet="🎉 Welcome to ERDucate!";
+  if(hour<12) greet="🌅 Good Morning! Welcome to ERDucate!";
+  else if(hour<18) greet="☀️ Good Afternoon! Welcome to ERDucate!";
+  else greet="🌙 Good Evening! Welcome to ERDucate!";
+  document.getElementById("greeting").textContent=greet;
+})();
+</script>
+</body>
+</html>

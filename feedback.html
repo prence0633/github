@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Feedback - ERDucate</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="ERDucate.ico">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: url("Image.png");
+  color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+}
+
+header {
+  background: linear-gradient(135deg, #800000, #a83232);
+  color: #fff;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+header .title { 
+  font-size: 1.4rem; 
+  font-weight: 700; 
+  font-family: 'Poppins', sans-serif;
+}
+header .nav-buttons button {
+  background: #fff;
+  border: none;
+  color: #800000;
+  padding: 8px 16px;
+  margin-left: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+header .nav-buttons button:hover {
+  background: #a83232;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  flex-grow: 1;
+  animation: fadeIn 0.8s ease;
+}
+
+h1 { 
+  text-align: center; 
+  color:#fff; 
+  margin-bottom: 8px; 
+  font-family: 'Poppins', sans-serif;
+}
+.tagline { 
+  text-align: center; 
+  font-style: italic; 
+  color:#fff; 
+  margin-bottom: 24px; 
+}
+
+.card {
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+.card h2 {
+  color: #800000;
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+.card p {
+  font-size: 0.95rem;
+  color: #334155;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.survey-box {
+  text-align: center;
+  margin-top: 20px;
+}
+.survey-box button {
+  background: #800000;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+.survey-box button:hover {
+  background: #a83232;
+  transform: scale(1.05);
+}
+
+iframe {
+  width: 100%;
+  height: 600px;
+  border: none;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+footer {
+  text-align: center;
+  background: linear-gradient(135deg, #800000, #a83232);
+  color: #fff;
+  padding: 16px;
+  font-size: 0.9rem;
+  margin-top: 40px;
+  box-shadow: 0 -3px 8px rgba(0,0,0,0.15);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------- */
+/* RESPONSIVENESS SECTION */
+/* ---------------------- */
+
+@media (max-width: 1024px) {
+  header .title { font-size: 1.3rem; }
+  .container { max-width: 90%; margin: 30px auto; }
+  .card h2 { font-size: 1.2rem; }
+  iframe { height: 500px; }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 16px;
+  }
+  header .title { font-size: 1.2rem; margin-bottom: 10px; }
+  header .nav-buttons button {
+    margin-left: 0;
+    margin-right: 8px;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+  .container { padding: 0 15px; }
+  .card { padding: 20px; }
+  iframe { height: 450px; }
+}
+
+@media (max-width: 480px) {
+  header { padding: 10px 12px; }
+  header .title { font-size: 1rem; text-align: center; width: 100%; }
+  header .nav-buttons { width: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; }
+  header .nav-buttons button {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+  h1 { font-size: 1.3rem; }
+  .card h2 { font-size: 1.1rem; }
+  .card p { font-size: 0.9rem; }
+  .container { margin: 20px auto; padding: 0 12px; }
+  iframe { height: 350px; }
+  footer { font-size: 0.8rem; padding: 12px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title">ERDucate Web-based Module</div>
+  <div class="nav-buttons">
+    <button onclick="goHome()">🏠 Home</button>
+    <button onclick="goAbout()">👤 About</button>
+    <button onclick="logout()">🚪 Logout</button>
+  </div>
+</header>
+
+<div class="container">
+  <h1>Feedback & Acceptability Survey</h1>
+  <p class="tagline">“Your voice matters — help us improve ERDucate!”</p>
+
+  <div class="card">
+    <h2>Why We Need Your Feedback</h2>
+    <p>
+      ERDucate was created to make learning Entity-Relationship Diagrams (ERD) 
+      and database concepts simple, fun, and effective.  
+      To make it even better, we need your honest feedback about your experience.  
+      By answering our acceptability questionnaire, you help us improve the lessons, quizzes, 
+      and gamified activities to serve you and future students better.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Survey Instructions</h2>
+    <p>
+      Please take a few minutes to answer the questions in our survey.  
+      It covers areas such as usability, content clarity, design, and overall acceptability of ERDucate.  
+      Your responses will be treated with full confidentiality and will only be used for academic purposes.  
+    </p>
+    <div class="survey-box">
+      <button onclick="openForm()">📋 Open Survey</button>
+    </div>
+    <!-- Embed form directly -->
+    <iframe id="surveyFrame" src="" style="display:none;"></iframe>
+  </div>
+</div>
+
+<footer>
+  <p>ERDucate Developer © 2025 | Technological University of the Philippines</p>
+</footer>
+
+<script>
+  function logout() {
+    localStorage.removeItem('loggedInUser');
+    window.location.href = 'login.html';
+  }
+  function goHome() {
+    window.location.href = 'index.html';
+  }
+  function goAbout() {
+    window.location.href = 'about.html';
+  }
+  function openForm() {
+    // replace with your actual Google Form link
+    const formLink = "https://docs.google.com/forms/d/e/1FAIpQLSfJTJSptXrMkGd6Yw_M3a_YdiV4AZmdALtzd9kx_ARDNYahDw/viewform?usp=headerr";
+    document.getElementById("surveyFrame").src = formLink;
+    document.getElementById("surveyFrame").style.display = "block";
+  }
+</script>
+
+</body>
+</html>

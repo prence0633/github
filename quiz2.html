@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ERDucate Lesson2 - Basic Concepts of Database Structure </title>
+  <link rel="icon" href="ERDucate.ico">
+ <link rel="stylesheet" href="quiz2.css">
+</head>
+<body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    :root{
+      --maroon:#800000;
+      --maroon-dark:#a00000;
+      --white:#ffffff;
+      --muted:#666666;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #fafafa;
+    }
+    header {
+      background-color: var(--maroon);
+      color: var(--white);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    header .title { font-size: 20px; font-weight: 600; }
+    header .btn-group a {
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s ease;
+    }
+    header .btn-group a:hover { background: #fff; color: var(--maroon); }
+
+    main { flex: 1 0 auto; width: 100%; }
+    h1 {
+      color: var(--maroon);
+      text-align: center;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    .meta-row { display:flex; justify-content:center; gap:16px; align-items:center; margin-bottom:8px; }
+    .timer { font-weight: bold; font-size: 16px; text-align: center; margin-top: 2px; }
+
+    form { margin-top: 12px; width: 100%; }
+    .question {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .question h3, .question p { margin: 0 0 8px 0; color: var(--maroon); font-size: 1rem; }
+    .question label { display: block; margin: 6px 0; cursor: pointer; }
+    .question input[type="text"] {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      font-size: 0.95rem;
+    }
+    .question .small { font-size: 0.9rem; color: var(--muted); margin-top:6px; }
+
+    button.submit-btn {
+      padding: 12px 20px;
+      background: var(--maroon);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.25s ease;
+      display: block;
+      margin: 16px auto 40px auto;
+    }
+    button.submit-btn:hover { background: var(--maroon-dark); }
+
+    footer {
+      text-align: center;
+      background: var(--maroon);
+      color: #fff;
+      padding: 18px;
+      font-size: 13px;
+      margin-top: auto;
+    }
+
+    /* Modal Styles */
+    #resultModal {
+      position: fixed;
+      top:0; left:0;
+      width:100vw; height:100vh;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 9999;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 740px;
+      width: 100%;
+      padding: 20px 25px;
+      text-align: left;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      max-height: 85vh;
+      overflow:auto;
+    }
+    .modal-content h2 { color: var(--maroon); margin-top:0; }
+    .modal-content ul { padding-left:20px; margin:12px 0; }
+    .modal-content button {
+      margin-top: 12px;
+      padding: 10px 18px;
+      border:none;
+      border-radius:8px;
+      font-weight:600;
+      background:var(--maroon);
+      color:#fff;
+      cursor:pointer;
+    }
+    .modal-content button:hover { background:var(--maroon-dark); }
+    .close-btn {
+      position: absolute;
+      top:8px; right:12px;
+      background:transparent;
+      border:none;
+      font-size:22px;
+      cursor:pointer;
+      color:var(--muted);
+    }
+    .close-btn:hover { color:#000; }
+    #proceedBtn { opacity:0.5; pointer-events:none; }
+    #proceedBtn.enabled { opacity:1; pointer-events:auto; }
+
+    @media (max-width: 1024px) {
+      body { padding: 10px; max-width: 95%; }
+      header { flex-wrap: wrap; gap: 8px; padding: 12px 14px; }
+    }
+    @media (max-width: 480px) {
+      header .title { font-size: 16px; }
+      .question { padding: 10px; }
+      button.submit-btn { width: 100%; }
+      .modal-content { padding: 12px 14px; }
+    }
+
+    .correct { color: green; font-weight:600; }
+    .incorrect { color: red; font-weight:600; }
+    .muted { color: var(--muted); font-size:0.95rem; }
+</style>
+  <header>
+    <div class="title">ERDucate Web Based Module</div>
+    <div class="btn-group">
+      <a href="Lesson2.html">📚 Back to Lesson</a>
+      <a href="index.html">🏠 Home</a>
+    </div>
+  </header>
+
+  <main>
+    <h1 class="Test">Quiz 2 Basic Concepts of Database Structure</h1>
+    <div class="meta-row">
+      <div class="timer" aria-live="polite">Time left: <span id="time">90</span>s</div>
+    </div>
+
+    <form id="quizForm" autocomplete="off" novalidate>
+      <!-- ===== MULTIPLE CHOICE (10) ===== -->
+       <h2 class="section-title">PART 1: Multiple Choice — Understanding Database Structure and Keys</h2>
+      <p><strong>Directions:</strong> Choose the letter of the correct answer. This part measures your understanding of how a database organizes information and how keys (Primary and Foreign) identify and connect data across tables.</p>
+
+      <div class="question" id="q1">
+        <h3>1. What is a database "Table" best described as?</h3>
+        <label><input type="radio" name="q1" value="a"> A collection of unrelated images</label>
+        <label><input type="radio" name="q1" value="b"> A structure that stores related data in rows and columns</label>
+        <label><input type="radio" name="q1" value="c"> A programming language</label>
+      </div>
+
+      <div class="question" id="q2">
+        <h3>2. What is a "Record" inside a table?</h3>
+        <label><input type="radio" name="q2" value="a"> A single row that stores details about one entity</label>
+        <label><input type="radio" name="q2" value="b"> A column header</label>
+        <label><input type="radio" name="q2" value="c"> The physical paper where data is printed</label>
+      </div>
+
+      <div class="question" id="q3">
+        <h3>3. What do we call individual data points like "Name" or "Grade" in a table?</h3>
+        <label><input type="radio" name="q3" value="a"> Fields</label>
+        <label><input type="radio" name="q3" value="b"> Records</label>
+        <label><input type="radio" name="q3" value="c"> Keys</label>
+      </div>
+
+      <div class="question" id="q4">
+        <h3>4. Why is a Primary Key important?</h3>
+        <label><input type="radio" name="q4" value="a"> It gives a unique identifier for each record</label>
+        <label><input type="radio" name="q4" value="b"> It decides the table color</label>
+        <label><input type="radio" name="q4" value="c"> It encrypts the database</label>
+      </div>
+
+      <div class="question" id="q5">
+        <h3>5. What does a Foreign Key do?</h3>
+        <label><input type="radio" name="q5" value="a"> Links a record in one table to a record in another table</label>
+        <label><input type="radio" name="q5" value="b"> Locks a table permanently</label>
+        <label><input type="radio" name="q5" value="c"> Formats text inside fields</label>
+      </div>
+
+      <div class="question" id="q6">
+        <h3>6. What's an advantage of structured data in a database?</h3>
+        <label><input type="radio" name="q6" value="a"> It organizes data for fast retrieval and analysis</label>
+        <label><input type="radio" name="q6" value="b"> It automatically writes essays</label>
+        <label><input type="radio" name="q6" value="c"> It makes images bigger</label>
+      </div>
+
+      <div class="question" id="q7">
+        <h3>7. Which of the following is an example use of a database?</h3>
+        <label><input type="radio" name="q7" value="a"> Managing library book records and borrowers</label>
+        <label><input type="radio" name="q7" value="b"> Painting a mural</label>
+        <label><input type="radio" name="q7" value="c"> Singing a song</label>
+      </div>
+
+      <div class="question" id="q8">
+        <h3>8. If two students share the same name, what helps keep them distinct in a database?</h3>
+        <label><input type="radio" name="q8" value="a"> Primary Key or Student ID</label>
+        <label><input type="radio" name="q8" value="b"> Changing their names</label>
+        <label><input type="radio" name="q8" value="c"> Storing them in the same cell</label>
+      </div>
+
+    <div class="question" id="q9">
+  <h3>9. Why is it important to divide data into separate tables?</h3>
+  <label><input type="radio" name="q9" value="a"> It prevents data duplication and keeps information organized</label>
+  <label><input type="radio" name="q9" value="b"> It makes the database slower</label>
+  <label><input type="radio" name="q9" value="c"> It hides the data permanently</label>
+</div>
+
+      <div class="question" id="q10">
+        <h3>10. What's the purpose of indexing a table?</h3>
+        <label><input type="radio" name="q10" value="a"> Improve query performance by allowing faster lookups</label>
+        <label><input type="radio" name="q10" value="b"> Change the font of the table</label>
+        <label><input type="radio" name="q10" value="c"> Print the table automatically</label>
+      </div>
+<!-- ===== IDENTIFICATION (5) ===== -->
+<!-- ===== IDENTIFICATION (10) ===== -->
+<h2 class="section-title">PART 2: Identification — Database Structure and Data Organization</h2>
+<p><strong>Directions:</strong> Answer each question briefly in the space provided. 
+This section focuses on how a database organizes information through structured components such as tables, rows, and columns, and highlights the importance of proper data organization to avoid redundancy and maintain accuracy. 
+Answers are not case-sensitive.</p>
+
+<!-- ===== Q11–15: Database Structure ===== -->
+<div class="question" id="q11">
+  <h3>11. The main structure in a database that stores data in rows and columns (one word)</h3>
+  <input type="text" name="q11" placeholder="Example: Table">
+</div>
+
+<div class="question" id="q12">
+  <h3>12. The horizontal component of a table that represents a single record of data (one word)</h3>
+  <input type="text" name="q12" placeholder="Example: Row or Record">
+</div>
+
+<div class="question" id="q13">
+  <h3>13. The vertical component of a table that represents a specific attribute of data (one word)</h3>
+  <input type="text" name="q13" placeholder="Example: Column or Field">
+</div>
+
+<div class="question" id="q14">
+  <h3>14. The smallest unit of data in a table, found at the intersection of a row and a column (one word)</h3>
+  <input type="text" name="q14" placeholder="Example: Cell">
+</div>
+
+<div class="question" id="q15">
+  <h3>15. The name given to each column that defines the type of data stored (one word)</h3>
+  <input type="text" name="q15" placeholder="Example: Field Name or Attribute">
+</div>
+
+<!-- ===== Q16–20: Importance of Organizing Data ===== -->
+<div class="question" id="q16">
+  <h3>16. Why should data be organized?</h3>
+  <label>Your Answer: <input type="text" name="q16" placeholder="Example: Clear and easy to use"></label>
+</div>
+
+<div class="question" id="q17">
+  <h3>17. What happens if data repeats?</h3>
+  <label>Your Answer: <input type="text" name="q17" placeholder="Example: Errors and confusion occur"></label>
+</div>
+
+<div class="question" id="q18">
+  <h3>18. How does organizing data help maintain accuracy?</h3>
+  <label>Your Answer: <input type="text" name="q18" placeholder="Example: Keeps information accurate and consistent"></label>
+</div>
+
+<div class="question" id="q19">
+  <h3>19. Give one problem caused by unorganized data.</h3>
+  <label>Your Answer: <input type="text" name="q19" placeholder="Example: Hard to find or update records"></label>
+</div>
+
+<div class="question" id="q20">
+  <h3>20. How does organized data save time?</h3>
+  <label>Your Answer: <input type="text" name="q20" placeholder="Example: Faster to search or edit information"></label>
+</div>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </main>
+
+  <!-- Result Modal -->
+  <div id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+    <div class="modal-content" role="document">
+      <button class="close-btn" aria-label="Close results">&times;</button>
+      <h2 id="resultTitle">Quiz Results & Rationalization</h2>
+      <p id="scoreText" style="font-weight:700"></p>
+      <p class="muted" id="feedbackText"></p>
+      <ul id="rationalizationList"></ul>
+      <button id="proceedBtn">🎮 Proceed to Game 2</button>
+    </div>
+  </div>
+
+  <footer>
+    ERDucate Developer © 2025 | Technological University of the Philippines
+  </footer>
+<script>
+   /* ===== Embedded JS: quiz logic, timer, scoring, modal, localStorage progress ===== */
+
+    // ===== User Progress Setup =====
+    let users = JSON.parse(localStorage.getItem("users")) || {};
+    let currentUser = localStorage.getItem("loggedInUser") || "DemoUser";
+    if (!users[currentUser]) users[currentUser] = { progress: {} };
+
+    // ===== Answers & Rationalizations =====
+    const answers = {
+      q1: "b", q2: "a", q3: "a", q4: "a", q5: "a",
+      q6: "a", q7: "a", q8: "a", q9: "a", q10: "a",
+      q11: "Table", q12: "Row", q13: "Column", q14: "Cell", q15: "Field",
+      q16: "true", q17: "false", q18: "true", q19: "false", q20: "true"
+    };
+
+    const rationalizations = {
+      q1: "Correct: A table stores related data in rows and columns — the core structure of a relational database.",
+      q2: "Correct: A record is one row representing one entity (e.g., one student).",
+      q3: "Correct: Fields (columns) store individual pieces of information like 'Name' or 'Grade'.",
+      q4: "Correct: A Primary Key uniquely identifies each record in a table.",
+      q5: "Correct: A Foreign Key links related records across tables to form relationships.",
+      q6: "Correct: Structured data supports organized storage and fast retrieval and analysis.",
+      q7: "Correct: Managing library book records is a classic database use case.",
+      q8: "Correct: A unique ID (Primary Key) keeps two identically-named people distinct.",
+      q9: "Correct: It prevents data duplication and keeps information organized.",
+      q10: "Correct: Indexes speed up lookups and queries on large tables.",
+           
+      //*****Identification*****/
+  q11: "Correct — The Table is the main structure that stores data in rows and columns. " +
+       "Rationale: A table is the core component of a database that organizes related data in a structured grid format. " +
+       "Explanation: Each table represents one entity (like Students or Products) and stores multiple records, each containing the same fields for consistency and organization.",
+
+  q12: "Correct — A Row (or Record) represents a single entry of data in a table. " +
+       "Rationale: A row contains all the field values for one specific item or entity within the table. " +
+       "Explanation: Each record follows the same format and stores complete information for one object, such as one student’s details.",
+
+  q13: "Correct — A Column represents a specific attribute or property of data. " +
+       "Rationale: Columns define what type of information is stored in each record, such as 'Name', 'Age', or 'Email'. " +
+       "Explanation: They organize data vertically, ensuring all values under one column share the same data type or category.",
+
+  q14: "Correct — A Cell is the smallest unit of data located at the intersection of a row and a column. " +
+       "Rationale: Each cell contains one individual piece of information, like a student’s name or score. " +
+       "Explanation: Cells store single values, which collectively form complete records within the table.",
+
+  q15: "Correct — A Field is the name or label assigned to each column in a table. " +
+       "Rationale: Fields describe the type of data contained in that column, helping to define the table’s structure. " +
+       "Explanation: They guide data entry and retrieval by identifying what kind of information each column holds.",
+
+ //*****True and false*****/
+  q16: " True — Organizing data into separate tables helps prevent duplication of information. " +
+        "Rationale: Dividing data into smaller, related tables ensures that each piece of information is stored only once. " +
+        "Explanation: This proper organization avoids redundancy and keeps data accurate and consistent across the database.",
+
+  q17: " False — Having the same data repeated in multiple tables helps maintain data accuracy. " +
+        "Rationale: Repetition of data across tables leads to redundancy and inconsistency. " +
+        "Explanation: When data changes in one table but not the others, it causes errors — which is why repetition should be avoided for accuracy.",
+
+  q18: "True — Properly designed relationships between tables ensure that data updates remain consistent across the database. " +
+        "Rationale: Relationships use primary and foreign keys to connect tables logically. " +
+        "Explanation: When these links are correct, any update in one table automatically reflects in others, keeping the database synchronized and accurate.",
+
+  q19: " False — Storing all data in a single table, even if it repeats, is the best way to keep information accurate. " +
+        "Rationale: Putting all data in one table increases redundancy and the chance of error. " +
+        "Explanation: Separating related data into multiple linked tables maintains organization, accuracy, and efficiency.",
+
+  q20: "True — Proper database organization improves data accuracy, consistency, and efficiency in data retrieval. " +
+        "Rationale: A structured database allows for cleaner storage and faster access to information. " +
+        "Explanation: By organizing data logically and minimizing repetition, users can ensure accurate, consistent, and easily retrievable information."
+};
+    
+    // DOM refs
+    const form = document.getElementById("quizForm");
+    const modal = document.getElementById("resultModal");
+    const scoreText = document.getElementById("scoreText");
+    const rationalizationList = document.getElementById("rationalizationList");
+    const closeBtn = modal.querySelector(".close-btn");
+    const proceedBtn = document.getElementById("proceedBtn");
+    const timerEl = document.getElementById("time");
+    const feedbackText = document.getElementById("feedbackText");
+
+    // ===== Timer (90s default) =====
+    let timeLeft = 90;
+    timerEl.textContent = timeLeft;
+    let timer = setInterval(()=> {
+      timeLeft--;
+      if (timeLeft < 0) timeLeft = 0;
+      timerEl.textContent = timeLeft;
+      if (timeLeft <= 10 && timeLeft > 0) timerEl.parentElement.style.color = "crimson";
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        // auto-submit
+        form.dispatchEvent(new Event('submit', {cancelable: true, bubbles: true}));
+      }
+    }, 1000);
+
+    // ===== Utility: get value (handles text inputs & radio groups) =====
+    function getAnswerValue(formEl, qName) {
+      const el = formEl.elements[qName];
+      if (!el) return "";
+      // For text input
+      if (el.type === "text" || (el.length && el[0] && el[0].type === "text")) {
+        return (el.value || (el[0] && el[0].value) || "").trim();
+      }
+      if (el.length !== undefined) {
+        for (let i=0;i<el.length;i++){
+          if (el[i].checked) return el[i].value;
+        }
+        return "";
+      }
+      return el.value || "";
+    }
+
+    // ===== Anti-cheat: disable copy/paste on identification text inputs =====
+    const textInputs = Array.from(document.querySelectorAll('input[type="text"]'));
+    textInputs.forEach(inp => {
+      inp.addEventListener('copy', e => e.preventDefault());
+      inp.addEventListener('paste', e => e.preventDefault());
+      inp.addEventListener('cut', e => e.preventDefault());
+      // optionally disable context menu on inputs
+      inp.addEventListener('contextmenu', e => e.preventDefault());
+    });
+
+    // ===== Submit Handler =====
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      // stop timer
+      clearInterval(timer);
+
+      let score = 0;
+      rationalizationList.innerHTML = "";
+      const total = 20;
+
+      for (let i = 1; i <= total; i++) {
+        let qName = "q" + i;
+        let raw = getAnswerValue(form, qName) || "";
+        let selected = String(raw);
+        const li = document.createElement("li");
+        li.style.marginBottom = "8px";
+
+        if (i <= 10) {
+          // MCQ
+          if (selected.toLowerCase() === answers[qName]) {
+            score++;
+            li.innerHTML = `✅ <strong>Q${i}:</strong> ${rationalizations[qName]}`;
+            li.classList.add("correct");
+          } else {
+            li.innerHTML = `❌ <strong>Q${i}:</strong> ${rationalizations[qName]}`;
+            li.classList.add("incorrect");
+          }
+        } else if (i <= 15) {
+          // Identification (case-insensitive)
+          let expected = answers[qName].toLowerCase().trim();
+          let given = selected.toLowerCase().trim();
+          if (given === expected && given !== "") {
+            score++;
+            li.innerHTML = `✅ <strong>Q${i}:</strong> ${rationalizations[qName]} — <span class="muted">Your answer: "${selected}"</span>`;
+            li.classList.add("correct");
+          } else {
+            li.innerHTML = `❌ <strong>Q${i}:</strong> ${rationalizations[qName]} — <span class="muted">Your answer: "${selected || '—'}"</span>`;
+            li.classList.add("incorrect");
+          }
+        } else {
+          // True/False
+          if (selected.toLowerCase() === answers[qName]) {
+            score++;
+            li.innerHTML = `✅ <strong>Q${i}:</strong> ${rationalizations[qName]}`;
+            li.classList.add("correct");
+          } else {
+            li.innerHTML = `❌ <strong>Q${i}:</strong> ${rationalizations[qName]}`;
+            li.classList.add("incorrect");
+          }
+        }
+
+        rationalizationList.appendChild(li);
+      }
+
+      // Score text & feedback
+      scoreText.textContent = `You scored ${score} out of ${total}.`;
+      const percent = Math.round((score / total) * 100);
+      feedbackText.textContent = `Score: ${percent}% — ${ percent >= 70 ? 'Passed' : 'Needs Improvement' }`;
+
+      // Update progress & proceed unlock (pass threshold: 14/20)
+      if (score >= 14) {
+        users[currentUser].progress.quiz2 = true;
+        localStorage.setItem("users", JSON.stringify(users));
+        proceedBtn.classList.add("enabled");
+        proceedBtn.setAttribute('title', 'Proceed to the next activity');
+        // ensure text
+        proceedBtn.textContent = "🎮 Proceed to Game 2";
+      } else {
+        proceedBtn.classList.remove("enabled");
+        proceedBtn.textContent = "Score too low. Try again!";
+      }
+
+      // show modal
+      modal.style.display = "flex";
+      closeBtn.focus();
+    });
+
+    // ===== Modal close handlers =====
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+      // if not passed, reset timer and allow retry (reset answers stay)
+      if (!users[currentUser].progress.quiz2) {
+        timeLeft = 90;
+        timer = setInterval(()=> {
+          timeLeft--;
+          if (timeLeft < 0) timeLeft = 0;
+          timerEl.textContent = timeLeft;
+          if (timeLeft <= 10 && timeLeft > 0) timerEl.parentElement.style.color = "crimson";
+          if (timeLeft <= 0) {
+            clearInterval(timer);
+            form.dispatchEvent(new Event('submit', {cancelable: true, bubbles: true}));
+          }
+        }, 1000);
+      }
+    });
+    // close on outside click
+    modal.addEventListener("click", (ev) => {
+      if (ev.target === modal) modal.style.display = "none";
+    });
+    // ESC closes
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key === "Escape" && modal.style.display === "flex") modal.style.display = "none";
+    });
+
+    // ===== Proceed Button action =====
+    proceedBtn.addEventListener("click", () => {
+      if (users[currentUser] && users[currentUser].progress && users[currentUser].progress.quiz2) {
+        // navigate to next activity
+        location.href = "game2.html";
+      } else {
+        // small visual feedback for disabled
+        proceedBtn.animate([{ transform: 'scale(1)' }, { transform: 'scale(0.98)' }, { transform: 'scale(1)' }], { duration: 200 });
+      }
+    });
+
+    // ===== Prevent accidental navigation (anti-cheat) =====
+    window.addEventListener("beforeunload", function (e) {
+      if (timeLeft > 0 && modal.style.display !== "flex") {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+
+    // ===== Utility for debugging: reset demo progress (console only) =====
+    window.ERDucateResetDemoQuiz2 = function() {
+      users = JSON.parse(localStorage.getItem("users")) || {};
+      if (users[currentUser]) {
+        delete users[currentUser].progress.quiz2;
+        localStorage.setItem("users", JSON.stringify(users));
+        alert('Quiz2 progress reset for ' + currentUser);
+      } else alert('No demo user data found.');
+    };
+</script>
+</body>
+</html>
+

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ERDucate — Lesson 2: Basic Concepts of Database Structure</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="lesson2.css"> 
+</head>
+<body>
+<div class="page" role="main">
+  <h1>Lesson 2 — Basic Concepts of Database Structure</h1>
+
+  <!-- Lesson Objectives -->
+  <div class="modal-card" style="margin-bottom:18px;">
+  <h2>Lesson 2 Objectives</h2>
+  <p>At the end of the lesson, the student should be able to:</p>
+  <ul>
+    <li>Describe how a <strong>Database</strong> organizes information through structured components that make data management more efficient.</li>
+    <li>Identify the parts of a <strong>Database structure</strong> — Tables, Rows (Records), and Columns (Fields).</li>
+    <li>Recognize the importance of organizing data properly to avoid redundancy and maintain data accuracy.</li>
+  </ul>
+</div>
+
+
+  <!-- Story Scene -->
+  <div class="lesson-container" aria-label="Lesson scene">
+    <div class="scene-bg" role="img" aria-label="Classroom background"></div>
+    <div class="characters" aria-hidden="true">
+      <img src="teacher-image.png" alt="Ma'am Rivera" class="teacher" id="teacherImg">
+      <img src="studentfrankie.png" alt="Frankie" class="student student1" id="student1Img">
+      <img src="john.png" alt="John" class="student student2" id="student2Img">
+    </div>
+
+    <!-- Speech bubbles -->
+    <div class="speech teacher-bubble" id="teacherBubble" role="status" aria-live="polite"></div>
+    <div class="speech student1-bubble" id="student1Bubble" role="status" aria-live="polite"></div>
+    <div class="speech student2-bubble" id="student2Bubble" role="status" aria-live="polite"></div>
+  </div>
+
+  <!-- Pause & reflect (appears during flow) -->
+  <div id="pauseReflect" class="pause-reflect" aria-hidden="true">
+    <h3>Pause & Reflect</h3>
+    <p id="reflectQuestion" style="color:var(--muted)">How would you explain the difference between a Primary Key and a Foreign Key? Write one short sentence in your notebook.</p>
+    <div style="margin-top:10px; display:flex; justify-content:center; gap:10px;">
+      <button class="btn" id="continueBtn">➡️Continue</button>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls" role="navigation" aria-label="Lesson Controls">
+    <button class="btn" id="startBtn">🚀Start Lesson</button>
+    <button id="backBtn" class="btn">⬅️Back</button>
+    <button class="btn" id="nextBtn" disabled>➡️Next</button>
+    <button class="btn" id="skipBtn">⏩Skip to Quiz</button>
+    <!-- extra small controls -->
+    <button class="btn small" id="showDbBtn" title="Show database summary">📊Show Summary</button>
+    <button class="btn small" id="openGuidedBtn" title="Guided practice">🧭Guided Practice</button>
+    <button class="btn small" id="openGlossaryBtn" title="Glossary">📚Glossary</button>
+  </div>
+
+</div>
+
+<!-- Intro Modal -->
+<div class="modal show" id="introModal" aria-hidden="false" role="dialog" aria-label="Intro — Lesson Overview">
+  <div class="modal-card" role="document">
+    <h2>Introduction — Basic Concepts of Database Structure </h2>
+    <p>
+      Ma’am Rivera is overwhelmed with checking student quizzes and records. Frankie suggests using a database to organize them, while John wonders how it actually works. 
+      In this lesson, you’ll discover how a <strong>Database</strong> organizes information through structured parts like <strong>Tables, Rows (Records), and Columns (Fields)</strong>. 
+      You’ll also learn how <strong>Primary and Foreign Keys</strong> uniquely identify and link data between tables — helping keep records accurate, consistent, and free from redundancy. 
+      By the end of this story, you’ll understand how structuring data makes managing school records more efficient and reliable.
+    </p>
+    <div class="modal-actions" style="margin-top:14px;">
+      <button class="btn" id="closeModalBtn">🔎Read Later</button>
+      <button class="btn" id="beginBtn">🚀Start Lesson</button>
+    </div>
+  </div>
+</div>
+
+<!-- Floating DB Info -->
+<div id="dbInfo" role="dialog" aria-hidden="true" aria-label="Summary — Database Structure">
+  <button class="btn small" style="float:right; background:var(--maroon); color:#fff; border:none;" aria-label="Close summary" id="closeDbX">❌</button>
+  <h3>Summary — Basic Database Structure</h3>
+  <p><strong>Table:</strong> Organizes data into rows (records) and columns (fields) for easier storage and retrieval.</p>
+  <p><strong>Row (Record):</strong> Represents a single entry in a table, such as one student's information.</p>
+  <p><strong>Column (Field):</strong> Represents a specific attribute or category of data, such as Name, Section, or Student_ID.</p>
+  <p><strong>Keys (Primary and Foreign):</strong> Ensure data accuracy and connection between tables — the <em>Primary Key</em> uniquely identifies each record, while the <em>Foreign Key</em> links related data across tables.</p>
+  <table aria-label="Example students table">
+    <thead>
+      <tr><th>Student_ID</th><th>Name</th><th>Section</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>101</td><td>Juan</td><td>A</td></tr>
+      <tr><td>102</td><td>Maria</td><td>B</td></tr>
+    </tbody>
+  </table>
+  <p style="color:var(--muted); font-size:13px;">Tip: Use primary keys to avoid duplicate records.</p>
+  <div class="mini-quiz" aria-hidden="false" style="margin-top:6px;">
+    <p><strong>Check Yourself:</strong> What is the purpose of the Primary Key?</p>
+    <button onclick="checkMiniAnswer(this,true)">To have a unique ID for each row</button>
+    <button onclick="checkMiniAnswer(this,false)">To make the table colorful</button>
+    <button onclick="checkMiniAnswer(this,false)">To increase the amount of data</button>
+  </div>
+  <a href="quiz2.html" class="quiz-link-btn" id="quizLink">🧠Take Quiz 2</a>
+      <button class="quiz-link-btn" id="confirmUnlockBtn">🔓Unlock & Proceed</button>
+</div>
+
+
+<!-- Guided Practice modal -->
+<div class="modal" id="guidedModal" aria-hidden="true" role="dialog" aria-label="Guided Practice">
+  <div class="modal-card" role="document">
+    <button class="modal-close" id="closeGuidedX" aria-label="Close guided practice">❌</button>
+    <h2>📝 Guided Practice — Short Answer</h2>
+    <p class="guided-note">Case: Explain in one line how a Foreign Key connects two tables. Write your answer below (one or two short sentences).</p>
+    <div style="margin-top:8px;">
+      <label for="guidedAnswer" style="font-weight:700;">Your Answer:</label>
+      <textarea id="guidedAnswer" placeholder="Example: A foreign key stores the primary key value of another table to link records."></textarea>
+      <div class="practice-buttons" style="margin-top:8px; display:flex; gap:8px; justify-content:flex-start;">
+        <button class="btn" id="showHintBtn">💡Need Hint</button>
+        <button class="btn secondary" id="showAnswerBtn">📝Show Sample Answer</button>
+      </div>
+      <div id="guidedHint" class="hint" style="margin-top:8px;">
+        Hint: Think: "which column refers to another table?" Mention the table and the referenced key.
+      </div>
+      <div id="guidedSample" class="answer" style="margin-top:8px;">
+Sample answer:
+A foreign key is a column in one table that contains values matching the primary key in another table to link the records.
+      </div>
+    </div>
+
+    <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+      <button class="btn secondary" id="closeGuidedBtn">Close</button>
+      <button class="btn" id="submitGuidedBtn">📤Submit & Proceed to Quiz</button>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Help modal -->
+<div class="modal" id="helpModal" aria-hidden="true" role="dialog" aria-label="Learner Support">
+  <div class="modal-card" role="document">
+    <button class="modal-close" id="closeHelpX" aria-label="Close help">❌</button>
+    <h2>📚 Learner Support</h2>
+    <p><strong>FAQ</strong></p>
+    <ul>
+      <li><b>Where to start?</b> — Click "Start Lesson" to begin the story-based walkthrough.</li>
+      <li><b>How to save progress?</b> — Progress auto-saves in your browser (localStorage).</li>
+      <li><b>How to practice?</b> — Open Guided Practice and submit your short answer to proceed to the quiz.</li>
+    </ul>
+    <p style="margin-top:8px;"><strong>Tip:</strong> Use keys to connect tables so you can look up related information quickly.</p>
+    <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+      <button class="btn" id="closeHelpBtn">❌Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Glossary modal -->
+<div class="modal" id="glossaryModal" aria-hidden="true" role="dialog" aria-label="Glossary">
+  <div class="modal-card" role="document">
+    <button class="modal-close" id="closeGlossaryX" aria-label="Close glossary">❌</button>
+    <h2>Glossary — Key Terms</h2>
+    <dl style="margin-top:6px; color:var(--muted);">
+       <dt style="font-weight:700;">Database</dt>
+    <dd style="margin:0 0 8px 0;">A structured collection of related data stored so it can be easily accessed and managed.</dd>
+
+    <dt style="font-weight:700;">Table</dt>
+    <dd style="margin:0 0 8px 0;">Organizes data in rows (records) and columns (fields).</dd>
+
+    <dt style="font-weight:700;">Row (Record)</dt>
+    <dd style="margin:0 0 8px 0;">Represents a single entry or instance in a table — for example, one student’s information.</dd>
+
+    <dt style="font-weight:700;">Column (Field)</dt>
+    <dd style="margin:0 0 8px 0;">Represents a specific attribute or category of data — for example, Name, Section, or Student_ID.</dd>
+
+    <dt style="font-weight:700;">Primary Key</dt>
+    <dd style="margin:0 0 8px 0;">A column (or set of columns) that uniquely identifies each record in a table.</dd>
+
+    <dt style="font-weight:700;">Foreign Key</dt>
+    <dd style="margin:0 0 8px 0;">A column that stores primary key values from another table to create a relationship between them.</dd>
+    </dl>
+    <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+      <button class="btn" id="closeGlossaryBtn">❌Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile glossary popup -->
+<div id="mobileGlossaryPopup" role="dialog" aria-hidden="true">
+  <p id="mobileGlossaryText" style="color:#fff; margin:0;"></p>
+  <div style="margin-top:8px;">
+    <button class="btn small" onclick="hideGlossaryPopup()">❌Close</button>
+  </div>
+</div>
+
+<!-- Floating Action Buttons -->
+<div class="fab-group" aria-hidden="false">
+  <button class="fab glossary" id="fabGlossary" title="Glossary">G</button>
+  <button class="fab practice" id="fabPractice" title="Guided Practice">P</button>
+  <button class="fab help" id="fabHelp" title="Help">?</button>
+</div>
+<script src="scriptlesson2.js"></script> 
+</body>
+</html>

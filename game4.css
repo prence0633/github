@@ -1,0 +1,252 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('Background-game-Lesson1.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px;
+  transition: background-image 0.5s ease-in-out;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6);
+  z-index: -1;
+}
+
+header {
+  background: #800000;
+  color: #fff;
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+}
+
+header .title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+header .btn-group button,
+header .btn-group a {
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-left: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+header .btn-group button:hover,
+header .btn-group a:hover {
+  background: #fff;
+  color: #800000;
+}
+
+h1 {
+  text-align: center;
+  color: #800000;
+  margin: 18px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: #800000;
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cta-btn:hover {
+  background: #a00000;
+  transform: scale(1.05);
+}
+
+#congratsMessage {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #28a745;
+  margin: 30px 0;
+}
+
+#progressBtnContainer {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  background: #fff;
+}
+
+th,
+td {
+  border: 1px solid #800000;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+.key-btn {
+  padding: 6px 10px;
+  border: 2px solid #800000;
+  background: #fff;
+  cursor: pointer;
+  margin: 4px;
+  border-radius: 6px;
+}
+
+.key-btn:hover {
+  background: #800000;
+  color: #fff;
+}
+
+.key-btn.selected {
+  background: #28a745;
+  color: #fff;
+}
+
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.modal-bg.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  background: white;
+  padding: 20px 28px;
+  border-radius: 10px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+  margin-bottom: 12px;
+  color: #800000;
+}
+
+/* ✅ Responsive adjustments */
+
+/* 🔶 For tablets / smaller desktops */
+@media (max-width: 1024px) {
+  body {
+    padding: 10px;
+  }
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+  header .btn-group {
+    margin-top: 10px;
+  }
+  th, td {
+    font-size: 15px;
+    padding: 8px;
+  }
+  table {
+    width: 100%;
+  }
+}
+
+/* 🔶 For tablets and large phones */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 20px;
+  }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  header .title {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .cta-btn {
+    font-size: 14px;
+    padding: 10px 16px;
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+  th, td {
+    font-size: 14px;
+    padding: 6px;
+  }
+  table {
+    font-size: 14px;
+    width: 100%;
+  }
+}
+
+/* 🔶 For small phones */
+@media (max-width: 480px) {
+  body {
+    padding: 8px;
+  }
+  h1 {
+    font-size: 18px;
+  }
+  header .title {
+    font-size: 16px;
+  }
+  header .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  header .btn-group button,
+  header .btn-group a {
+    margin: 4px 4px;
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+  th, td {
+    font-size: 12px;
+    padding: 4px;
+  }
+  .cta-btn {
+    width: 90%;
+    font-size: 13px;
+    padding: 8px 12px;
+    margin: 0 auto;
+  }
+  #congratsMessage {
+    font-size: 22px;
+  }
+  table {
+    font-size: 12px;
+  }
+}
+
