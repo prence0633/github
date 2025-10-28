@@ -1,0 +1,76 @@
+<!-- Save this file as quiz5.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ERDucate Quiz 5 — Table Relationships</title>
+  <link rel="icon" href="ERDucate.ico">
+  <link rel="stylesheet" href="quiz5.css">
+  </head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="title">ERDucate Web Based Module</div>
+    <nav class="btn-group" aria-label="Primary links">
+      <a href="Lesson5.html">📚 Back to Lesson</a>
+      <a href="index.html">🏠 Home</a>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <h1>Quiz 5 — Table Relationships </h1>
+    <div class="meta-row" aria-hidden="false">
+      <div class="timer" aria-live="polite">Time left: <span id="time">180</span>s</div>
+    </div>
+
+    <!-- Quiz form -->
+    <form id="quizForm" autocomplete="off" novalidate>
+
+      <!-- PART 1 -->
+      <section class="section" id="part1">
+        <h2>PART 1 — Explain Relationship Types (10)</h2>
+        <strong>Directions:</strong><p class="hint">For each scenario choose the correct relationship type (One-to-One / One-to-Many / Many-to-Many).</p>
+        <!-- Questions injected by JS -->
+      </section>
+
+      <!-- PART 2 -->
+      <section class="section" id="part2">
+        <h2>PART 2 — Apply & Match (10)</h2>
+        <strong>Directions:</strong><p class="hint">For each scenario select the relationship type and choose suggested PK and FK from the dropdowns. (PK & FK dropdowns are guided choices to help learners.)</p>
+        <!-- Questions injected by JS -->
+      </section>
+
+      <p class="hint">Passing threshold: <strong>14 / 20</strong>. Your completion is saved to localStorage for the logged-in user.</p>
+    </form>
+
+    <div class="controls" role="region" aria-label="Quiz controls">
+      <button id="submitQuiz" class="submit-btn" type="button" aria-label="Submit quiz">Submit</button>
+    </div>
+  </main>
+
+  <!-- Result Modal -->
+  <div id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+    <div class="modal-content">
+      <button class="close-btn" aria-label="Close results">&times;</button>
+      <h2 id="resultTitle">Quiz Results & Rationalization</h2>
+      <p id="scoreText" style="font-weight:700"></p>
+      <p id="feedbackText" class="hint"></p>
+      <ul id="rationalizationList" aria-live="polite"></ul>
+      <div class="actions">
+        <button id="proceedBtn" title="Proceed to the next activity">🎮 Proceed to Game 5</button>
+        <button id="retryBtn" title="Retry the quiz">🔁 Retry</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    ERDucate Developer © 2025 | Technological University of the Philippines
+  </footer>
+
+  <!-- ===== Inline JavaScript (logic + generation) ===== -->
+  <script src="quiz5.js"></script>
+</body>
+</html>

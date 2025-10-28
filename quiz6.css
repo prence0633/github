@@ -1,0 +1,102 @@
+ /* ================== THEME / LAYOUT ================== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    :root{
+      --maroon:#800000;
+      --maroon-dark:#a00000;
+      --muted:#666666;
+      --white:#ffffff;
+      --card:#ffffff;
+      --max-width:980px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family:'Poppins',sans-serif;
+      margin:18px auto;
+      padding:0 18px 48px;
+      max-width:var(--max-width);
+      color:#222;
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+      background-image: url("Quiz-Background-Lesson6.png");
+      background-repeat:no-repeat;
+      background-position:center center;
+      background-attachment: fixed;
+      background-size: cover;
+      background-color: rgba(255,255,255,0.96);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    header{
+      background:var(--maroon);
+      color:var(--white);
+      padding:14px 18px;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+    header .title{font-weight:600; font-size:20px; text-align:center; flex:1 1 100%;}
+    .btn-group{display:flex; gap:8px;}
+    .btn-group a{
+      text-decoration:none;
+      color:#fff;
+      border:2px solid #fff;
+      padding:6px 12px;
+      border-radius:6px;
+      transition:180ms;
+      font-size:14px;
+    }
+    .btn-group a:hover{background:#fff;color:var(--maroon);transform:translateY(-1px)}
+
+    main{flex:1 0 auto; width:100%; margin-top:18px;}
+    h1{text-align:center;color:var(--maroon);margin:6px 0 10px;font-size:22px}
+    .meta-row{display:flex;justify-content:center;gap:12px;margin-bottom:12px}
+    .timer{
+      background:#fff;padding:8px 12px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);font-weight:700;
+    }
+
+    form{width:100%;}
+    .section{
+      background:rgba(255,255,255,0.98);
+      padding:14px;border-radius:10px;margin-bottom:14px;
+      box-shadow:0 4px 16px rgba(0,0,0,0.04);
+    }
+    .section h2{margin:0 0 8px;color:var(--maroon);font-size:18px}
+    .hint{color:var(--muted);font-size:13px;margin-bottom:8px}
+
+    .question{
+      background:var(--card);padding:12px;border-radius:10px;margin-bottom:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.03);
+    }
+    .question h3{margin:0 0 8px;color:var(--maroon);font-size:15px}
+    label{display:block;margin:6px 0;cursor:pointer;font-size:14px;color:#222}
+    input[type="radio"]{margin-right:8px}
+    select,input[type="text"],textarea{
+      width:100%;padding:8px 10px;border-radius:8px;border:1px solid #ddd;font-size:14px;
+    }
+
+    .controls{display:flex;justify-content:center;gap:12px;margin-top:12px}
+    button.submit-btn{background:var(--maroon);color:#fff;border:none;border-radius:8px;padding:12px 18px;font-weight:700;cursor:pointer;width:260px}
+    button.submit-btn:hover{background:var(--maroon-dark);transform:translateY(-2px)}
+    footer{text-align:center;background:var(--maroon);color:#fff;padding:14px;border-radius:8px;margin-top:12px;font-size:13px}
+
+    /* Modal */
+    #resultModal{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:18px;z-index:9999}
+    .modal-content{background:#fff;padding:20px;border-radius:12px;max-width:920px;width:100%;max-height:86vh;overflow:auto;position:relative;box-shadow:0 10px 30px rgba(0,0,0,0.25)}
+    .modal-content h2{color:var(--maroon);margin-top:0}
+    .close-btn{position:absolute;right:12px;top:10px;background:transparent;border:none;font-size:22px;cursor:pointer;color:var(--muted)}
+    .modal-content ul{padding-left:18px;margin:12px 0}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .actions button{padding:10px 14px;background:var(--maroon);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700}
+    .actions button:hover{background:var(--maroon-dark)}
+
+    .status-pass{color:green;font-weight:700}
+    .status-fail{color:red;font-weight:700}
+
+    @media(max-width:720px){button.submit-btn{width:100%}.modal-content{padding:14px}}
+    @media(max-width:420px){body{padding:12px;margin:8px auto}header .title{font-size:18px}.question h3{font-size:14px}}

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERDucate Quiz 8 - Introduction to SQL & Querying Databases</title>
+<link rel="icon" href="ERDucate.ico">
+<link rel="stylesheet" href="quiz8.css">
+</head>
+<body>
+
+<header>
+  <div class="title"> ERDucate Web Based Module</div>
+  <div class="btn-group">
+    <a href="Lesson8.html">📚 Back to Lesson</a>
+    <a href="index.html">🏠 Home</a>
+  </div>
+</header>
+
+<h1>Quiz 8 — SQL & Querying Databases</h1>
+
+
+<div class="timer">⏱️ Time left: <span id="time">250</span>s</div>
+
+<form id="quizForm" autocomplete="off" novalidate>
+
+  <!-- PART 1: Easy Multiple Choice (10) -->
+  <div class="section-title">Part 1 — Multiple Choice</div>
+<p class="section-desc">
+  <strong>Directions:</strong> Choose the correct answer for each question. This section focuses on basic SQL concepts such as SELECT, FROM, WHERE, and ORDER BY.
+</p>
+
+
+  <div class="question" id="q1">
+    <h3>1. What is SQL primarily used for?</h3>
+    <label><input type="radio" name="q1" value="a"> A) Designing websites</label>
+    <label><input type="radio" name="q1" value="b"> B) Querying and managing databases</label>
+    <label><input type="radio" name="q1" value="c"> C) Writing operating systems</label>
+    <label><input type="radio" name="q1" value="d"> D) Creating graphics</label>
+  </div>
+
+  <div class="question" id="q2">
+    <h3>2. Which clause filters rows based on conditions?</h3>
+    <label><input type="radio" name="q2" value="a"> A) SELECT</label>
+    <label><input type="radio" name="q2" value="b"> B) WHERE</label>
+    <label><input type="radio" name="q2" value="c"> C) FROM</label>
+    <label><input type="radio" name="q2" value="d"> D) JOIN</label>
+  </div>
+
+  <div class="question" id="q3">
+    <h3>3. Which keyword removes duplicate rows?</h3>
+    <label><input type="radio" name="q3" value="a"> A) DISTINCT</label>
+    <label><input type="radio" name="q3" value="b"> B) GROUP BY</label>
+    <label><input type="radio" name="q3" value="c"> C) ORDER BY</label>
+    <label><input type="radio" name="q3" value="d"> D) HAVING</label>
+  </div>
+
+  <div class="question" id="q4">
+    <h3>4. Which clause sorts result rows?</h3>
+    <label><input type="radio" name="q4" value="a"> A) GROUP BY</label>
+    <label><input type="radio" name="q4" value="b"> B) ORDER BY</label>
+    <label><input type="radio" name="q4" value="c"> C) WHERE</label>
+    <label><input type="radio" name="q4" value="d"> D) LIMIT</label>
+  </div>
+
+  <div class="question" id="q5">
+    <h3>5. Which function counts rows?</h3>
+    <label><input type="radio" name="q5" value="a"> A) SUM()</label>
+    <label><input type="radio" name="q5" value="b"> B) AVG()</label>
+    <label><input type="radio" name="q5" value="c"> C) COUNT()</label>
+    <label><input type="radio" name="q5" value="d"> D) MAX()</label>
+  </div>
+
+  <div class="question" id="q6">
+    <h3>6. Which clause filters groups after aggregation?</h3>
+    <label><input type="radio" name="q6" value="a"> A) WHERE</label>
+    <label><input type="radio" name="q6" value="b"> B) HAVING</label>
+    <label><input type="radio" name="q6" value="c"> C) FROM</label>
+    <label><input type="radio" name="q6" value="d"> D) SELECT</label>
+  </div>
+
+  <div class="question" id="q7">
+    <h3>7. Which JOIN returns only matching rows from both tables?</h3>
+    <label><input type="radio" name="q7" value="a"> A) LEFT JOIN</label>
+    <label><input type="radio" name="q7" value="b"> B) RIGHT JOIN</label>
+    <label><input type="radio" name="q7" value="c"> C) INNER JOIN</label>
+    <label><input type="radio" name="q7" value="d"> D) FULL OUTER JOIN</label>
+  </div>
+
+  <div class="question" id="q8">
+    <h3>8. Which statement inserts a new row?</h3>
+    <label><input type="radio" name="q8" value="a"> A) INSERT INTO</label>
+    <label><input type="radio" name="q8" value="b"> B) UPDATE</label>
+    <label><input type="radio" name="q8" value="c"> C) DELETE</label>
+    <label><input type="radio" name="q8" value="d"> D) SELECT</label>
+  </div>
+
+  <div class="question" id="q9">
+    <h3>9. Which command removes rows based on a condition?</h3>
+    <label><input type="radio" name="q9" value="a"> A) DROP TABLE</label>
+    <label><input type="radio" name="q9" value="b"> B) TRUNCATE</label>
+    <label><input type="radio" name="q9" value="c"> C) DELETE</label>
+    <label><input type="radio" name="q9" value="d"> D) RENAME</label>
+  </div>
+
+  <div class="question" id="q10">
+    <h3>10. In SELECT ... FROM ... what is required?</h3>
+    <label><input type="radio" name="q10" value="a"> A) WHERE</label>
+    <label><input type="radio" name="q10" value="b"> B) GROUP BY</label>
+    <label><input type="radio" name="q10" value="c"> C) FROM</label>
+    <label><input type="radio" name="q10" value="d"> D) HAVING</label>
+  </div>
+
+  <!-- PART 2: Medium Fill-in SQL (10) -->
+  <div class="section-title">Part 2 — Fill in the SQL Statement</div>
+<p class="section-desc">
+  <strong>Directions:</strong> Complete the SQL commands by typing the missing keywords or clauses. Make sure to use the correct SQL syntax.
+</p>
+
+
+  <div class="question" id="q11">
+    <h3>11. Complete: Select name and age from Students where age &gt; 18</h3>
+    <p class="small-muted"><em>____ name, age ____ Students ____ age &gt; 18;</em></p>
+    <input type="text" name="q11" placeholder="e.g. SELECT name, age FROM Students WHERE age > 18;">
+  </div>
+
+  <div class="question" id="q12">
+    <h3>12. Complete: Select all from Orders where amount &gt;= 100</h3>
+    <p class="small-muted"><em>____ * ____ Orders ____ amount &gt;= 100;</em></p>
+    <input type="text" name="q12" placeholder="e.g. SELECT * FROM Orders WHERE amount >= 100;">
+  </div>
+
+  <div class="question" id="q13">
+    <h3>13. Complete: Select product and SUM(qty) grouped by product</h3>
+    <p class="small-muted"><em>____ product, SUM(qty) ____ Sales ____ product;</em></p>
+    <input type="text" name="q13" placeholder="e.g. SELECT product, SUM(qty) FROM Sales GROUP BY product;">
+  </div>
+
+  <div class="question" id="q14">
+    <h3>14. Complete: Get unique departments from Employees</h3>
+    <p class="small-muted"><em>____ DISTINCT dept ____ Employees;</em></p>
+    <input type="text" name="q14" placeholder="e.g. SELECT DISTINCT dept FROM Employees;">
+  </div>
+
+  <div class="question" id="q15">
+    <h3>15. Complete: Update Customers set city = 'Manila' where id = 5</h3>
+    <p class="small-muted"><em>____ Customers ____ city = 'Manila' ____ id = 5;</em></p>
+    <input type="text" name="q15" placeholder="e.g. UPDATE Customers SET city = 'Manila' WHERE id = 5;">
+  </div>
+
+  <div class="question" id="q16">
+    <h3>16. Complete: Delete rows from Temp where created &lt; '2024-01-01'</h3>
+    <p class="small-muted"><em>____ ____ Temp ____ created &lt; '2024-01-01';</em></p>
+    <input type="text" name="q16" placeholder="e.g. DELETE FROM Temp WHERE created < '2024-01-01';">
+  </div>
+
+  <div class="question" id="q17">
+    <h3>17. Complete: Select name ordered by last_name ascending</h3>
+    <p class="small-muted"><em>____ name ____ Employees ____ last_name ____;</em></p>
+    <input type="text" name="q17" placeholder="e.g. SELECT name FROM Employees ORDER BY last_name ASC;">
+  </div>
+
+  <div class="question" id="q18">
+    <h3>18. Complete: Join Customers and Orders on customer id</h3>
+    <p class="small-muted"><em>____ Customers c JOIN Orders o ON c.id = o.customer_id;</em></p>
+    <input type="text" name="q18" placeholder="e.g. SELECT c.*, o.* FROM Customers c JOIN Orders o ON c.id = o.customer_id;">
+  </div>
+
+  <div class="question" id="q19">
+    <h3>19. Complete: Count the number of products</h3>
+    <p class="small-muted"><em>____ COUNT(*) ____ Products;</em></p>
+    <input type="text" name="q19" placeholder="e.g. SELECT COUNT(*) FROM Products;">
+  </div>
+
+  <div class="question" id="q20">
+    <h3>20. Complete: Select product where price between 50 and 150</h3>
+    <p class="small-muted"><em>____ product ____ Products ____ price BETWEEN 50 AND 150;</em></p>
+    <input type="text" name="q20" placeholder="e.g. SELECT product FROM Products WHERE price BETWEEN 50 AND 150;">
+  </div>
+
+  <!-- PART 3: Short Answer / Guided Scenario (5) -->
+  <div class="section-title">Part 3 — Guided Scenario</div>
+<p class="section-desc">
+  <strong>Directions:</strong> Write the correct SQL query based on each scenario. The first four items will be graded, while the last one is a reflection question.
+</p>
+
+  <div class="question" id="q21">
+    <h3>21. Retrieve all products with price &gt; 100 from Products.</h3>
+    <textarea name="q21" placeholder="e.g. SELECT * FROM Products WHERE price > 100;"></textarea>
+  </div>
+
+  <div class="question" id="q22">
+    <h3>22. List unique customers from Orders (no duplicates).</h3>
+    <textarea name="q22" placeholder="e.g. SELECT DISTINCT customer FROM Orders;"></textarea>
+  </div>
+
+  <div class="question" id="q23">
+    <h3>23. Count how many orders each customer made (show customer and count).</h3>
+    <textarea name="q23" placeholder="e.g. SELECT customer, COUNT(*) FROM Orders GROUP BY customer;"></textarea>
+  </div>
+
+  <div class="question" id="q24">
+    <h3>24. Correct this broken query: SELECT name age FROM Students WHERE age &gt; 18;</h3>
+    <textarea name="q24" placeholder="e.g. SELECT name, age FROM Students WHERE age > 18;"></textarea>
+  </div>
+
+  <div class="question" id="q25">
+    <h3>25. Reflection (NOT scored): Briefly reflect — How does SQL help in real-world data work?</h3>
+    <textarea name="q25" placeholder="Write your reflection here... (this answer will NOT count toward your score)"></textarea>
+  </div>
+
+</form>
+
+<button id="submitQuiz" class="submit-btn">Submit Quiz</button>
+
+<!-- Result Modal -->
+<div id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+  <div class="modal-content">
+    <button class="close-btn" aria-label="Close results">&times;</button>
+    <h2 id="resultTitle">Quiz Results & Rationalization</h2>
+    <p id="scoreText" style="font-weight:700"></p>
+    <p class="small-muted" id="feedbackText"></p>
+
+    <div class="result-grid" id="resultGrid">
+      <div>
+        <h3>Rationalizations</h3>
+        <ul id="rationalizationList"></ul>
+      </div>
+      <div>
+        <h3>Your Answers (summary)</h3>
+        <ul id="answersSummary"></ul>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;">
+      <button id="proceedBtn">🎮 Proceed to Game 8</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  ERDucate Developer © 2025 | Technological University of the Philippines
+</footer>
+<script src="quiz8.js"></script>
+</body>
+</html>

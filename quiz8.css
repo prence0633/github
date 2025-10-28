@@ -1,0 +1,148 @@
+/* ============================
+   ERDucate Quiz 8 — Styles
+   ============================ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root{
+  --maroon:#800000;
+  --maroon-dark:#a00000;
+  --white:#ffffff;
+  --muted:#666666;
+  --card:#ffffff;
+  --bg:#fafafa;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:'Poppins',sans-serif;
+  max-width:980px;
+  margin:0 auto;
+  padding:18px;
+  background-image: url("Quiz-Background-Lesson8.png");
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-attachment:fixed;
+  background-size:cover;
+  color:#222;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+
+/* Header */
+header{
+  background:var(--maroon);
+  color:var(--white);
+  padding:14px 16px;
+  border-radius:8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+header .title{font-size:20px;font-weight:600}
+header .btn-group a{
+  background:transparent;
+  border:2px solid #fff;
+  color:#fff;
+  padding:6px 12px;
+  border-radius:6px;
+  text-decoration:none;
+  font-size:14px;
+  transition:0.2s;
+}
+header .btn-group a:hover{background:#fff;color:var(--maroon)}
+
+/* Page title + instructions */
+h1{color:var(--maroon);text-align:center;margin:20px 0 8px}
+.instructions{
+  background:rgba(255,255,255,0.95);
+  border-radius:10px;
+  padding:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.06);
+  margin-bottom:12px;
+}
+.instructions ul{margin:6px 0 0 18px;padding:0;color:var(--muted)}
+
+/* Timer */
+.timer{
+  font-weight:700;
+  font-size:15px;
+  text-align:center;
+  margin:10px 0 16px;
+  color:#111;
+}
+
+/* Form & sections */
+form#quizForm{margin-top:6px;margin-bottom:12px}
+.section-title{
+  background:var(--maroon);
+  color:#fff;
+  padding:8px 12px;border-radius:8px;
+  margin-top:18px;font-weight:600;
+}
+.question{
+  background:var(--card);
+  padding:14px;border-radius:10px;margin:12px 0;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+  border-left:6px solid rgba(128,0,0,0.06);
+}
+.question h3{margin:0 0 8px;color:var(--maroon);font-size:1rem}
+.question p{margin:6px 0;color:var(--muted);font-size:0.95rem}
+
+/* SQL blocks */
+.question pre{
+  background:#f4f4f4;padding:10px;border-radius:6px;font-size:13px;overflow:auto;white-space:pre-wrap;
+}
+
+/* Inputs */
+label{display:block;margin:8px 0;cursor:pointer}
+input[type="radio"]{margin-right:8px}
+input[type="text"], textarea{
+  width:100%;padding:8px 10px;border-radius:6px;border:1px solid #ddd;
+  font-size:0.95rem;resize:vertical;min-height:36px;
+}
+
+/* Buttons */
+button.submit-btn{
+  padding:12px 20px;background:var(--maroon);color:var(--white);border:none;border-radius:8px;
+  cursor:pointer;font-weight:700;display:block;margin:20px auto 40px auto;transition:0.18s;
+}
+button.submit-btn:hover{background:var(--maroon-dark)}
+
+/* Modal */
+#resultModal{
+  position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.6);
+  display:none;align-items:center;justify-content:center;padding:20px;z-index:9999;
+}
+.modal-content{
+  background:#fff;border-radius:12px;max-width:900px;width:100%;padding:20px;position:relative;
+  box-shadow:0 6px 22px rgba(0,0,0,0.25);max-height:88vh;overflow:auto;
+}
+.modal-content h2{color:var(--maroon);margin-top:0}
+.close-btn{position:absolute;top:10px;right:12px;background:transparent;border:none;font-size:22px;cursor:pointer;color:var(--muted)}
+.close-btn:hover{color:#000}
+.modal-content ul{padding-left:18px;margin:10px 0}
+.modal-content .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal-content button{margin-top:12px;padding:10px 14px;border-radius:8px;border:none;background:var(--maroon);color:#fff;font-weight:700;cursor:pointer}
+.modal-content button:hover{background:var(--maroon-dark)}
+#proceedBtn{opacity:0.5;pointer-events:none}
+#proceedBtn.enabled{opacity:1;pointer-events:auto}
+
+/* helpers */
+.small-muted{color:var(--muted);font-size:0.92rem}
+.correct{color:green;font-weight:700}
+.incorrect{color:red;font-weight:700}
+
+/* responsive */
+@media (max-width:900px){
+  .modal-content .result-grid{grid-template-columns:1fr}
+  header{flex-direction:column;align-items:flex-start;gap:8px}
+}
+@media (max-width:480px){
+  h1{font-size:20px}
+  body{padding:12px}
+  header .title{font-size:18px}
+  .instructions{font-size:14px;padding:10px}
+}
